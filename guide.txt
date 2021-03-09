@@ -1,0 +1,27 @@
+--------------------------------
+|	CONFIG_REG		|
+|				|
+--------------------------------
+0 : PRIM_RX : Controls the NRF mode [ 1= Receiver ] [ 0 = Transmitter ]
+
+1 : PWR_UP  : Power up control. [1 = Power up]  [0 = Power down]
+
+2 : CRCO : Set CRC encoding scheme. [1 = 2 Bytes]  [0 = 1 Byte] I have a tutorial on CRC here if        you dont know what it is. 
+
+3 : EN_CRC   : Enables the CRC (more on this later) If any channel has Auto Ack enabled the CRC is
+also forced to be enabled. Ill explain why.
+
+4 : MASK_MAX_RT : Enables/Disables whether the MAX_RT interrupt drives the IRQ pin
+
+5 : MASK_TX_DS     : Enables/Disables whether the TX_DS interrupt drives the IRQ pin
+
+6 : MASK_RX_DR    :  Enables/Disables whether the RX_DR interrupt drives the IRQ pin
+
+Bits 0 and 1 are pretty self explanatory. Bit 2 controls how many bytes are used for the CRC scheme, basically the NRF will add either 1 or 2 bytes at the end of a transmission when CRC is enabled. And as noted when any channel has auto acknowledge enabled the CRC is forced. 
+
+CRC and auto Ack work in conjunction to make sure data reception is only presented when the data is valid. The NRF will run a CRC algorithm on the address, packet control (if there is one) and your payload. The result of that is a "CRC code"  and it will add that code to the frame format and transmit it along with your data. Then the transmitter will turn itself into a receiver, no code required to do this, and listen for an ACK to verify the data was received.
+
+The receiver will receive the entire frame packet and extract your data and run the same CRC algorithm on it. If the CRC code that results from the receivers CRC engine is the same as the one sent by the transmitter then it means they both ran the same CRC algorithm on the exact same data and thus no bits were lost or modified or noise etc.. therefore the data is valid. 
+
+At this point the receiver will momentarily turn into a transmitter, all on its own no code required, and it will send an ACK command to the transmitter telling it that it received the data. If the CRC codes do not match then the receiver does not send anything and discards the data.
+Note that both receiver and transmitter need to have auto ACK enabled for this scheme to work, this is what they call "Enhanced Shockburst" 
