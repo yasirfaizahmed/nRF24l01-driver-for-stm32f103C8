@@ -9,7 +9,7 @@
 2 : CRCO : Set CRC encoding scheme. [1 = 2 Bytes]  [0 = 1 Byte] I have a tutorial on CRC here if        you dont know what it is. 
 
 3 : EN_CRC   : Enables the CRC (more on this later) If any channel has Auto Ack enabled the CRC is
-also forced to be enabled. Ill explain why.
+also forced to be enabled. 
 
 4 : MASK_MAX_RT : Enables/Disables whether the MAX_RT interrupt drives the IRQ pin
 
@@ -24,4 +24,51 @@ CRC and auto Ack work in conjunction to make sure data reception is only present
 The receiver will receive the entire frame packet and extract your data and run the same CRC algorithm on it. If the CRC code that results from the receivers CRC engine is the same as the one sent by the transmitter then it means they both ran the same CRC algorithm on the exact same data and thus no bits were lost or modified or noise etc.. therefore the data is valid. 
 
 At this point the receiver will momentarily turn into a transmitter, all on its own no code required, and it will send an ACK command to the transmitter telling it that it received the data. If the CRC codes do not match then the receiver does not send anything and discards the data.
-Note that both receiver and transmitter need to have auto ACK enabled for this scheme to work, this is what they call "Enhanced Shockburst" 
+Note that both receiver and transmitter need to have auto ACK enabled for this scheme to work, this is what they call "Enhanced Shockburst".
+
+
+There are only 11 commands
+
+DPI nature - nature of the SPI protocol, that with every byte you send a byte is sent back. That first byte you get back is not the reply to the command request, but just a dummy byte that needs to be sent.
+
+------------------------------ command 1 ---------------------------------
+command: R_REGISTER
+code   : 000xxxxx
+
+The R_REGISTER command is used to Read a register and its opcode is 000xxxxx where the x's represent the address of the register you wish to read. For example if you want to read the contents of the RF_SETUP register which is address 0x06 ( 00000110 ) you would simply join the R_REGISTER command with the RF_SETUP address , which if you look at it ends up being just the RF_SETUP command anywyas.. then you send that through SPI and transmit. Then youll get a dummy byte, you can ignore it, to get your actual reply you need to send a dummy byte also because thats how SPI works and you will get the contents of the RF_SETUP register .
+
+//pseudo code
+#define R_REGISTER  0x00
+#define RF_SETUP    0x06
+spi_send ( R_REGISTER | RF_SETUP) ; 
+//the returned byte will be first a dummy byte and then the contents
+
+------------------------------ command 2 ---------------------------------
+command: W_REGISTER
+code   : 001xxxxx
+
+This is the Write command and you use it to write to a register. Unlike the previous command this is not just leading zeros. The x's represent the address of the register you want to write to. After sending this command the NRF expects the data that is to be written to . The SPI send would look exactly like the previous one except you OR it with W_REGISTER.
+
+//pseudo code
+#define W_REGISTER  0x20  // 00100000
+#define RF_SETUP    0x06
+spi_send ( W_REGISTER | RF_SETUP) ;
+spi_send(data)
+
+
+------------------------------ command 3 ---------------------------------
+command: R_RX_PAYLOAD
+code   : 01100001
+ 
+The R_RX_PAYLOAD is the command you send when you know you have received data, you will know this because the RX_DR interrupt will have been triggered.  Before you read the payload it makes sense to read STATUS register and check the  RX_P_NO bits to figure out which Pipe this data was received on.
+Or if you're only using one pipe it does not matter.
+After sending the R_RX_PAYLOAD command the NRF needs to transmit that data to you via SPI and in order to do that you have to send it some dummy bytes, it does not matter what the bytes are it can be 0xF1 or 0xFF... makes no difference,what does make a difference is that you need to send it the number of bytes equal to the data-width that was set in the RX_PW_P# register or alternatively there is a command to check the width of the top most payload.
+ Width can be from 1 to 32 bytes
+
+
+
+------------------------------ command 4 ---------------------------------
+command: T_TX_PAYLOAD
+code   : 01000000
+
+This is the command to write your payload. You must make sure that before you start the RF transmission  the CE pin must be LOW. Once you send this command the NRF expects your payload data to come next. Your data width can be from 1 to 32 bytes longs.  After the last byte is sent and you stop the SPI communication you have to bring the CE pin HIGH, because a LOW to HIGH transition is what tells the NRF to transmit what is in the TX FIFO. and this command is what writes in the TX FIFO.
