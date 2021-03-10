@@ -160,3 +160,18 @@ The packet format consists of several fields. Also note that the entire packet o
 
 --------------------------- Preamble --------------------------------------------
 Preamble is nothing more then a sequence of 1s and 0s to synchronize the receiver's demodulator to the incoming stream. It is only one byte long, if the first bit in the address is a 1 then the preamble is 10101010, otherwise it is 01010101.
+
+--------------------------- Packet Control --------------------------------------
+The packet control section has 3 sections within itself.
+
+1. Payload length is a 6 bit field that tells the receiver the length of the incoming payload This field however is only used when dynamic payload length is enabled. Otherwise the value in RX_PW_P# register is the width of the payload.
+
+2. PID is the packet identification field. It is used to tell the receiver 
+whether this packet is new or a re-transmitted packet. That way the receiver knows not to present a re-transmitted packet to the mcu if it has already presented this same packet before. THAT DOES NOT MEAN YOU CANNOT SEND THE SAME DATA TWICE, this "re-transmit" is more like an error or somehow the ACK was not received by the transmitter and now its re-transmitting the same packet. 
+
+3. NO_ACK this is a bit that tells the receiver that no auto ACK should be used for this packet.
+
+
+
+
+NOTE: Every time you start an SPI communication instance you must drive low the CSN pin, this is the slave select line and makes the NRF start listening in its SPI lines.
