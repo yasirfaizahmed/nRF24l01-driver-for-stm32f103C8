@@ -31,6 +31,10 @@ There are only 11 commands
 
 DPI nature - nature of the SPI protocol, that with every byte you send a byte is sent back. That first byte you get back is not the reply to the command request, but just a dummy byte that needs to be sent.
 
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
+
 ------------------------------ command 1 ---------------------------------
 command: R_REGISTER
 code   : 000xxxxx
@@ -133,3 +137,26 @@ This is a No Operation command, when you send it the NRF does nothing with it. B
 -------------------------------------------------------------------------------
 -------------------------------------------------------------------------------
 -------------------------------------------------------------------------------
+
+Packet Format
+	This is Enhanced Shockburst(TM) pakcet format from nordic 
+     _________________________________________________________________
+    |	Preamble | Address  | Packet control |  Payload	   |    CRC   |
+    |	1Byte	 | 3-5bytes |    9bits       |	1-32bytes  | 1-2bytes |
+    |____________|__________|________________|_____________|__________|
+		  		 /
+				/
+			       /
+			     |/_	
+      _________________________________________
+     |	Payload lengths | PID control | NO_ACK | 
+     |	   8bits        |  2bits      |  1bit  |
+     |__________________|_____________|________|
+
+
+
+
+The packet format consists of several fields. Also note that the entire packet of data is transmitted MSB , most significant byte first, and each byte is transmitted LSB least significant bit first. This might sound weird or confusing but do not worry the hardware inside the NRF takes care of all of that behind the scenes for you. 
+
+--------------------------- Preamble --------------------------------------------
+Preamble is nothing more then a sequence of 1s and 0s to synchronize the receiver's demodulator to the incoming stream. It is only one byte long, if the first bit in the address is a 1 then the preamble is 10101010, otherwise it is 01010101.
