@@ -9,7 +9,7 @@
 
 1 : PWR_UP  : Power up control. [1 = Power up]  [0 = Power down]
 
-2 : CRCO : Set CRC encoding scheme. [1 = 2 Bytes]  [0 = 1 Byte] I have a tutorial on CRC here if        you dont know what it is. 
+2 : CRCO : Set CRC encoding scheme. [1 = 2 Bytes]  [0 = 1 Byte].
 
 3 : EN_CRC   : Enables the CRC (more on this later) If any channel has Auto Ack enabled the CRC is
 also forced to be enabled. 
@@ -189,7 +189,7 @@ Well technically speaking all the pipes addresses are 5 bytes but for these piep
 |	               TX_ADDR  REG		 		 	   |
 |									   |
 |--------------------------------------------------------------------------|
-This register is also 5bytes (40bits) long, I just got lazy to draw it like I drew the other long register. In this register you enter the address that has to match the pipe address on the receiver that listening. It does not have to be 5bytes long, since some pipes only support at one byte addresses.
+This register is also 5bytes (40bits) long,  In this register you enter the address that has to match the pipe address on the receiver that listening. It does not have to be 5bytes long, since some pipes only support at one byte addresses.
 
 
  --------------------------------
@@ -344,6 +344,8 @@ code   : 11111111
 
 This is a No Operation command, when you send it the NRF does nothing with it. But since you are sending a byte the SPI has to send one back so the NRF send you the contents of its STATUS register. 
 
+
+
 -------------------------------------------------------------------------------
 -------------------------------------------------------------------------------
 -------------------------------------------------------------------------------
@@ -391,7 +393,31 @@ NOTE: Every time you start an SPI communication instance you must drive low the 
 -------------------------------------------------------------------------------
 -------------------------------------------------------------------------------
 -------------------------------------------------------------------------------
+**Every time you start an SPI communication instance you must drive low the CSN pin, this is the slave select line and makes the NRF start listening in its SPI lines. I will remind you of this in the code**
 
 	Transmitting
 Setup:
+
+1. The CE pin must start out LOW, because a HIGH to LOW transition is what causes the transmission to start. So before anything is done make sure the CE pin is LOW alos the CE pin should not be held high for too long. but the NRF takes care of that in Enhanced Shockburst mode.
+2. Next you want to power up the chip internally by setting the PWR_UP bit in the CONFIG register
+3. Clear (0) the PRIM_RX bit in the CONFIG register to use the NRF as a transmitter
+4. Set CRC encoding scheme 1 byte or 2 bytes , by setting or clearing the CRCO bit in the CONFIG register
+5. Enable the CRC itself by setting the EN_CRC bit in the CONFIG register, you can skip this since enabling auto ACK on any pipe will force this bit high anyways.
+6. Set the interrupts desired in the CONFIG register, clearing them (0) means they will be active.
+7. Set address width in the SETUP_AW 
+8. Setup wait time in between re-transmissions after a failed transmission 
+9. Setup max number of re-transmits
+10. As a safety measure clear interrupt flags in the STATUS register.
+
+Sending Data
+
+1. Make sure CE is LOW
+2. Write the receivers pipe address in the TX_ADDR register (receivers pipe address and address width must match transmitter settings above)
+3. Copy the same address from TX_ADDR to Pipe 0 on  RX_ADDR_P0 register  because after transmit the NRF momentarily becomes a receiver to listen for the auto ACK and it listens on Pipe 0. Remember the address you are transmitting is at least 3 bytes long depending on the width setting. You must write that same amount of bytes in the TX_ADDR register and Pipe 0 address register 
+4. Send the TX_PAYLOAD command
+5. Send the payload data.
+6. Drive the CE pin HIGH for a minimum of 10us to start the transmission and then bring it back LOW
+7. Next just handle the TX_DS interrupt or MAX_RT interrupts as you wish. Hopefully you dont get the MAX_RT interrupt because that means the data did not send, meaning there was no auto ACK received. Also if you send payloads too fast you will get a few MAX_RT interrupts because the module is not that fast and it takes time to transmit as well as get a reply.
+
+
 
