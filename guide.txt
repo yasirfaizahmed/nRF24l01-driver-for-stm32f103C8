@@ -1,3 +1,6 @@
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
 --------------------------------
 |	CONFIG_REG		|
 |				|
@@ -25,6 +28,11 @@ The receiver will receive the entire frame packet and extract your data and run 
 
 At this point the receiver will momentarily turn into a transmitter, all on its own no code required, and it will send an ACK command to the transmitter telling it that it received the data. If the CRC codes do not match then the receiver does not send anything and discards the data.
 Note that both receiver and transmitter need to have auto ACK enabled for this scheme to work, this is what they call "Enhanced Shockburst".
+shockburts format 
+     ___________________________________________________________
+     |     preamble     | Address     | payload     |  CRC      |
+     |	   1byte        |  3-5bytes   |  0-32bytes  |  1-2bytes |
+     |__________________|_____________|_____________|___________|
 
 
 There are only 11 commands
@@ -175,3 +183,13 @@ whether this packet is new or a re-transmitted packet. That way the receiver kno
 
 
 NOTE: Every time you start an SPI communication instance you must drive low the CSN pin, this is the slave select line and makes the NRF start listening in its SPI lines.
+
+
+
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
+
+	Transmitting
+Setup:
+
