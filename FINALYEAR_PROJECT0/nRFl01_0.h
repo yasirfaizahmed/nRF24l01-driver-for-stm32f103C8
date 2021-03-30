@@ -51,4 +51,35 @@
 #define W_TX_PAYLOAD_NOACK	(uint8_t) 0xB0
 #define NOP									(uint8_t) 0xFF
 
+
+/*********************** nRF Bit definitions ********************/
+/******** CONFIG *******/
+#define MASK_RX_DR  (uint8_t) 0x06
+#define MASK_TX_DS  (uint8_t) 0x05
+#define MASK_MAX_RT (uint8_t) 0x04
+#define EN_CRC      (uint8_t) 0x03
+#define CRCO        (uint8_t) 0x02
+#define PWR_UP      (uint8_t) 0x01
+#define PRIM_RX     (uint8_t) 0xx0
+
+/******** EN_AA *******/
+#define ENAA_P5    	(uint8_t) 0x05
+#define ENAA_P4    	(uint8_t) 0x04
+#define ENAA_P3    	(uint8_t) 0x03
+#define ENAA_P2    	(uint8_t) 0x02
+#define ENAA_P1    	(uint8_t) 0x01
+#define ENAA_P0    	(uint8_t) 0x00
+
+/****** EN_RXADDR ****/
+#define ERX_P5     	(uint8_t) 0x05
+#define ERX_P4      (uint8_t) 0x04
+#define ERX_P3      (uint8_t) 0x03
+#define ERX_P2      (uint8_t) 0x02
+#define ERX_P1      (uint8_t) 0x01
+#define ERX_P0      (uint8_t) 0x00
+
+/****** SETUP_AW *****/
+#define AW          (uint8_t) 0x00
+
+/******** CONFIG *******/
 #endif
