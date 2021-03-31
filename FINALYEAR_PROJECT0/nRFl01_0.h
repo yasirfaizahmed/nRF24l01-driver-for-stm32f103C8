@@ -104,6 +104,47 @@
 #define RF_CH_5           (uint8_t) 0x20
 #define RF_CH_6           (uint8_t) 0x40
 
+/****** RF_SETUP ****/
+#define RF_PWR_0          (uint8_t) 0x02
+#define RF_PWR_1          (uint8_t) 0x04
+#define RF_DR_HIGH        (uint8_t) 0x08
+#define RF_DR_LOW         (uint8_t) 0x20
+#define CONT_WAVE         (uint8_t) 0x80
+
+/***** STATUS ******/
+#define TX_FULL           (uint8_t) 0
+#define RX_P_NO           (uint8_t) 1
+#define MAX_RT            (uint8_t) 0x10
+#define TX_DS             (uint8_t) 0x20
+#define RX_DR             (uint8_t) 0x40
+
+/**** OBSERVE *****/
+#define PLOS_CNT          (uint8_t) 4
+#define ARC_CNT           (uint8_t) 0
+
+/***** CD ********/
+#define CD_BIT            (uint8_t) 0
+
+/******* FIFO ****/
+#define RX_EMPTY          (uint8_t) 0
+#define RX_FULL           (uint8_t) 1
+#define TX_EMPTY          (uint8_t) 4
+#define FIFO_FULL         (uint8_t) 5
+#define TX_REUSE          (uint8_t) 6
+
+/********* DYNPD ****/
+#define DPL_P0            (uint8_t) 0x01
+#define DPL_P1            (uint8_t) 0x02
+#define DPL_P2            (uint8_t) 0x04
+#define DPL_P3            (uint8_t) 0x08
+#define DPL_P4            (uint8_t) 0x10
+#define DPL_P5            (uint8_t) 0x20
+
+/***** FEATURE *****/
+#define EN_DYN_ACK        (uint8_t) 0x01
+#define EN_ACK_PAY        (uint8_t) 0x02
+#define EN_DPL            (uint8_t) 0x04
+
 
 
 #endif
