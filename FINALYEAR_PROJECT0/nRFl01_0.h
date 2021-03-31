@@ -145,6 +145,21 @@
 #define EN_ACK_PAY        (uint8_t) 0x02
 #define EN_DPL            (uint8_t) 0x04
 
+/********************* custom defines ********************/
+/****** pipe number *******/
+#define PIPE_0	0x00 
+#define PIPE_1	0x01
+#define PIPE_2	0x02
+#define PIPE_3	0x03
+#define PIPE_4	0x04
+#define PIPE_5	0x05
+
+/****** Offset addresses *****/
+#define RX_ADDR_OFFSET  0x0A
+#define RX_PW_OFFSET    0x11
+
+
+
 
 
 #endif
