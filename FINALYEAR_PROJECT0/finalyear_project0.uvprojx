@@ -10,6 +10,7 @@
       <TargetName>Target 1</TargetName>
       <ToolsetNumber>0x4</ToolsetNumber>
       <ToolsetName>ARM-ADS</ToolsetName>
+      <pCCUsed>5060750::V5.06 update 6 (build 750)::ARMCC</pCCUsed>
       <uAC6>0</uAC6>
       <TargetOption>
         <TargetCommonOption>
@@ -390,6 +391,31 @@
               <FileName>nRFl01_0.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\nRFl01_0.h</FilePath>
+            </File>
+            <File>
+              <FileName>GPIO_DRIVER2.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\GPIO_DRIVER2.c</FilePath>
+            </File>
+            <File>
+              <FileName>GPIO_DRIVER2.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\GPIO_DRIVER2.h</FilePath>
+            </File>
+            <File>
+              <FileName>TIM_DRIVER0.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\TIM_DRIVER0.c</FilePath>
+            </File>
+            <File>
+              <FileName>TIM_DRIVER0.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\TIM_DRIVER0.h</FilePath>
+            </File>
+            <File>
+              <FileName>usart_debug0.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\usart_debug0.h</FilePath>
             </File>
           </Files>
         </Group>
