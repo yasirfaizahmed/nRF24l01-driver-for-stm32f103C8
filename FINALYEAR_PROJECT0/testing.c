@@ -4,22 +4,37 @@
 #include "nRFl01_0.h"
 #include "GPIO_DRIVER2.h"
 #include "TIM_DRIVER0.h"
-#include "usart_debug0.h"
+#include "usart_debug0.h"		//only for debugging through UART serial to USB
 
 
-void clock_setup(void);
-void GPIO_setup(void);
-void tim_setup(void);
-void SPI_setup(void);
+void clock_setup(void);	//sets sys_clock at 72MHz using PLL and HSE, mostly done using the defaultly created startup file
+void GPIO_setup(void);	//pretty self explainatory
+void tim_setup(void);		//TIM4 for basic delays min 1us
+void SPI_setup(void);		//SPI1 at 571Kbps, max 31Mbps
+
+void nRF_setup(void);
+void SPI_send_uint8_t(uint8_t);
+
+
 
 int main(){
+	clock_setup();
 	
+	GPIO_setup();
 	
+	tim_setup();
+	
+	SPI_setup();
+	
+	while(1){
+		nRF_setup();
+		
+	}
 	
 	
 }
 
-void clock_init(){
+void clock_setup(){
 	RCC->CR |= RCC_CR_HSION;	//HSI on
 	while( !(RCC_CR_HSIRDY & (RCC->CR)) );	//wait till its ready
 	
@@ -48,7 +63,32 @@ void tim_setup(){
 void SPI_setup(){
 	//SPI setup
 	SPI1->CR1 |= SPI_CR1_MSTR;	//master mode
-	SPI1->CR1 |= SPI_CR1_BR_1 | SPI_CR1_BR_2;	//571Kbps (with 72MHz sys_clk)
+	SPI1->CR1 |= SPI_CR1_BR_1 | SPI_CR1_BR_2;	//at 571Kbps, max 31Mbps
 	SPI1->CR2 |= SPI_CR2_SSOE;	//SS o/p enable
 	SPI1->CR1 |= SPI_CR1_SPE;	//turn on the SPI
+}
+
+void nRF_setup(){
+	uint8_t command = 0x00;	//command which will be sent to nRF
+	command |= PWR_UP;	//power up the nRF
+	//command |= PRIM_RX;	//as a Primary TX device
+	//command |= CRCO;	//CRC encoding scheme, 2bytes 
+	command |= EN_CRC;	//enabeling CRC
+	
+	SPI_send_uint8_t(command);	
+	
+	//digital_writepin(GPIOA, 4, LOW);	//bringing CE pin LOW
+	
+	
+	
+}
+	
+void SPI_send_uint8_t(uint8_t data){
+	//very standard SPI TX protocol
+	delay_us(20);
+	digital_writepin(GPIOA, 4, LOW);
+	SPI1->DR = data;
+	while( !((SPI1->SR) & SPI_SR_BSY) );
+	digital_writepin(GPIOA, 4, HIGH);
+	
 }

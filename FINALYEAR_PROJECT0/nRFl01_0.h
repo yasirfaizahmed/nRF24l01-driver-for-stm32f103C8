@@ -57,10 +57,10 @@
 #define MASK_RX_DR        (uint8_t) 0x06
 #define MASK_TX_DS        (uint8_t) 0x05
 #define MASK_MAX_RT       (uint8_t) 0x04
-#define EN_CRC            (uint8_t) 0x03
-#define CRCO              (uint8_t) 0x02
-#define PWR_UP            (uint8_t) 0x01
-#define PRIM_RX           (uint8_t) 0xx0
+#define EN_CRC            (uint8_t) 0x08
+#define CRCO              (uint8_t) 0x04
+#define PWR_UP            (uint8_t) 0x02
+#define PRIM_RX           (uint8_t) 0x00
 
 /******** EN_AA *******/
 #define ENAA_P5           (uint8_t) 0x05
