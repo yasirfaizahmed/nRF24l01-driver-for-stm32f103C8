@@ -15,6 +15,8 @@ void SPI_setup(void);		//SPI1 at 571Kbps, max 31Mbps
 void nRF_setup(void);
 void SPI_send_uint8_t(uint8_t);
 
+uint8_t command = 0x00;	//command to be sent to nRF
+uint8_t data = 0x00;	//data which will be sent to nRF
 
 
 int main(){
@@ -69,13 +71,15 @@ void SPI_setup(){
 }
 
 void nRF_setup(){
-	uint8_t command = 0x00;	//command which will be sent to nRF
-	command |= PWR_UP;	//power up the nRF
+	command |= W_REGISTER | CONFIG;	//Or-ing the command with offset
+	SPI_send_uint8_t(command);
+	
+	data |= PWR_UP;	//power up the nRF
 	//command |= PRIM_RX;	//as a Primary TX device
 	//command |= CRCO;	//CRC encoding scheme, 2bytes 
-	command |= EN_CRC;	//enabeling CRC
-	
-	SPI_send_uint8_t(command);	
+	data |= EN_CRC;	//enabeling CRC
+	SPI_send_uint8_t(data);
+	data = 0x00;	//clearing data buffer
 	
 	//digital_writepin(GPIOA, 4, LOW);	//bringing CE pin LOW
 	
