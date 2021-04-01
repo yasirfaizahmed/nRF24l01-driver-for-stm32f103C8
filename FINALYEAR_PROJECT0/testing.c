@@ -30,6 +30,7 @@ int main(){
 	
 	while(1){
 		nRF_setup();
+		delay_ms(50);
 		
 	}
 	
@@ -71,18 +72,28 @@ void SPI_setup(){
 }
 
 void nRF_setup(){
+	// SETUP REG 
 	command |= W_REGISTER | CONFIG;	//Or-ing the command with offset
 	SPI_send_uint8_t(command);
-	
+	command = CLEAR;	//clearing command buffer
+	delay_ms(5);
 	data |= PWR_UP;	//power up the nRF
-	//command |= PRIM_RX;	//as a Primary TX device
-	//command |= CRCO;	//CRC encoding scheme, 2bytes 
+	//data |= PRIM_RX;	//as a Primary TX device
+	//data |= CRCO;	//CRC encoding scheme, 2bytes 
 	data |= EN_CRC;	//enabeling CRC
 	SPI_send_uint8_t(data);
-	data = 0x00;	//clearing data buffer
+	data = CLEAR;	//clearing data buffer
+	delay_ms(5);
 	
-	//digital_writepin(GPIOA, 4, LOW);	//bringing CE pin LOW
-	
+	//SETUP_AW REG
+	command |= W_REGISTER | SETUP_AW;	// Or-ring with offset 
+	SPI_send_uint8_t(command);
+	command = CLEAR;
+	delay_ms(5);
+	data |= AW_5B;	//5Bytes of address value
+	SPI_send_uint8_t(data);
+	data = CLEAR;
+	delay_ms(5);
 	
 	
 }

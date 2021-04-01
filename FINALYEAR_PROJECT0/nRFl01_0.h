@@ -80,8 +80,8 @@
 
 /****** SETUP_AW *****/
 #define AW_3B             (uint8_t) 0x01
-#define AW_4B             (uint8_t) 0x10
-#define AW_5B             (uint8_t) 0x11
+#define AW_4B             (uint8_t) 0x02
+#define AW_5B             (uint8_t) 0x03
 
 /**** SETUP_RETR ****/
 #define RETR_ARC_DIS      (uint8_t) 0x00
@@ -157,6 +157,9 @@
 /****** Offset addresses *****/
 #define RX_ADDR_OFFSET  0x0A
 #define RX_PW_OFFSET    0x11
+
+/****** others *****/
+#define CLEAR 0x00
 
 
 
