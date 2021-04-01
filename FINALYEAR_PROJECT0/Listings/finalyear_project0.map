@@ -587,8 +587,8 @@ Image Symbol Table
     i.digital_writepin                       0x080004f4   Section        0  gpio_driver2.o(i.digital_writepin)
     i.main                                   0x08000512   Section        0  testing.o(i.main)
     i.nRF_setup                              0x08000530   Section        0  testing.o(i.nRF_setup)
-    i.pin_mode                               0x080005c8   Section        0  gpio_driver2.o(i.pin_mode)
-    i.tim_setup                              0x08000628   Section        0  testing.o(i.tim_setup)
+    i.pin_mode                               0x08000610   Section        0  gpio_driver2.o(i.pin_mode)
+    i.tim_setup                              0x08000670   Section        0  testing.o(i.tim_setup)
     .data                                    0x20000000   Section        2  testing.o(.data)
     .bss                                     0x20000004   Section       96  libspace.o(.bss)
     HEAP                                     0x20000068   Section      512  startup_stm32f10x_md.o(HEAP)
@@ -761,11 +761,11 @@ Image Symbol Table
     delay_us                                 0x080004c5   Thumb Code    42  tim_driver0.o(i.delay_us)
     digital_writepin                         0x080004f5   Thumb Code    30  gpio_driver2.o(i.digital_writepin)
     main                                     0x08000513   Thumb Code    30  testing.o(i.main)
-    nRF_setup                                0x08000531   Thumb Code   142  testing.o(i.nRF_setup)
-    pin_mode                                 0x080005c9   Thumb Code    92  gpio_driver2.o(i.pin_mode)
-    tim_setup                                0x08000629   Thumb Code     8  testing.o(i.tim_setup)
-    Region$$Table$$Base                      0x08000630   Number         0  anon$$obj.o(Region$$Table)
-    Region$$Table$$Limit                     0x08000650   Number         0  anon$$obj.o(Region$$Table)
+    nRF_setup                                0x08000531   Thumb Code   216  testing.o(i.nRF_setup)
+    pin_mode                                 0x08000611   Thumb Code    92  gpio_driver2.o(i.pin_mode)
+    tim_setup                                0x08000671   Thumb Code     8  testing.o(i.tim_setup)
+    Region$$Table$$Base                      0x08000678   Number         0  anon$$obj.o(Region$$Table)
+    Region$$Table$$Limit                     0x08000698   Number         0  anon$$obj.o(Region$$Table)
     command                                  0x20000000   Data           1  testing.o(.data)
     data                                     0x20000001   Data           1  testing.o(.data)
     __libspace_start                         0x20000004   Data          96  libspace.o(.bss)
@@ -779,9 +779,9 @@ Memory Map of the image
 
   Image Entry point : 0x08000189
 
-  Load Region LR_1 (Base: 0x08000000, Size: 0x00000654, Max: 0xffffffff, ABSOLUTE)
+  Load Region LR_1 (Base: 0x08000000, Size: 0x0000069c, Max: 0xffffffff, ABSOLUTE)
 
-    Execution Region ER_RO (Exec base: 0x08000000, Load base: 0x08000000, Size: 0x00000650, Max: 0xffffffff, ABSOLUTE)
+    Execution Region ER_RO (Exec base: 0x08000000, Load base: 0x08000000, Size: 0x00000698, Max: 0xffffffff, ABSOLUTE)
 
     Exec Addr    Load Addr    Size         Type   Attr      Idx    E Section Name        Object
 
@@ -855,25 +855,25 @@ Memory Map of the image
     0x080004c4   0x080004c4   0x00000030   Code   RO          176    i.delay_us          tim_driver0.o
     0x080004f4   0x080004f4   0x0000001e   Code   RO          133    i.digital_writepin  gpio_driver2.o
     0x08000512   0x08000512   0x0000001e   Code   RO            8    i.main              testing.o
-    0x08000530   0x08000530   0x00000098   Code   RO            9    i.nRF_setup         testing.o
-    0x080005c8   0x080005c8   0x00000060   Code   RO          134    i.pin_mode          gpio_driver2.o
-    0x08000628   0x08000628   0x00000008   Code   RO           11    i.tim_setup         testing.o
-    0x08000630   0x08000630   0x00000020   Data   RO          608    Region$$Table       anon$$obj.o
+    0x08000530   0x08000530   0x000000e0   Code   RO            9    i.nRF_setup         testing.o
+    0x08000610   0x08000610   0x00000060   Code   RO          134    i.pin_mode          gpio_driver2.o
+    0x08000670   0x08000670   0x00000008   Code   RO           11    i.tim_setup         testing.o
+    0x08000678   0x08000678   0x00000020   Data   RO          608    Region$$Table       anon$$obj.o
 
 
-    Execution Region ER_RW (Exec base: 0x20000000, Load base: 0x08000650, Size: 0x00000004, Max: 0xffffffff, ABSOLUTE)
+    Execution Region ER_RW (Exec base: 0x20000000, Load base: 0x08000698, Size: 0x00000004, Max: 0xffffffff, ABSOLUTE)
 
     Exec Addr    Load Addr    Size         Type   Attr      Idx    E Section Name        Object
 
-    0x20000000   0x08000650   0x00000002   Data   RW           13    .data               testing.o
+    0x20000000   0x08000698   0x00000002   Data   RW           13    .data               testing.o
 
 
-    Execution Region ER_ZI (Exec base: 0x20000004, Load base: 0x08000654, Size: 0x00000664, Max: 0xffffffff, ABSOLUTE)
+    Execution Region ER_ZI (Exec base: 0x20000004, Load base: 0x0800069c, Size: 0x00000664, Max: 0xffffffff, ABSOLUTE)
 
     Exec Addr    Load Addr    Size         Type   Attr      Idx    E Section Name        Object
 
     0x20000004        -       0x00000060   Zero   RW          477    .bss                c_w.l(libspace.o)
-    0x20000064   0x08000654   0x00000004   PAD
+    0x20000064   0x0800069c   0x00000004   PAD
     0x20000068        -       0x00000200   Zero   RW          213    HEAP                startup_stm32f10x_md.o
     0x20000268        -       0x00000400   Zero   RW          212    STACK               startup_stm32f10x_md.o
 
@@ -888,11 +888,11 @@ Image component sizes
        126          4          0          0          0       1658   gpio_driver2.o
         64         26        236          0       1536        828   startup_stm32f10x_md.o
        328         28          0          0          0       2165   system_stm32f10x.o
-       434         32          0          2          0     210380   testing.o
+       506         30          0          2          0     210416   testing.o
        116         14          0          0          0       1399   tim_driver0.o
 
     ----------------------------------------------------------------------
-      1068        104        268          4       1536     216430   Object Totals
+      1140        102        268          4       1536     216466   Object Totals
          0          0         32          0          0          0   (incl. Generated)
          0          0          0          2          0          0   (incl. Padding)
 
@@ -941,15 +941,15 @@ Image component sizes
 
       Code (inc. data)   RO Data    RW Data    ZI Data      Debug   
 
-      1348        120        268          4       1636     216230   Grand Totals
-      1348        120        268          4       1636     216230   ELF Image Totals
-      1348        120        268          4          0          0   ROM Totals
+      1420        118        268          4       1636     216266   Grand Totals
+      1420        118        268          4       1636     216266   ELF Image Totals
+      1420        118        268          4          0          0   ROM Totals
 
 ==============================================================================
 
-    Total RO  Size (Code + RO Data)                 1616 (   1.58kB)
+    Total RO  Size (Code + RO Data)                 1688 (   1.65kB)
     Total RW  Size (RW Data + ZI Data)              1640 (   1.60kB)
-    Total ROM Size (Code + RO Data + RW Data)       1620 (   1.58kB)
+    Total ROM Size (Code + RO Data + RW Data)       1692 (   1.65kB)
 
 ==============================================================================
 

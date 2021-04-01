@@ -39,7 +39,7 @@
 
 /*********************** nRF Register commands ********************/
 #define R_REGISTER          (uint8_t) 0x00
-#define W_REGISTER          (uint8_t) 0x01
+#define W_REGISTER          (uint8_t) 0x20
 #define R_RX_PAYLOAD        (uint8_t) 0x61
 #define W_TX_REGISTER       (uint8_t) 0xA0
 #define FLUSH_TX            (uint8_t) 0xE1
@@ -91,9 +91,9 @@
 #define RETR_ARC_3      	(uint8_t) 0x08
 #define RETR_ARD_DIS			(uint8_t) 0x00
 #define RETR_ARD_0      	(uint8_t) 0x10
-#define RETR_ARD_5      	(uint8_t) 0x20
-#define RETR_ARD_6      	(uint8_t) 0x40
-#define RETR_ARD_7      	(uint8_t) 0x80
+#define RETR_ARD_1      	(uint8_t) 0x20
+#define RETR_ARD_2      	(uint8_t) 0x40
+#define RETR_ARD_3      	(uint8_t) 0x80
 
 /******* RF_CH ******/
 #define RF_CH_0           (uint8_t) 0x01

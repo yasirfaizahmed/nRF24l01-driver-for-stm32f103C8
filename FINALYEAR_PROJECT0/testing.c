@@ -72,7 +72,7 @@ void SPI_setup(){
 }
 
 void nRF_setup(){
-	// SETUP REG 
+	// SETUP REG (0x20) (0x0A)
 	command |= W_REGISTER | CONFIG;	//Or-ing the command with offset
 	SPI_send_uint8_t(command);
 	command = CLEAR;	//clearing command buffer
@@ -85,12 +85,23 @@ void nRF_setup(){
 	data = CLEAR;	//clearing data buffer
 	delay_ms(5);
 	
-	//SETUP_AW REG
+	//SETUP_AW REG	(0x23) (0x03)
 	command |= W_REGISTER | SETUP_AW;	// Or-ring with offset 
 	SPI_send_uint8_t(command);
 	command = CLEAR;
 	delay_ms(5);
-	data |= AW_5B;	//5Bytes of address value
+	data |= AW_5B;	//5Bytes of address width
+	SPI_send_uint8_t(data);
+	data = CLEAR;
+	delay_ms(5);
+	
+	//SETUP_RETR REG	(0x24) (0xFF)
+	command |= W_REGISTER | SETUP_RETR;	//Or-ring with offset
+	SPI_send_uint8_t(command);
+	command = CLEAR;
+	delay_ms(5);
+	data |= RETR_ARC_0 | RETR_ARC_1 | RETR_ARC_2 | RETR_ARC_3;	//15 re_transmit retries 
+	data |= RETR_ARD_0 | RETR_ARD_1 | RETR_ARD_2 | RETR_ARD_3;	//wait for 4000us  
 	SPI_send_uint8_t(data);
 	data = CLEAR;
 	delay_ms(5);
