@@ -4,6 +4,8 @@
 #include <stdint.h>
 #include <stdbool.h>
 
+
+
 /*********************** nRF Register offset addresses ********************/
 #define CONFIG				(uint8_t) 0x00
 #define EN_AA 				(uint8_t) 0x01
@@ -37,6 +39,7 @@
 #define FEATURE				(uint8_t) 0x1D
 
 
+
 /*********************** nRF Register commands ********************/
 #define R_REGISTER          (uint8_t) 0x00
 #define W_REGISTER          (uint8_t) 0x20
@@ -50,6 +53,7 @@
 #define W_ACK_PAYLOAD       (uint8_t) 0xA8
 #define W_TX_PAYLOAD_NOACK  (uint8_t) 0xB0
 #define NOP                 (uint8_t) 0xFF
+
 
 
 /*********************** nRF Bit definitions ********************/
@@ -145,6 +149,8 @@
 #define EN_ACK_PAY        (uint8_t) 0x02
 #define EN_DPL            (uint8_t) 0x04
 
+
+
 /********************* custom defines ********************/
 /****** pipe number *******/
 #define PIPE_0	0x00 
@@ -163,6 +169,14 @@
 
 
 
+/********************* function prototyping **************/
+void clock_setup(void);	//sets sys_clock at 72MHz using PLL and HSE, mostly done using the defaultly created startup file
+void GPIO_setup(void);	//pretty self explainatory
+void tim_setup(void);		//TIM4 for basic delays min 1us
+void SPI_setup(void);		//SPI1 at 571Kbps, max 31Mbps
+
+void nRF_setup(void);
+void SPI_send_uint8_t(uint8_t);
 
 
 #endif

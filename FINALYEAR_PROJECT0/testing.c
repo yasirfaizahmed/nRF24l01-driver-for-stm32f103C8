@@ -7,13 +7,7 @@
 #include "usart_debug0.h"		//only for debugging through UART serial to USB
 
 
-void clock_setup(void);	//sets sys_clock at 72MHz using PLL and HSE, mostly done using the defaultly created startup file
-void GPIO_setup(void);	//pretty self explainatory
-void tim_setup(void);		//TIM4 for basic delays min 1us
-void SPI_setup(void);		//SPI1 at 571Kbps, max 31Mbps
 
-void nRF_setup(void);
-void SPI_send_uint8_t(uint8_t);
 
 uint8_t command = 0x00;	//command to be sent to nRF
 uint8_t data = 0x00;	//data which will be sent to nRF
@@ -37,6 +31,7 @@ int main(){
 	
 }
 
+
 void clock_setup(){
 	RCC->CR |= RCC_CR_HSION;	//HSI on
 	while( !(RCC_CR_HSIRDY & (RCC->CR)) );	//wait till its ready
@@ -48,6 +43,7 @@ void clock_setup(){
 
 }
 
+
 void GPIO_setup(){
 	//GPIO pin setup as alternate function
 	pin_mode(IOPA, GPIOA, 7, op_50MHz, op_afpp);	//MOSI pin as GPIO alternate_pin can run upto 50MHz
@@ -55,7 +51,10 @@ void GPIO_setup(){
 	pin_mode(IOPA, GPIOA, 5, op_50MHz, op_afpp);	//SCK pin as GPIO alternate_pin can run upto 50MHz
 	pin_mode(IOPA, GPIOA, 4, op_50MHz, op_gppp);	//CS pin as GPIO general_puspose_pin can run upto 50MHz
 	
+	//digital_writepin(GPIOA, 4, HIGH);
+	GPIOA->BSRR |= (1<<4);	
 }
+
 
 void tim_setup(){
 	//timer setup (TIM4)
@@ -63,13 +62,29 @@ void tim_setup(){
 	
 }
 
+
 void SPI_setup(){
 	//SPI setup
 	SPI1->CR1 |= SPI_CR1_MSTR;	//master mode
 	SPI1->CR1 |= SPI_CR1_BR_1 | SPI_CR1_BR_2;	//at 571Kbps, max 31Mbps
+	SPI1->CR1 |= SPI_CR1_SSI;	//Software slave management enabled
 	SPI1->CR2 |= SPI_CR2_SSOE;	//SS o/p enable
 	SPI1->CR1 |= SPI_CR1_SPE;	//turn on the SPI
 }
+
+	
+void SPI_send_uint8_t(uint8_t data){
+	//very standard SPI TX protocol
+	delay_us(20);
+	GPIOA->BSRR |= (1<<4);	
+	//digital_writepin(GPIOA, 4, LOW);
+	SPI1->DR = data;
+	while( !((SPI1->SR) & SPI_SR_BSY) );
+	//digital_writepin(GPIOA, 4, HIGH);
+	GPIOA->BRR |= (1<<4);	
+	
+}
+
 
 void nRF_setup(){
 	// SETUP REG (0x20) (0x0A)
@@ -106,15 +121,13 @@ void nRF_setup(){
 	data = CLEAR;
 	delay_ms(5);
 	
-	
-}
-	
-void SPI_send_uint8_t(uint8_t data){
-	//very standard SPI TX protocol
-	delay_us(20);
-	digital_writepin(GPIOA, 4, LOW);
-	SPI1->DR = data;
-	while( !((SPI1->SR) & SPI_SR_BSY) );
-	digital_writepin(GPIOA, 4, HIGH);
+	//STATUS REG	(0x27) (0x00)
+	command |= W_REGISTER | STATUS;	//Or-ing with offset
+	SPI_send_uint8_t(command);
+	command = CLEAR;
+	delay_ms(5);
+	data = CLEAR;	//clearing all the flags 
+	SPI_send_uint8_t(data);
+	delay_ms(5);
 	
 }
