@@ -3,7 +3,7 @@
 <title>Static Call Graph - [.\Objects\finalyear_project0.axf]</title></head>
 <body><HR>
 <H1>Static Call Graph for image .\Objects\finalyear_project0.axf</H1><HR>
-<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5060750: Last Updated: Fri Apr 02 22:07:27 2021
+<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5060750: Last Updated: Sat Apr 03 00:50:51 2021
 <BR><P>
 <H3>Maximum Stack Usage =         32 bytes + Unknown(Functions without stacksize, Cycles, Untraceable Function Pointers)</H3><H3>
 Call chain for Maximum Stack Depth:</H3>
@@ -480,24 +480,23 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[47]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 </UL>
 
-<P><STRONG><a name="[52]"></a>SPI_send_uint8_t</STRONG> (Thumb, 76 bytes, Stack size 16 bytes, testing.o(i.SPI_send_uint8_t))
+<P><STRONG><a name="[52]"></a>SPI_send_uint8_t</STRONG> (Thumb, 80 bytes, Stack size 16 bytes, testing.o(i.SPI_send_uint8_t))
 <BR><BR>[Stack]<UL><LI>Max Depth = 24<LI>Call Chain = SPI_send_uint8_t &rArr; digital_writepin
 </UL>
 <BR>[Calls]<UL><LI><a href="#[51]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;digital_writepin
-<LI><a href="#[54]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;delay_us
 <LI><a href="#[53]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;delay_ms
 </UL>
 <BR>[Called By]<UL><LI><a href="#[5a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;nRF_setup
 </UL>
 
-<P><STRONG><a name="[59]"></a>SPI_setup</STRONG> (Thumb, 44 bytes, Stack size 0 bytes, testing.o(i.SPI_setup))
+<P><STRONG><a name="[59]"></a>SPI_setup</STRONG> (Thumb, 54 bytes, Stack size 0 bytes, testing.o(i.SPI_setup))
 <BR><BR>[Called By]<UL><LI><a href="#[47]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 </UL>
 
 <P><STRONG><a name="[39]"></a>SystemInit</STRONG> (Thumb, 78 bytes, Stack size 8 bytes, system_stm32f10x.o(i.SystemInit))
 <BR><BR>[Stack]<UL><LI>Max Depth = 28<LI>Call Chain = SystemInit &rArr; SetSysClock &rArr; SetSysClockTo72
 </UL>
-<BR>[Calls]<UL><LI><a href="#[55]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SetSysClock
+<BR>[Calls]<UL><LI><a href="#[54]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SetSysClock
 </UL>
 <BR>[Address Reference Count : 1]<UL><LI> startup_stm32f10x_md.o(.text)
 </UL>
@@ -508,19 +507,18 @@ Global Symbols
 <P><STRONG><a name="[53]"></a>delay_ms</STRONG> (Thumb, 24 bytes, Stack size 8 bytes, tim_driver0.o(i.delay_ms))
 <BR><BR>[Stack]<UL><LI>Max Depth = 8<LI>Call Chain = delay_ms
 </UL>
-<BR>[Calls]<UL><LI><a href="#[54]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;delay_us
+<BR>[Calls]<UL><LI><a href="#[56]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;delay_us
 </UL>
-<BR>[Called By]<UL><LI><a href="#[52]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SPI_send_uint8_t
+<BR>[Called By]<UL><LI><a href="#[47]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
+<LI><a href="#[52]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SPI_send_uint8_t
 </UL>
 
 <P><STRONG><a name="[5b]"></a>delay_tim_init</STRONG> (Thumb, 36 bytes, Stack size 0 bytes, tim_driver0.o(i.delay_tim_init))
 <BR><BR>[Called By]<UL><LI><a href="#[58]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;tim_setup
 </UL>
 
-<P><STRONG><a name="[54]"></a>delay_us</STRONG> (Thumb, 42 bytes, Stack size 0 bytes, tim_driver0.o(i.delay_us))
+<P><STRONG><a name="[56]"></a>delay_us</STRONG> (Thumb, 42 bytes, Stack size 0 bytes, tim_driver0.o(i.delay_us))
 <BR><BR>[Called By]<UL><LI><a href="#[53]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;delay_ms
-<LI><a href="#[5a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;nRF_setup
-<LI><a href="#[52]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SPI_send_uint8_t
 </UL>
 
 <P><STRONG><a name="[51]"></a>digital_writepin</STRONG> (Thumb, 30 bytes, Stack size 8 bytes, gpio_driver2.o(i.digital_writepin))
@@ -530,10 +528,11 @@ Global Symbols
 <LI><a href="#[4f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GPIO_setup
 </UL>
 
-<P><STRONG><a name="[47]"></a>main</STRONG> (Thumb, 24 bytes, Stack size 0 bytes, testing.o(i.main))
+<P><STRONG><a name="[47]"></a>main</STRONG> (Thumb, 30 bytes, Stack size 0 bytes, testing.o(i.main))
 <BR><BR>[Stack]<UL><LI>Max Depth = 32<LI>Call Chain = main &rArr; nRF_setup &rArr; SPI_send_uint8_t &rArr; digital_writepin
 </UL>
-<BR>[Calls]<UL><LI><a href="#[58]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;tim_setup
+<BR>[Calls]<UL><LI><a href="#[53]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;delay_ms
+<LI><a href="#[58]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;tim_setup
 <LI><a href="#[5a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;nRF_setup
 <LI><a href="#[57]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;clock_setup
 <LI><a href="#[59]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SPI_setup
@@ -542,11 +541,10 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[46]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__rt_entry_main
 </UL>
 
-<P><STRONG><a name="[5a]"></a>nRF_setup</STRONG> (Thumb, 228 bytes, Stack size 8 bytes, testing.o(i.nRF_setup))
+<P><STRONG><a name="[5a]"></a>nRF_setup</STRONG> (Thumb, 28 bytes, Stack size 8 bytes, testing.o(i.nRF_setup))
 <BR><BR>[Stack]<UL><LI>Max Depth = 32<LI>Call Chain = nRF_setup &rArr; SPI_send_uint8_t &rArr; digital_writepin
 </UL>
-<BR>[Calls]<UL><LI><a href="#[54]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;delay_us
-<LI><a href="#[52]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SPI_send_uint8_t
+<BR>[Calls]<UL><LI><a href="#[52]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SPI_send_uint8_t
 </UL>
 <BR>[Called By]<UL><LI><a href="#[47]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 </UL>
@@ -568,18 +566,18 @@ Global Symbols
 <H3>
 Local Symbols
 </H3>
-<P><STRONG><a name="[55]"></a>SetSysClock</STRONG> (Thumb, 8 bytes, Stack size 8 bytes, system_stm32f10x.o(i.SetSysClock))
+<P><STRONG><a name="[54]"></a>SetSysClock</STRONG> (Thumb, 8 bytes, Stack size 8 bytes, system_stm32f10x.o(i.SetSysClock))
 <BR><BR>[Stack]<UL><LI>Max Depth = 20<LI>Call Chain = SetSysClock &rArr; SetSysClockTo72
 </UL>
-<BR>[Calls]<UL><LI><a href="#[56]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SetSysClockTo72
+<BR>[Calls]<UL><LI><a href="#[55]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SetSysClockTo72
 </UL>
 <BR>[Called By]<UL><LI><a href="#[39]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SystemInit
 </UL>
 
-<P><STRONG><a name="[56]"></a>SetSysClockTo72</STRONG> (Thumb, 214 bytes, Stack size 12 bytes, system_stm32f10x.o(i.SetSysClockTo72))
+<P><STRONG><a name="[55]"></a>SetSysClockTo72</STRONG> (Thumb, 214 bytes, Stack size 12 bytes, system_stm32f10x.o(i.SetSysClockTo72))
 <BR><BR>[Stack]<UL><LI>Max Depth = 12<LI>Call Chain = SetSysClockTo72
 </UL>
-<BR>[Called By]<UL><LI><a href="#[55]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SetSysClock
+<BR>[Called By]<UL><LI><a href="#[54]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SetSysClock
 </UL>
 <P>
 <H3>

@@ -175,8 +175,9 @@ void GPIO_setup(void);	//pretty self explainatory
 void tim_setup(void);		//TIM4 for basic delays min 1us
 void SPI_setup(void);		//SPI1 at 571Kbps, max 31Mbps
 
-void nRF_setup(void);
-void SPI_send_uint8_t(uint8_t, uint8_t);
+void nRF_setup(void);	//it sets the nRF in working condition
+void SPI_send_uint8_t(uint8_t, uint8_t);	//for transmiting commands and data
+
 
 
 #endif

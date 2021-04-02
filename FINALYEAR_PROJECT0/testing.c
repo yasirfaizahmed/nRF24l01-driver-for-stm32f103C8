@@ -24,7 +24,7 @@ int main(){
 	
 	while(1){
 		nRF_setup();
-		//delay_ms(50);
+		delay_ms(50);
 		
 	}
 	
@@ -52,7 +52,6 @@ void GPIO_setup(){
 	
 
 	digital_writepin(GPIOA, 4, HIGH);
-	//GPIOA->BSRR |= (1<<4);	
 }
 
 
@@ -67,7 +66,7 @@ void SPI_setup(){
 	//SPI setup
 	SPI1->CR1 |= SPI_CR1_MSTR;	//master mode
 	SPI1->CR1 |= SPI_CR1_BR_1 | SPI_CR1_BR_2;	//at 571Kbps, max 31Mbps
-	//SPI1->CR1 |= SPI_CR1_SSI;	//Software slave management enabled
+	SPI1->CR1 |= SPI_CR1_SSI;	//Software slave management enabled
 	SPI1->CR2 |= SPI_CR2_SSOE;	//SS o/p enable
 	SPI1->CR1 |= SPI_CR1_SPE;	//turn on the SPI
 }
@@ -76,10 +75,12 @@ void SPI_setup(){
 void SPI_send_uint8_t(uint8_t command, uint8_t data){
 	//very standard SPI TX protocol
 	delay_ms(50);
+	
 	digital_writepin(GPIOA, 4, LOW);
 	SPI1->DR = command;
 	while(SPI1->SR & SPI_SR_BSY);
 	delay_us(20);
+	
 	SPI1->DR = data;
 	while(SPI1->SR & SPI_SR_BSY);
 	digital_writepin(GPIOA, 4, HIGH);
@@ -117,10 +118,11 @@ void nRF_setup(){
 	command = CLEAR;	
 	delay_us(1000);
 	
-	//STATUS REG	(0x27) (0x00)
+	//STATUS REG	(0x27) (0x70)
 	command |= W_REGISTER | STATUS;	//Or-ing with offset
+	data |= 0x70;	//clearing flags 
 	SPI_send_uint8_t(command, data);
-	data = CLEAR;	//clearing all the flags 
+	data = CLEAR;	
 	command = CLEAR;	
 	delay_us(1000);
 	
