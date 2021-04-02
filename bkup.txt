@@ -1,0 +1,388 @@
+# FINALYEAR_PROJECT
+## Custom nRF24L01 transceiver module driver for a stm32f103 target device
+
+![alt text](https://github.com/yasirfaizahmed/FINALYEAR_PROJECT/blob/master/images/download.jpg)
+![alt text](https://github.com/yasirfaizahmed/FINALYEAR_PROJECT/blob/master/images/stm.jpg)
+
+### Key Features of nRF
+
+	• Worldwide 2.4GHz ISM band operation
+  	• Up to 2Mbps on air data rate
+  	• Ultra low power operation
+  	• 11.3mA TX at 0dBm output power
+  	• 12.3mA RX at 2Mbps air data rate
+  	• 900nA in power down
+  	• 22μA in standby-I
+  	• On chip voltage regulator
+  	• 1.9 to 3.6V supply range
+  	• Enhanced ShockBurst™
+  	• Automatic packet handling
+  	• Auto packet transaction handling
+  	• 6 data pipe MultiCeiver™
+  	• Air compatible with nRF2401A, 02, E1 and E2
+  	• Low cost BOM
+  	• ±60ppm 16MHz crystal
+  	• 5V tolerant inputs
+  	• Compact 20-pin 4x4mm QFN package
+  
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
+### REGISTERS DEFINITTIONS 
+
+### CONFIG REG
+![](https://github.com/yasirfaizahmed/FINALYEAR_PROJECT/blob/master/images/config_reg.jpg)
+
+0 : PRIM_RX : Controls the NRF mode [ 1= Receiver ] [ 0 = Transmitter ]
+
+1 : PWR_UP  : Power up control. [1 = Power up]  [0 = Power down]
+
+2 : CRCO : Set CRC encoding scheme. [1 = 2 Bytes]  [0 = 1 Byte].
+
+3 : EN_CRC   : Enables the CRC (more on this later) If any channel has Auto Ack enabled the CRC is
+also forced to be enabled. 
+
+4 : MASK_MAX_RT : Enables/Disables whether the MAX_RT interrupt drives the IRQ pin
+
+5 : MASK_TX_DS     : Enables/Disables whether the TX_DS interrupt drives the IRQ pin
+
+6 : MASK_RX_DR    :  Enables/Disables whether the RX_DR interrupt drives the IRQ pin
+
+Bits 0 and 1 are pretty self explanatory. Bit 2 controls how many bytes are used for the CRC scheme, basically the NRF will add either 1 or 2 bytes at the end of a transmission when CRC is enabled. And as noted when any channel has auto acknowledge enabled the CRC is forced. 
+
+CRC and auto Ack work in conjunction to make sure data reception is only presented when the data is valid. The NRF will run a CRC algorithm on the address, packet control (if there is one) and your payload. The result of that is a "CRC code"  and it will add that code to the frame format and transmit it along with your data. Then the transmitter will turn itself into a receiver, no code required to do this, and listen for an ACK to verify the data was received.
+
+The receiver will receive the entire frame packet and extract your data and run the same CRC algorithm on it. If the CRC code that results from the receivers CRC engine is the same as the one sent by the transmitter then it means they both ran the same CRC algorithm on the exact same data and thus no bits were lost or modified or noise etc.. therefore the data is valid. 
+
+At this point the receiver will momentarily turn into a transmitter, all on its own no code required, and it will send an ACK command to the transmitter telling it that it received the data. If the CRC codes do not match then the receiver does not send anything and discards the data.
+Note that both receiver and transmitter need to have auto ACK enabled for this scheme to work, this is what they call "Enhanced Shockburst".
+
+shockburts format 
+![](https://github.com/yasirfaizahmed/FINALYEAR_PROJECT/blob/master/images/shockburst%20(1).jpg)
+
+the Preamble is nothing more then a sequence of 1s and 0s to synchronize the receiver's demodulator to the incoming stream. It is only one byte long, if the first bit in the address is a 1 then the preamble is 10101010, otherwise it is 01010101.
+
+
+### EN_AA REG
+![](https://github.com/yasirfaizahmed/FINALYEAR_PROJECT/blob/master/images/EN_AA%20REG.jpg)
+0 - 5 : This bits are used to enable auto acknowledge on the given pipe number. 
+
+A "Pipe" is basically like a different channel but not a frequency channel, think of it as the name suggest a Pipe. Imagine one big Pipe where all the data comes through, this would be your frequency 2.4 Ghz give or take some megahertz because you have the option to change the frequency channels. Your data travels on this frequency and that is the BIG pipe so to speak. When it gets to the receiver it now can go down several other small pipes each with its own address. That is why when you transmit a data packet you send an address
+
+### EN_RX_ADDR REG
+![](https://github.com/yasirfaizahmed/FINALYEAR_PROJECT/blob/master/images/EN_RX_ADDR%20REG.jpg)
+0 - 5 : This bits are used to enable a given pipe number.
+
+This is the register where you enable all pipes that you will be using. Setting a 1 in its corresponding bit enables it you can have more than one or all enabled at the same time.
+
+### SETUP_AW REG
+![](https://github.com/yasirfaizahmed/FINALYEAR_PROJECT/blob/master/images/SETUP_AW%20REG.jpg)
+This register only uses 2bits to set the width of the pipe addresses.  The values allowed are as follow:
+
+	00 - Illegal
+	01 - 3 bytes
+	10 - 4 bytes
+	11 - 5 bytes
+
+Remember that the address is transmitted every time you send a packet so having less bytes to transmit can be beneficial in some applications but the robustness of having more bytes may be useful in other applications.
+
+### SETUP_RETR REG
+![](https://github.com/yasirfaizahmed/FINALYEAR_PROJECT/blob/master/images/SETUP_RETR%20REG.jpg)
+0-3 : ARC : These bits are used to set how many times the transmitter will re-transmit when it fails to                         receive an auto ACK from the receiver.  
+
+Acceptable values are:
+
+	0000 - re-transmit disabled
+	0001 - 1 re-transmit
+	0010 - 2 re-transmit
+	........ etc .......
+	1111 - 15 re-transmit
+
+
+4-7 : ARD :  These bits are used to assign a designated waiting period before each re-transmission.
+
+Acceptable values are:
+
+	0000 - Wait 250 uS
+	0001 - Wait 500 uS
+	0010 - Wait 750 uS
+	........ etc .......
+	1111 - Wait 4000 uS
+
+### RF_CH REG
+![](https://github.com/yasirfaizahmed/FINALYEAR_PROJECT/blob/master/images/RF_CH%20REG.jpg)
+This register uses bits 0 through 6 to set the channel frequency where your NRF will transmit and receive its data. Needless to say that both transmitter and receiver need to be on the same frequency. Also needless to say you get 126 RF channels to chose from. 000000 is not acceptable, hence why you dont have 127
+
+
+
+### RF_SETUP REG
+![](https://github.com/yasirfaizahmed/FINALYEAR_PROJECT/blob/master/images/RF_SETUP%20REG.jpg)
+0    : Obsolete / Not used 
+
+1-2 : RF_PWR : Set the output power in TX mode 
+
+Acceptable values are: 
+    00 : -18dBm
+    01 : -12dBm
+    10 : -6dBm
+    11 : 0dBm
+
+3 : RF_DR_HIGH : Select one of the high data rates : [ 0 = 1Mbps ] [ 1 = 2Mbps ]
+
+4 : PLL_LOCK : This bit is used for testing . Not relevant for operation. Leave at reset value of 0
+
+5 : RF_DR_LOW : Set the data rate to its lowest of 250kbs, if this is set it overrides RF_DR_HIGH
+
+6 : RESERVED
+
+7 : CONT_WAVE :  This bit enables continuous transmission. 
+
+The RF_PWR and PLL_LOCK bits should for the most part be left alone. The PLL_LOCK bit is used for a testing procedure explained in the datasheet, you ca view that on your ow. The RF_PWR bit controls the output power, if you do not know anything about analog electronics, 0dBm does not mean zero output power. Unless you have power consumption restrictions to meet you should not really set it below 0dBm.
+
+
+### STATUS REG
+![](https://github.com/yasirfaizahmed/FINALYEAR_PROJECT/blob/master/images/STATUS%20REG.jpg)
+0 : TX_FULL : When this bit is set it means the TX FIFO is full and you must either read some data or  risk it being lost as it pushes out the oldest data to fill it with new incoming data
+
+1-3: RX_P_NO : Tells you on what Pipe there is the current data available to read.
+
+4 : MAX_RT : This is an interrupt that signals when the maximum number of re-transmits has been    reached. Write a 1 to clear this bit
+
+5 : TX_DS : Interrupt that signals when the data packet has been transmitted. If auto ACK is                  enabled his interrupt will only trigger when the ACK is received. Write 1 to clear
+
+6 : RX_DR : This interrupt signals that new data has arrived to be read from the FIFO. Write 1 to            clear it.
+
+Like stated in the CONFIG register description, these interrupts can drive the IRQ pin low when the flags are set. And like most status registers the interrupts are cleared by writing a 1 to the bit. 
+
+### OBSERVE_TX REG
+![](https://github.com/yasirfaizahmed/FINALYEAR_PROJECT/blob/master/images/OBSERVE_TX%20REG.jpg)
+0-3 : ARC_CNT : These bits tell current count of re-transmit
+
+4-7 : PLOS_CNT : These bits keep track of how many packets have been lost after the max re-transmit
+
+When ARC_CNT exceeds the max number of re-transmits set in the SETUP_RETR register it triggers the MAX_RT interrupt , which in turn may or may not trigger the IRQ pin to go low depending on your settings
+
+### RPD REG	
+![](https://github.com/yasirfaizahmed/FINALYEAR_PROJECT/blob/master/images/RPD%20REG.jpg)
+The RPD register has only one readable bit that signals power levels above -64dBm present in the RF channel you are using. Otherwise it reads 0.
+
+
+### RX_ADDR_P0
+![](https://github.com/yasirfaizahmed/FINALYEAR_PROJECT/blob/master/images/RX_ADDR.jpg)
+if you look carefully, the image above depicts two registers, RX_ADDR_P0 and register RX_ADDR_P1.  This does not mean there are two registers in one, I am simply stating that both RX_ADDR_P0 and RX_ADDR_P1 have up to 5bytes (40 bits)  All these bits are used to set a unique address of your choice to Pipe 0 and Pipe 1. You do not have to use all 5 bytes but if you want to use 5 bytes these are the only two Pipes that support 5 byte of unique address space.
+
+### RX_ADDR_P1-P5
+![](https://github.com/yasirfaizahmed/FINALYEAR_PROJECT/blob/master/images/RX_ADDR%20P2-P5.jpg)
+The rest of the Pipe's addresses only support a one byte address. The diagram above is also pretty self explanatory. 
+Well technically speaking all the pipes addresses are 5 bytes but for these piepes you can only change the low byte, all the other 4 high bytes are equal to the high 4 bytes that are set in pipe 1 
+
+
+### TX_ADDR  REG
+![](https://github.com/yasirfaizahmed/FINALYEAR_PROJECT/blob/master/images/TX_ADDR%20REG.jpg)
+This register is also 5bytes (40bits) long,  In this register you enter the address that has to match the pipe address on the receiver that listening. It does not have to be 5bytes long, since some pipes only support at one byte addresses.
+
+### RX_PW_p1-P5 REG
+![](https://github.com/yasirfaizahmed/FINALYEAR_PROJECT/blob/master/images/RX_PW%20REG.jpg)
+These 6 registers RX_PW_P0 ... through... RX_PW_P5  hold the number of bytes that are available to read on the specific pipe.
+
+### FIFO_STATUS REG	
+![](https://github.com/yasirfaizahmed/FINALYEAR_PROJECT/blob/master/images/FIFO_STATUS%20REG.jpg)
+0 : RX_EMPTY : indicates there is no data in the RX FIFO
+
+1 : RX_FULL : Indicates the RX FIFO is full...go figure 
+
+4 : TX_EMPTY : Indicates TX FIFO is empty
+
+5 : TX_FULL : take a wild guess......
+
+6 : TX_REUSE : reuses / resend the previously sent TX payload (data packet)
+
+
+### DYNPD REG
+![](https://github.com/yasirfaizahmed/FINALYEAR_PROJECT/blob/master/images/DYNPD%20REG.jpg)
+When you transmit data as a transmitter to a receiver, both must agree on the payload length otherwise the receiver will not acknowledge the received payload. 
+
+However this register allows you to send data of variable length without the need to have a predefined data width. each bit in this register enabled Dynamic Payload on a given pipe. However the Dynamic payload feature also must be enabled , in order for an individual pipe to also have dynamic payload. The feature is enabled in the next register. 
+
+### FEAUTURE REG
+![](https://github.com/yasirfaizahmed/FINALYEAR_PROJECT/blob/master/images/Feature%20REG.jpg)
+0 : EN_DYN_ACK : Enables the NOACK feature
+
+1 : EN_ACK_PAY : Allows the receiver to also send a payload along with an AUTO ACK
+
+2 : EN_DPL : Enables dynamic payload
+
+The EN_DYN_ACK bit means that the receiver does not have to send an ACK and the transmitter is also not expecting one. 
+The auto ack sent by a receiver to tell the transmitter is usually does not include any payload , but you can do that if you would like by enabling the EN_ACK_PAY  bit. And ultimately EN_DPL is self explanatory.
+
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
+## nRF COMMANDS
+There are only 11 commands
+
+DPI nature - nature of the SPI protocol, that with every byte you send a byte is sent back. That first byte you get back is not the reply to the command request, but just a dummy byte that needs to be sent.
+
+
+------------------------------ command 1 ---------------------------------
+### command: R_REGISTER
+### code   : 000xxxxx
+
+The R_REGISTER command is used to Read a register and its opcode is 000xxxxx where the x's represent the address of the register you wish to read. For example if you want to read the contents of the RF_SETUP register which is address 0x06 ( 00000110 ) you would simply join the R_REGISTER command with the RF_SETUP address , which if you look at it ends up being just the RF_SETUP command anywyas.. then you send that through SPI and transmit. Then youll get a dummy byte, you can ignore it, to get your actual reply you need to send a dummy byte also because thats how SPI works and you will get the contents of the RF_SETUP register .
+
+//pseudo code
+#define R_REGISTER  0x00
+#define RF_SETUP    0x06
+spi_send ( R_REGISTER | RF_SETUP) ; 
+//the returned byte will be first a dummy byte and then the contents
+
+------------------------------ command 2 ---------------------------------
+### command: W_REGISTER
+### code   : 001xxxxx
+
+This is the Write command and you use it to write to a register. Unlike the previous command this is not just leading zeros. The x's represent the address of the register you want to write to. After sending this command the NRF expects the data that is to be written to . The SPI send would look exactly like the previous one except you OR it with W_REGISTER.
+
+//pseudo code
+#define W_REGISTER  0x20  // 00100000
+#define RF_SETUP    0x06
+spi_send ( W_REGISTER | RF_SETUP) ;
+spi_send(data)
+
+
+------------------------------ command 3 ---------------------------------
+#### command: R_RX_PAYLOAD
+### code   : 01100001
+ 
+The R_RX_PAYLOAD is the command you send when you know you have received data, you will know this because the RX_DR interrupt will have been triggered.  Before you read the payload it makes sense to read STATUS register and check the  RX_P_NO bits to figure out which Pipe this data was received on.
+Or if you're only using one pipe it does not matter.
+After sending the R_RX_PAYLOAD command the NRF needs to transmit that data to you via SPI and in order to do that you have to send it some dummy bytes, it does not matter what the bytes are it can be 0xF1 or 0xFF... makes no difference,what does make a difference is that you need to send it the number of bytes equal to the data-width that was set in the RX_PW_P# register or alternatively there is a command to check the width of the top most payload.
+ Width can be from 1 to 32 bytes
+
+
+
+------------------------------ command 4 ---------------------------------
+### command: W_TX_PAYLOAD
+### code   : 01000000
+
+This is the command to write your payload. You must make sure that before you start the RF transmission  the CE pin must be LOW. Once you send this command the NRF expects your payload data to come next. Your data width can be from 1 to 32 bytes longs.  After the last byte is sent and you stop the SPI communication you have to bring the CE pin HIGH, because a LOW to HIGH transition is what tells the NRF to transmit what is in the TX FIFO. and this command is what writes in the TX FIFO.
+
+
+------------------------------ command 5,6 ---------------------------------
+### command: FLUSH_TX, FLUSH_RX
+### code   : 11100001, 11100010
+
+
+These two commands clear the FIFOs, really not much else to be said here aside from the fact that the datasheet says you should not clear the RX FIFO during a transmission of ACK.  Just wait till all transmissions are done before clearing the RX FIFO.
+
+
+------------------------------ command 7 ---------------------------------
+### command: REUSE_TX_PL
+### code   : 11100011
+
+This command allows you to resend the last transmission. You do not need to send W_TX_PAYLOAD.
+Simply send this command and it will resend the last packet so long as you have not flushed the FIFO with the commands above this one.
+
+
+
+------------------------------ command 8,9 ---------------------------------
+### command: ACTIVATE, ACTIVATE_BYTE
+### code   : 01010000, 01110011
+
+This command activates three features at once, not necessarily enables them, but allows them to be used if desired. So its very important. The features it activates are:
+1. R_RX_PL_WID read RX payload width when using dynamic payload
+2. W_ACK_PAYLOAD allows a payload to be sent with an ack
+3. W_TX_PAYLOAD_NOACK disables ack on this specific packet
+
+these three features are described below also. But those commands are useless unless they are activated by this command. 
+The command works by first sending the ACTIVATE command, then sending the ACTIVATE_BYTE 
+so basically sending 2 SPI send actions, first the ACTIVATE then the ACTIVATE byte.
+
+
+------------------------------ command 10 ---------------------------------
+### command: R_RX_PL_WID
+### code   : 01100000
+
+This command  reads the data width of the top payload in the RX FIFO
+
+------------------------------ command 11 ---------------------------------
+### command: W_ACK_PAYLOAD
+### code   : 10101xxx
+
+This command is used to write the payload that will go along with an ACK, when ACK Payloads are enabled in the feature register. After this command the NRF expects the payload data which can be from 1 to 32 bytes.
+
+------------------------------ command 11 ---------------------------------
+command: W_TX_PAYLOAD_NO_ACK
+code   : 10101xxx
+
+This W_TX_PAYLOAD_NO_ACK command is used to disable auto ACK for the current packet. So you enabled this bit right before sending the W_TX_PAYLOAD command.
+
+------------------------------ command 12 ---------------------------------
+### command: NOP
+### code   : 11111111
+
+This is a No Operation command, when you send it the NRF does nothing with it. But since you are sending a byte the SPI has to send one back so the NRF send you the contents of its STATUS register. 
+
+
+
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
+
+### Packet Format
+	This is Enhanced Shockburst(TM) pakcet format from nordic 
+ ![](https://github.com/yasirfaizahmed/FINALYEAR_PROJECT/blob/master/images/shockburst%20(1).jpg)
+
+The packet format consists of several fields. Also note that the entire packet of data is transmitted MSB , most significant byte first, and each byte is transmitted LSB least significant bit first. This might sound weird or confusing but do not worry the hardware inside the NRF takes care of all of that behind the scenes for you. 
+
+### Preamble 
+Preamble is nothing more then a sequence of 1s and 0s to synchronize the receiver's demodulator to the incoming stream. It is only one byte long, if the first bit in the address is a 1 then the preamble is 10101010, otherwise it is 01010101.
+
+### Packet Control 
+The packet control section has 3 sections within itself.
+
+1. Payload length is a 6 bit field that tells the receiver the length of the incoming payload This field however is only used when dynamic payload length is enabled. Otherwise the value in RX_PW_P# register is the width of the payload.
+
+2. PID is the packet identification field. It is used to tell the receiver 
+whether this packet is new or a re-transmitted packet. That way the receiver knows not to present a re-transmitted packet to the mcu if it has already presented this same packet before. THAT DOES NOT MEAN YOU CANNOT SEND THE SAME DATA TWICE, this "re-transmit" is more like an error or somehow the ACK was not received by the transmitter and now its re-transmitting the same packet. 
+
+3. NO_ACK this is a bit that tells the receiver that no auto ACK should be used for this packet.
+
+
+
+
+NOTE: Every time you start an SPI communication instance you must drive low the CSN pin, this is the slave select line and makes the NRF start listening in its SPI lines.
+
+
+
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
+**Every time you start an SPI communication instance you must drive low the CSN pin, this is the slave select line and makes the NRF start listening in its SPI lines. I will remind you of this in the code**
+
+## Transmitting
+### Setup:
+
+1. The CE pin must start out LOW, because a HIGH to LOW transition is what causes the transmission to start. So before anything is done make sure the CE pin is LOW alos the CE pin should not be held high for too long. but the NRF takes care of that in Enhanced Shockburst mode.
+2. Next you want to power up the chip internally by setting the PWR_UP bit in the CONFIG register
+3. Clear (0) the PRIM_RX bit in the CONFIG register to use the NRF as a transmitter
+4. Set CRC encoding scheme 1 byte or 2 bytes , by setting or clearing the CRCO bit in the CONFIG register
+5. Enable the CRC itself by setting the EN_CRC bit in the CONFIG register, you can skip this since enabling auto ACK on any pipe will force this bit high anyways.
+6. Set the interrupts desired in the CONFIG register, clearing them (0) means they will be active.
+7. Set address width in the SETUP_AW 
+8. Setup wait time in between re-transmissions after a failed transmission 
+9. Setup max number of re-transmits
+10. As a safety measure clear interrupt flags in the STATUS register.
+
+### Sending Data
+
+1. Make sure CE is LOW
+2. Write the receivers pipe address in the TX_ADDR register (receivers pipe address and address width must match transmitter settings above)
+3. Copy the same address from TX_ADDR to Pipe 0 on  RX_ADDR_P0 register  because after transmit the NRF momentarily becomes a receiver to listen for the auto ACK and it listens on Pipe 0. Remember the address you are transmitting is at least 3 bytes long depending on the width setting. You must write that same amount of bytes in the TX_ADDR register and Pipe 0 address register 
+4. Send the TX_PAYLOAD command
+5. Send the payload data.
+6. Drive the CE pin HIGH for a minimum of 10us to start the transmission and then bring it back LOW
+7. Next just handle the TX_DS interrupt or MAX_RT interrupts as you wish. Hopefully you dont get the MAX_RT interrupt because that means the data did not send, meaning there was no auto ACK received. Also if you send payloads too fast you will get a few MAX_RT interrupts because the module is not that fast and it takes time to transmit as well as get a reply.
+
+
+
+
