@@ -9,7 +9,6 @@
 
 
 
-uint8_t command = 0x00;	//command to be sent to nRF
 uint8_t data = 0x00;	//data which will be sent to nRF
 
 
@@ -22,10 +21,23 @@ int main(){
 	
 	SPI_setup();
 	
+	usart1_setup();//for debugging
+	
+	
+	for(uint8_t i=0x00;i<0x1D;i++){
+			uint8_t val = SPI_read_uint8_t(i);
+			//delay_ms(5);
+			//printMsg("%d-%d\n", i, val);  
+			USART1->DR = val;
+			while( !(USART1->SR & USART_SR_TXE) );
+			USART1->DR = '\n';
+			while( !(USART1->SR & USART_SR_TXE) );
+		}
+	
+	
 	while(1){
-		nRF_setup();
-		delay_ms(50);
-		
+		uint8_t val;
+		for(int i=0;i<0xf;i++) val = SPI_read_uint8_t(i);
 	}
 	
 }
@@ -72,61 +84,71 @@ void SPI_setup(){
 }
 
 	
-void SPI_send_uint8_t(uint8_t command, uint8_t data){
+void SPI_write_uint8_t(uint8_t addr, uint8_t data){
 	//very standard SPI TX protocol
-	delay_ms(50);
-	
+	delay_us(50);
 	digital_writepin(GPIOA, 4, LOW);
-	SPI1->DR = command;
+	SPI1->DR = (W_REGISTER | addr);
 	while(SPI1->SR & SPI_SR_BSY);
-	delay_us(20);
+	delay_us(50);
 	
 	SPI1->DR = data;
 	while(SPI1->SR & SPI_SR_BSY);
 	digital_writepin(GPIOA, 4, HIGH);
 	
-	
 }
+
+
+uint8_t SPI_read_uint8_t(uint8_t addr){
+	uint8_t reg_val;
+	//sending the read command first along with address where we are reading from
+	delay_us(50);
+	digital_writepin(GPIOA, 4, LOW);
+	SPI1->DR = (R_REGISTER | addr);
+	while( (SPI1->SR) & (SPI_SR_BSY) );
+	//start listening now
+	delay_us(50);
+	while( (SPI1->SR) & (0x01) ) reg_val = SPI1->DR;
+	digital_writepin(GPIOA, 4, HIGH);
+	
+	return reg_val;
+}
+
+
+
 
 
 void nRF_setup(){
 	// SETUP REG (0x20) (0x0A)
-	command |= W_REGISTER | CONFIG;	//Or-ing the command with offset
+	//command |= W_REGISTER | CONFIG;	//Or-ing the command with offset
 	data |= PWR_UP;	//power up the nRF
-	//data |= PRIM_RX;	//as a Primary TX device
-	//data |= CRCO;	//CRC encoding scheme, 2bytes 
 	data |= EN_CRC;	//enabeling CRC
-	SPI_send_uint8_t(command, data);
+	SPI_write_uint8_t(CONFIG, data);
 	data = CLEAR;	//clearing data buffer
-	command = CLEAR;	//clearing command buffer
 	delay_us(1000);
 	
 	//SETUP_AW REG	(0x23) (0x03)
-	command |= W_REGISTER | SETUP_AW;	// Or-ring with offset 
 	data |= AW_5B;	//5Bytes of address width
-	SPI_send_uint8_t(command, data);
+	SPI_write_uint8_t(SETUP_AW, data);
 	data = CLEAR;
-	command = CLEAR;	
 	delay_us(1000);
 	
 	//SETUP_RETR REG	(0x24) (0xFF)
-	command |= W_REGISTER | SETUP_RETR;	//Or-ring with offset
 	data |= RETR_ARC_0 | RETR_ARC_1 | RETR_ARC_2 | RETR_ARC_3;	//15 re_transmit retries 
 	data |= RETR_ARD_0 | RETR_ARD_1 | RETR_ARD_2 | RETR_ARD_3;	//wait for 4000us  
-	SPI_send_uint8_t(command, data);
+	SPI_write_uint8_t(SETUP_RETR, data);
 	data = CLEAR;
-	command = CLEAR;	
 	delay_us(1000);
 	
 	//STATUS REG	(0x27) (0x70)
-	command |= W_REGISTER | STATUS;	//Or-ing with offset
 	data |= 0x70;	//clearing flags 
-	SPI_send_uint8_t(command, data);
+	SPI_write_uint8_t(STATUS, data);
 	data = CLEAR;	
-	command = CLEAR;	
 	delay_us(1000);
 	
 	
 }
+
+
 
 
