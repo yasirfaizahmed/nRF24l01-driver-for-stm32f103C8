@@ -1,5 +1,26 @@
 #include "TIM_DRIVER0.h"
 
+/************************************** clock setup  ****************************************/
+void clock_setup(){
+	RCC->CR |= RCC_CR_HSION;	//HSI on
+	while( !(RCC_CR_HSIRDY & (RCC->CR)) );	//wait till its ready
+	
+	//clocks for peripherals 
+	RCC->APB2ENR |= RCC_APB2ENR_IOPAEN;	//enable clock forport A
+	RCC->APB2ENR |= RCC_APB2ENR_AFIOEN;	//enable clock for alternate functions
+	RCC->APB2ENR |= RCC_APB2ENR_SPI1EN;	//enable clock for SPI1
+
+}
+
+
+/************************************ tim setup function ************************************/
+void tim_setup(){
+	//timer setup (TIM4)
+	delay_tim_init();	//initilize the TIM4 needed for delays
+	
+}
+
+
 /************************************ tim_init function ************************************/
 void delay_tim_init(void){
 	RCC->APB1ENR |= RCC_APB1ENR_TIM4EN;

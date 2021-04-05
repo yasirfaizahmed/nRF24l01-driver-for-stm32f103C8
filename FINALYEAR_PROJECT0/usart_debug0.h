@@ -12,7 +12,7 @@
 
 static void printMsg(char *msg, ...);
 void usart1_setup(void);
-
+void UART_TX(unsigned short uart, char ptr);
 
 void usart1_setup(){
 	//Enabeling HSI, Not really necessary.
@@ -47,6 +47,28 @@ static void printMsg(char *msg, ...){
 		USART1->DR = buff[i];
 		while( !(USART1->SR & USART_SR_TXE) );
 	}
+}
+
+void UART_TX(unsigned short uart,char ptr)
+{
+	if(uart == 1)
+		{
+			while((USART1->SR & (1<<6)) == 0x00)
+			{};
+			USART1->DR = ptr;
+		}
+	else if(uart == 2)
+		{
+			while((USART2->SR & (1<<6)) == 0x00)
+			{};
+			USART2->DR = ptr;
+		}
+		if(uart == 3)
+		{
+			while((USART3->SR & (1<<6)) == 0x00)
+			{};
+			USART3->DR = ptr;
+		}
 }
 
 

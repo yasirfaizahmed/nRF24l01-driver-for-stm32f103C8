@@ -20,6 +20,11 @@
 //	TIM_11 = (uint32_t) 0x00200000,
 //}TIMx;
 
+/************************************ clock setup ********************************************/
+void clock_setup(void);	//sets sys_clock at 72MHz using PLL and HSE, mostly done using the defaultly created startup file
+
+/************************************ tim setup ********************************************/
+void tim_setup(void);		//TIM4 for basic delays min 1us
 
 
 /************************************ tim_init function ************************************/
