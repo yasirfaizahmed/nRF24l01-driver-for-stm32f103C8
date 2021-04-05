@@ -26,8 +26,8 @@ void SPI_nrf_GPIO_setup(){
 
 
 
-char SPI_nrf_rx(char value){
-	char status_contents;
+uint8_t SPI_nrf_rx(uint8_t value){
+	uint8_t status_contents;
 	SPI1->DR = value;
 	while( (SPI1->SR) & (SPI_SR_BSY) );
 	
@@ -37,8 +37,8 @@ char SPI_nrf_rx(char value){
 }
 
 
-char SPI_nrf_read_reg(char addr){
-	char reg_contents;
+uint8_t SPI_nrf_read_reg(uint8_t addr){
+	uint8_t reg_contents;
 	digital_writepin(GPIOA, 4, LOW);	//bring the CS lOW
 
 	SPI_nrf_rx(R_REGISTER | addr);
@@ -49,8 +49,8 @@ char SPI_nrf_read_reg(char addr){
 }
 
 
-char SPI_nrf_read_status(void){
-	char status_contents;
+uint8_t SPI_nrf_read_status(void){
+	uint8_t status_contents;
 	digital_writepin(GPIOA, 4, LOW);
 	
 	status_contents = SPI_nrf_rx(R_REGISTER | STATUS);

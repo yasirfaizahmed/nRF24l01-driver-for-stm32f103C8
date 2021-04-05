@@ -26,7 +26,7 @@ int main(){
 	
 	while(1){
 		for(int i=0;i<0x0A;i++) UART_TX(1, SPI_nrf_read_reg(R_REGISTER | i) );
-		delay_ms(5);
+		delay_ms(50);
 		
 	}
 	
