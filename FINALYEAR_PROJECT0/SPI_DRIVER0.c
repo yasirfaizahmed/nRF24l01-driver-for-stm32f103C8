@@ -27,13 +27,13 @@ void SPI_nrf_GPIO_setup(){
 
 
 uint8_t SPI_nrf_rx(uint8_t value){
-	uint8_t status_contents;
+	uint8_t contents;
 	SPI1->DR = value;
 	while( (SPI1->SR) & (SPI_SR_BSY) );
 	
-	while( (SPI1->SR) & (SPI_SR_RXNE) ) status_contents = SPI1->DR;
+	while( (SPI1->SR) & (SPI_SR_RXNE) ) contents = SPI1->DR;
 	
-	return status_contents;
+	return contents;
 }
 
 
@@ -55,6 +55,19 @@ uint8_t SPI_nrf_read_status(void){
 	
 	status_contents = SPI_nrf_rx(R_REGISTER | STATUS);
 	return status_contents;
+}
+
+uint8_t SPI_nrf_write(uint8_t addr, uint8_t data){
+	uint8_t status_contents;
+	digital_writepin(GPIOA, 4, LOW);
+	SPI1->DR = (W_REGISTER | addr);
+	while( (SPI1->SR) & (SPI_SR_BSY) );
+	
+	
+	
+	SPI1->DR = data;
+	while( (SPI1->SR) & (SPI_SR_BSY) );
+	
 }
 
 

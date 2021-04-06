@@ -1,5 +1,16 @@
-# FINALYEAR_PROJECT
+﻿# FINALYEAR_PROJECT
 ## Custom nRF24L01 transceiver module driver for a stm32f103 target device
+
+### INTRODUCTION
+This project is all about creating a custom library from scratch for a nRF24L01 transceiver module, the code developed here will run on a stm32f103C8 microcontroller (also known as the BLUEPILL) which is a very handy and pretty cheap uC.
+This nRF module is designed and manufactured by NordicSemiconductors(R) and as a matter of fact its pretty well designed and has a lot of features required to compete the ever growing tech world.
+
+### RESEARCH / REFERENCES
+As I have mentioned above, its totally from scratch and this is by referring the two holy grails of reference manuals of nRF and as well as stm32f103C8 uC.
+
+you can download the manuals from here.
+[stm32f103C8](https://www.st.com/resource/en/reference_manual/cd00171190-stm32f101xx-stm32f102xx-stm32f103xx-stm32f105xx-and-stm32f107xx-advanced-arm-based-32-bit-mcus-stmicroelectronics.pdf)
+[nRF24L01](https://www.mouser.com/datasheet/2/297/nRF24L01_Product_Specification_v2_0-9199.pdf)
 
 ![alt text](https://github.com/yasirfaizahmed/FINALYEAR_PROJECT/blob/master/images/download.jpg)
 ![alt text](https://github.com/yasirfaizahmed/FINALYEAR_PROJECT/blob/master/images/stm.jpg)
