@@ -10,12 +10,17 @@ As I have mentioned above, its totally from scratch and this is by referring the
 
 you can download the manuals from here.
 [stm32f103C8](https://www.st.com/resource/en/reference_manual/cd00171190-stm32f101xx-stm32f102xx-stm32f103xx-stm32f105xx-and-stm32f107xx-advanced-arm-based-32-bit-mcus-stmicroelectronics.pdf)
-[nRF24L01](https://www.mouser.com/datasheet/2/297/nRF24L01_Product_Specification_v2_0-9199.pdf)
+
+[nRF24L01](https://www.mouser.com/datasheet/2/297/nRF24L01_Product_Specification_v2_0-9199.pdf) 
 
 ![alt text](https://github.com/yasirfaizahmed/FINALYEAR_PROJECT/blob/master/images/download.jpg)
-![alt text](https://github.com/yasirfaizahmed/FINALYEAR_PROJECT/blob/master/images/stm.jpg)
 
-### Key Features of nRF
+
+### Key Features 
+
+###nRF24L01 transceiver module
+
+![alt text](https://github.com/yasirfaizahmed/FINALYEAR_PROJECT/blob/master/images/stm.jpg)
 
 	• Worldwide 2.4GHz ISM band operation
   	• Up to 2Mbps on air data rate
@@ -35,6 +40,69 @@ you can download the manuals from here.
   	• ±60ppm 16MHz crystal
   	• 5V tolerant inputs
   	• Compact 20-pin 4x4mm QFN package
+
+### stm32f103C8 uC
+
+	**ARM®32-bit Cortex®-M3 CPU Core**
+
+	• 72 MHz maximum frequency,1.25 DMIPS/MHz (Dhrystone 2.1) performance at 0 wait state memory access
+	• Single-cycle multiplication and hardware division
+	
+	**Memories**
+
+	• 64 or 128 Kbytes of Flash memory
+	• 20 Kbytes of SRAM
+
+	**Clock, reset and supply management**
+
+	• 2.0 to 3.6 V application supply and I/Os
+	• POR, PDR, and programmable voltage detector (PVD)
+	• 4-to-16 MHz crystal oscillator
+	• Internal 8 MHz factory-trimmed RC
+	• Internal 40 kHz RC
+	• PLL for CPU clock
+	• 32 kHz oscillator for RTC with calibration
+
+	**Low-power**
+
+	• Sleep, Stop and Standby modes
+	• VBAT supply for RTC and backup registers
+
+	**2 x 12-bit, 1 μs A/D converters (up to 16 channels)**
+
+	• Conversion range: 0 to 3.6 V
+	• Dual-sample and hold capability
+	• Temperature sensor
+
+	**DMA**
+
+	• 7-channel DMA controller
+	• Peripherals supported: timers, ADC, SPIs, I2Cs and USARTs
+	• Up to 80 fast I/O ports
+	• 26/37/51/80 I/Os, all mappable on 16 external interrupt vectors and almost all 5 V-tolerant
+
+	**Debug mode**
+
+	• Serial wire debug (SWD) & JTAG interfaces
+
+	**7 timers**
+
+	• Three 16-bit timers, each with up to 4 IC/OC/PWM or pulse counter and quadrature (incremental) encoder input
+	• 16-bit, motor control PWM timer with dead-time generation and emergency stop
+	• 2 watchdog timers (Independent and Window)
+	• SysTick timer 24-bit downcounter
+
+	**Up to 9 communication interfaces**
+
+	• Up to 2 x I2C interfaces (SMBus/PMBus)
+	• Up to 3 USARTs (ISO 7816 interface, LIN, IrDA capability, modem control)
+	• Up to 2 SPIs (18 Mbit/s)
+	• CAN interface (2.0B Active)
+	• USB 2.0 full-speed interface
+
+	**CRC calculation unit, 96-bit unique ID**
+
+	• Packages are ECOPACK®
   
 -------------------------------------------------------------------------------
 -------------------------------------------------------------------------------
