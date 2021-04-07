@@ -2,25 +2,35 @@
 ## Custom nRF24L01 transceiver module driver for a stm32f103 target device
 
 ### INTRODUCTION
+
 This project is all about creating a custom library from scratch for a nRF24L01 transceiver module, the code developed here will run on a stm32f103C8 microcontroller (also known as the BLUEPILL) which is a very handy and pretty cheap uC.
-This nRF module is designed and manufactured by NordicSemiconductors(R) and as a matter of fact its pretty well designed and has a lot of features required to compete the ever growing tech world.
+This nRF module is designed and manufactured by NordicSemiconductors™ and as a matter of fact its pretty well designed and has a lot of features required to compete the ever growing tech world.
 
 ### RESEARCH / REFERENCES
+
 As I have mentioned above, its totally from scratch and this is by referring the two holy grails of reference manuals of nRF and as well as stm32f103C8 uC.
 
 you can download the manuals from here.
+
 [stm32f103C8](https://www.st.com/resource/en/reference_manual/cd00171190-stm32f101xx-stm32f102xx-stm32f103xx-stm32f105xx-and-stm32f107xx-advanced-arm-based-32-bit-mcus-stmicroelectronics.pdf)
 
 [nRF24L01](https://www.mouser.com/datasheet/2/297/nRF24L01_Product_Specification_v2_0-9199.pdf) 
 
+
+### Key features of the end product code
+	• Max data rate exchange rates upto 8Mbps
+	• Half-duplex communication behaviour
+	• CRC enabled data transmissions and receptions with auto acknoledgements
+	• can talk upto 6 diffrent other nRF modules (still in progress)
+	• and much more..
+
+
+
+### Key Features of the modules 
+
+### nRF24L01 transceiver module
+
 ![alt text](https://github.com/yasirfaizahmed/FINALYEAR_PROJECT/blob/master/images/download.jpg)
-
-
-### Key Features 
-
-###nRF24L01 transceiver module
-
-![alt text](https://github.com/yasirfaizahmed/FINALYEAR_PROJECT/blob/master/images/stm.jpg)
 
 	• Worldwide 2.4GHz ISM band operation
   	• Up to 2Mbps on air data rate
@@ -42,6 +52,8 @@ you can download the manuals from here.
   	• Compact 20-pin 4x4mm QFN package
 
 ### stm32f103C8 uC
+
+![alt text](https://github.com/yasirfaizahmed/FINALYEAR_PROJECT/blob/master/images/stm.jpg)
 
 	**ARM®32-bit Cortex®-M3 CPU Core**
 
