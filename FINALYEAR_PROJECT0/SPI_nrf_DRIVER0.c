@@ -1,8 +1,8 @@
-#include "SPI_DRIVER0.h"
+#include "SPI_nrf_DRIVER0.h"
 #include <stm32f10x.h>
 #include "GPIO_DRIVER2.h"
 #include "nRFl01_0.h"
-
+#include "TIM_DRIVER0.h"
 
 void SPI_nrf_setup(){
 	//SPI setup
@@ -41,8 +41,8 @@ uint8_t SPI_nrf_read_reg(uint8_t addr){
 	uint8_t reg_contents;
 	digital_writepin(GPIOA, 4, LOW);	//bring the CS lOW
 
-	SPI_nrf_rx(R_REGISTER | addr);
-	reg_contents = SPI_nrf_rx(R_REGISTER | addr);
+	SPI_nrf_rx(R_REGISTER | addr);	//sending R_REGISTER command
+	reg_contents = SPI_nrf_rx(R_REGISTER | addr);	//sending it again and in return taking nRF register data from MISO 
 
 	digital_writepin(GPIOA, 4, HIGH);	//bring the CS HIGH
 	return reg_contents;
@@ -57,17 +57,38 @@ uint8_t SPI_nrf_read_status(void){
 	return status_contents;
 }
 
-uint8_t SPI_nrf_write(uint8_t addr, uint8_t data){
-	uint8_t status_contents;
+
+uint8_t SPI_nrf_write_bit(uint8_t addr, uint8_t bit){//to write into the passed address register, returns 1 if successfully written else returns 0
+	uint8_t reg_content, new_content;	//reg_contents are the present data in reg we are about to write
+	reg_content = SPI_nrf_read_reg(addr);	//taking the reg contents before over-writing
+	new_content = reg_content  | bit;	//or-ring it with bit
 	digital_writepin(GPIOA, 4, LOW);
-	SPI1->DR = (W_REGISTER | addr);
-	while( (SPI1->SR) & (SPI_SR_BSY) );
 	
+	SPI_nrf_rx(W_REGISTER | addr);	//sending W_REGISTER command
+	SPI_nrf_rx(new_content);	//writing new contents
 	
+	digital_writepin(GPIOA, 4, HIGH);
 	
-	SPI1->DR = data;
-	while( (SPI1->SR) & (SPI_SR_BSY) );
-	
+	reg_content = SPI_nrf_read_reg(addr);	//taking the new contents back to verify
+	if(reg_content == new_content) return 1;
+	else return 0;
 }
 
+
+uint8_t SPI_nrf_write_bits(uint8_t addr, uint8_t bits){
+	uint8_t reg_content, new_content;
+	reg_content = SPI_nrf_read_reg(addr);
+	new_content = (reg_content & (~reg_content)) | bits;
+	digital_writepin(GPIOA, 4, LOW);
+	
+	SPI_nrf_rx(W_REGISTER|addr);
+	SPI_nrf_rx(new_content);
+	
+	digital_writepin(GPIOA, 4, HIGH);
+	
+	reg_content = SPI_nrf_read_reg(addr);
+	if(reg_content == new_content) return 1;
+	else return 0;
+	
+}
 

@@ -11,3 +11,4 @@
 .\objects\spi_driver0.o: GPIO_DRIVER2.h
 .\objects\spi_driver0.o: nRFl01_0.h
 .\objects\spi_driver0.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdbool.h
+.\objects\spi_driver0.o: TIM_DRIVER0.h

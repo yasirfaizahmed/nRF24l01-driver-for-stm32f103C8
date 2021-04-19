@@ -298,8 +298,8 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>.\SPI_DRIVER0.c</PathWithFileName>
-      <FilenameWithoutPath>SPI_DRIVER0.c</FilenameWithoutPath>
+      <PathWithFileName>.\SPI_nrf_DRIVER0.c</PathWithFileName>
+      <FilenameWithoutPath>SPI_nrf_DRIVER0.c</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>
@@ -310,8 +310,8 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>.\SPI_DRIVER0.h</PathWithFileName>
-      <FilenameWithoutPath>SPI_DRIVER0.h</FilenameWithoutPath>
+      <PathWithFileName>.\SPI_nrf_DRIVER0.h</PathWithFileName>
+      <FilenameWithoutPath>SPI_nrf_DRIVER0.h</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>

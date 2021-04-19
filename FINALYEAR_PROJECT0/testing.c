@@ -5,7 +5,7 @@
 #include "GPIO_DRIVER2.h"
 #include "TIM_DRIVER0.h"
 #include "usart_debug0.h"		//only for debugging through UART serial to USB
-#include "SPI_DRIVER0.h"
+#include "SPI_nrf_DRIVER0.h"
 
 
 
@@ -22,12 +22,16 @@ int main(){
 	
 	
 
+	SPI_nrf_write_bit(CONFIG, 0x01);
+	SPI_nrf_write_bits(SETUP_AW, AW_3B);
 	
-	
+	for(int i=0;i<0xA;i++){
+			UART_TX(1, SPI_nrf_read_reg(i));
+			delay_ms(50);
+		}
 	while(1){
-		for(int i=0;i<0x0A;i++) UART_TX(1, SPI_nrf_read_reg(R_REGISTER | i) );
-		delay_ms(50);
 		
+	  
 	}
 	
 	

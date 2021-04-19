@@ -418,14 +418,14 @@
               <FilePath>.\nRFl01_0.h</FilePath>
             </File>
             <File>
-              <FileName>SPI_DRIVER0.c</FileName>
+              <FileName>SPI_nrf_DRIVER0.c</FileName>
               <FileType>1</FileType>
-              <FilePath>.\SPI_DRIVER0.c</FilePath>
+              <FilePath>.\SPI_nrf_DRIVER0.c</FilePath>
             </File>
             <File>
-              <FileName>SPI_DRIVER0.h</FileName>
+              <FileName>SPI_nrf_DRIVER0.h</FileName>
               <FileType>5</FileType>
-              <FilePath>.\SPI_DRIVER0.h</FilePath>
+              <FilePath>.\SPI_nrf_DRIVER0.h</FilePath>
             </File>
             <File>
               <FileName>usart_debug0.h</FileName>

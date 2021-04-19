@@ -15,4 +15,4 @@
 .\objects\testing.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\string.h
 .\objects\testing.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdlib.h
 .\objects\testing.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdarg.h
-.\objects\testing.o: SPI_DRIVER0.h
+.\objects\testing.o: SPI_nrf_DRIVER0.h
