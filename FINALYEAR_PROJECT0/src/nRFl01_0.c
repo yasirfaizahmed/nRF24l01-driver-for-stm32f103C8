@@ -1,7 +1,7 @@
-#include "nRFl01_0.h"
+#include "../inc/nRFl01_0.h"
 #include <stm32f10x.h>
-#include "GPIO_DRIVER2.h"
-#include "TIM_DRIVER0.h"
+#include "../inc/GPIO_DRIVER2.h"
+#include "../inc/TIM_DRIVER0.h"
 
 
 /*

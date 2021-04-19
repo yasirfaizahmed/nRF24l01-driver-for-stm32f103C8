@@ -1,4 +1,4 @@
-#include "TIM_DRIVER0.h"
+#include "../inc/TIM_DRIVER0.h"
 
 /************************************** clock setup  ****************************************/
 void clock_setup(){

@@ -1,4 +1,4 @@
-#include "GPIO_DRIVER2.h"
+#include "../inc/GPIO_DRIVER2.h"
 
 
 /***************************************pin_mode function***********************************************/

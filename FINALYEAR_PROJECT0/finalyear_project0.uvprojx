@@ -390,47 +390,47 @@
             <File>
               <FileName>GPIO_DRIVER2.c</FileName>
               <FileType>1</FileType>
-              <FilePath>.\GPIO_DRIVER2.c</FilePath>
-            </File>
-            <File>
-              <FileName>GPIO_DRIVER2.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\GPIO_DRIVER2.h</FilePath>
-            </File>
-            <File>
-              <FileName>TIM_DRIVER0.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\TIM_DRIVER0.c</FilePath>
-            </File>
-            <File>
-              <FileName>TIM_DRIVER0.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\TIM_DRIVER0.h</FilePath>
+              <FilePath>.\src\GPIO_DRIVER2.c</FilePath>
             </File>
             <File>
               <FileName>nRFl01_0.c</FileName>
               <FileType>1</FileType>
-              <FilePath>.\nRFl01_0.c</FilePath>
-            </File>
-            <File>
-              <FileName>nRFl01_0.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\nRFl01_0.h</FilePath>
+              <FilePath>.\src\nRFl01_0.c</FilePath>
             </File>
             <File>
               <FileName>SPI_nrf_DRIVER0.c</FileName>
               <FileType>1</FileType>
-              <FilePath>.\SPI_nrf_DRIVER0.c</FilePath>
+              <FilePath>.\src\SPI_nrf_DRIVER0.c</FilePath>
+            </File>
+            <File>
+              <FileName>TIM_DRIVER0.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\src\TIM_DRIVER0.c</FilePath>
+            </File>
+            <File>
+              <FileName>GPIO_DRIVER2.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\inc\GPIO_DRIVER2.h</FilePath>
+            </File>
+            <File>
+              <FileName>nRFl01_0.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\inc\nRFl01_0.h</FilePath>
             </File>
             <File>
               <FileName>SPI_nrf_DRIVER0.h</FileName>
               <FileType>5</FileType>
-              <FilePath>.\SPI_nrf_DRIVER0.h</FilePath>
+              <FilePath>.\inc\SPI_nrf_DRIVER0.h</FilePath>
+            </File>
+            <File>
+              <FileName>TIM_DRIVER0.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\inc\TIM_DRIVER0.h</FilePath>
             </File>
             <File>
               <FileName>usart_debug0.h</FileName>
               <FileType>5</FileType>
-              <FilePath>.\usart_debug0.h</FilePath>
+              <FilePath>.\inc\usart_debug0.h</FilePath>
             </File>
           </Files>
         </Group>
