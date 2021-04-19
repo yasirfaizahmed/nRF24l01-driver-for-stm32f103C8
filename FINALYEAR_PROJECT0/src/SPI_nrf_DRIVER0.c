@@ -78,7 +78,7 @@ uint8_t SPI_nrf_write_bit(uint8_t addr, uint8_t bit){//to write into the passed 
 uint8_t SPI_nrf_write_bits(uint8_t addr, uint8_t bits){	//does the same thing as above, but instead writes multiple bits at once in the reg
 	uint8_t reg_content, new_content;
 	reg_content = SPI_nrf_read_reg(addr);
-	new_content = (reg_content & (~reg_content)) | bits;
+	new_content = reg_content | bits;
 	digital_writepin(GPIOA, 4, LOW);
 	
 	SPI_nrf_rx(W_REGISTER|addr);

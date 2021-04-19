@@ -43,9 +43,11 @@ void nrf_setup(){
 	SPI_nrf_write_bit(CONFIG, PWR_UP);	//turns-on the nRF
 	SPI_nrf_write_bit(CONFIG, PRIM_RX);	//as PTX now
 	//SPI_nrf_write_bit(CONFIG, CRCO);	//2byte CRC scheme
-	SPI_nrf_write_bit(CONFIG, EN_CRC);
-	
-	
+	SPI_nrf_write_bit(CONFIG, EN_CRC);	//enabeling auto ACK
+	SPI_nrf_write_bits(SETUP_AW, AW_3B);	//setting Address width to 3Bytes
+	SPI_nrf_write_bits(SETUP_RETR, (RETR_ARD_0|RETR_ARD_1|RETR_ARD_2|RETR_ARD_3));	//waiting 4000uS for onother Auto Retransmission
+	SPI_nrf_write_bits(SETUP_RETR, (RETR_ARC_0|RETR_ARC_1|RETR_ARC_2));	//7 re_transmit on fail of AA
+	//SPI_nrf_write_bits();
 }
 
 

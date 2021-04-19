@@ -25,11 +25,15 @@ int main(){
 	//SPI_nrf_write_bit(CONFIG, 0x01);
 	//SPI_nrf_write_bits(SETUP_AW, AW_3B);
 	nrf_setup();
+	while(1){
+		nrf_setup();
 	for(int i=0;i<0xA;i++){
 			UART_TX(1, SPI_nrf_read_reg(i));
 			delay_ms(50);
 		}
 	
+		delay_ms(2000);
+	}
 	
 	
 }
