@@ -18,24 +18,17 @@ int main(){
 	
 	SPI_nrf_setup();
 	
-	usart1_setup();//for debugging
+	usart1_setup();
 	
 	//testing linrary functions here starts
-
-	//SPI_nrf_write_bit(CONFIG, 0x01);
-	//SPI_nrf_write_bits(SETUP_AW, AW_3B);
-	nrf_setup();
-	while(1){
-		nrf_setup();
-	for(int i=0;i<0xA;i++){
-			UART_TX(1, SPI_nrf_read_reg(i));
-			delay_ms(50);
-		}
 	
+	nrf_setup();
+	nrf_set_TX_ADDR(0x1234567890, 5);
+	while(1){
+		UART_TX(1, SPI_nrf_read_reg(TX_ADDR));
 		delay_ms(2000);
 	}
-	
-	
+
 }
 
 

@@ -171,7 +171,7 @@
 
 /********************* function prototyping **************/
 void nrf_setup(void);	//it sets the nRF in working condition
-
+bool nrf_set_TX_ADDR(uint64_t tx_addr, int addr_width);	//sets the TX_ADDR
 	
 #endif
 

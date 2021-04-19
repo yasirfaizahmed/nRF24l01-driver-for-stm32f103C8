@@ -4,7 +4,6 @@
 #include "../inc/TIM_DRIVER0.h"
 #include "../inc/SPI_nrf_DRIVER0.h"
 
-
 /*
 void nRF_setup(){
 	// SETUP REG (0x20) (0x0A)
@@ -44,10 +43,30 @@ void nrf_setup(){
 	SPI_nrf_write_bit(CONFIG, PRIM_RX);	//as PTX now
 	//SPI_nrf_write_bit(CONFIG, CRCO);	//2byte CRC scheme
 	SPI_nrf_write_bit(CONFIG, EN_CRC);	//enabeling auto ACK
-	SPI_nrf_write_bits(SETUP_AW, AW_3B);	//setting Address width to 3Bytes
+	//SPI_nrf_write_bits(SETUP_AW, AW_3B);	//setting Address width to 3Bytes
 	SPI_nrf_write_bits(SETUP_RETR, (RETR_ARD_0|RETR_ARD_1|RETR_ARD_2|RETR_ARD_3));	//waiting 4000uS for onother Auto Retransmission
 	SPI_nrf_write_bits(SETUP_RETR, (RETR_ARC_0|RETR_ARC_1|RETR_ARC_2));	//7 re_transmit on fail of AA
-	//SPI_nrf_write_bits();
+	SPI_nrf_write_bits(STATUS, (RX_DR|TX_DS|MAX_RT));	//clearing flags in STATUS reg
+	
 }
 
+bool nrf_set_TX_ADDR(uint64_t tx_addr, int addr_width){	//sets the TX_ADDR, returns 1 if successfull else returns 0
+	uint8_t data;
+	uint8_t mask = 0xFF, temp = tx_addr;
+	uint8_t i = 1;
+	
+	digital_writepin(GPIOA, 4, LOW);
+	
+	SPI_nrf_rx_tx(W_REGISTER | TX_ADDR);	//sending W_REGISTER into TX_ADDR
+	while(i <= addr_width){
+		data = temp & mask;
+		temp = tx_addr;
+		temp = temp>>(8*i);
+		SPI_nrf_rx_tx(data);
+		i++;
+	}
+	
+	digital_writepin(GPIOA, 4, HIGH);
+	
+}
 
