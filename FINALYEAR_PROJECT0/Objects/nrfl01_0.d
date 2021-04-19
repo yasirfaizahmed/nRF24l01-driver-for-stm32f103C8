@@ -11,3 +11,4 @@
 .\objects\nrfl01_0.o: C:\Users\YASIR\AppData\Local\Arm\Packs\Keil\STM32F1xx_DFP\2.3.0\Device\Include\system_stm32f10x.h
 .\objects\nrfl01_0.o: src\../inc/GPIO_DRIVER2.h
 .\objects\nrfl01_0.o: src\../inc/TIM_DRIVER0.h
+.\objects\nrfl01_0.o: src\../inc/SPI_nrf_DRIVER0.h

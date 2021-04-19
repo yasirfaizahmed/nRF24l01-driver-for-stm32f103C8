@@ -393,9 +393,9 @@
               <FilePath>.\src\GPIO_DRIVER2.c</FilePath>
             </File>
             <File>
-              <FileName>nRFl01_0.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\src\nRFl01_0.c</FilePath>
+              <FileName>GPIO_DRIVER2.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\inc\GPIO_DRIVER2.h</FilePath>
             </File>
             <File>
               <FileName>SPI_nrf_DRIVER0.c</FileName>
@@ -403,14 +403,14 @@
               <FilePath>.\src\SPI_nrf_DRIVER0.c</FilePath>
             </File>
             <File>
-              <FileName>TIM_DRIVER0.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\src\TIM_DRIVER0.c</FilePath>
+              <FileName>SPI_nrf_DRIVER0.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\inc\SPI_nrf_DRIVER0.h</FilePath>
             </File>
             <File>
-              <FileName>GPIO_DRIVER2.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\inc\GPIO_DRIVER2.h</FilePath>
+              <FileName>nRFl01_0.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\src\nRFl01_0.c</FilePath>
             </File>
             <File>
               <FileName>nRFl01_0.h</FileName>
@@ -418,9 +418,9 @@
               <FilePath>.\inc\nRFl01_0.h</FilePath>
             </File>
             <File>
-              <FileName>SPI_nrf_DRIVER0.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\inc\SPI_nrf_DRIVER0.h</FilePath>
+              <FileName>TIM_DRIVER0.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\src\TIM_DRIVER0.c</FilePath>
             </File>
             <File>
               <FileName>TIM_DRIVER0.h</FileName>

@@ -20,19 +20,16 @@ int main(){
 	
 	usart1_setup();//for debugging
 	
-	
+	//testing linrary functions here starts
 
-	SPI_nrf_write_bit(CONFIG, 0x01);
-	SPI_nrf_write_bits(SETUP_AW, AW_3B);
-	
+	//SPI_nrf_write_bit(CONFIG, 0x01);
+	//SPI_nrf_write_bits(SETUP_AW, AW_3B);
+	nrf_setup();
 	for(int i=0;i<0xA;i++){
 			UART_TX(1, SPI_nrf_read_reg(i));
 			delay_ms(50);
 		}
-	while(1){
-		
-	  
-	}
+	
 	
 	
 }

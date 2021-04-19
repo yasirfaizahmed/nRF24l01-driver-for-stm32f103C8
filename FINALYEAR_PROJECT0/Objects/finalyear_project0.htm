@@ -3,11 +3,11 @@
 <title>Static Call Graph - [.\Objects\finalyear_project0.axf]</title></head>
 <body><HR>
 <H1>Static Call Graph for image .\Objects\finalyear_project0.axf</H1><HR>
-<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5060750: Last Updated: Mon Apr 19 06:35:23 2021
+<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5060750: Last Updated: Mon Apr 19 07:17:56 2021
 <BR><P>
-<H3>Maximum Stack Usage =         48 bytes + Unknown(Functions without stacksize, Cycles, Untraceable Function Pointers)</H3><H3>
+<H3>Maximum Stack Usage =         72 bytes + Unknown(Functions without stacksize, Cycles, Untraceable Function Pointers)</H3><H3>
 Call chain for Maximum Stack Depth:</H3>
-__rt_entry_main &rArr; main &rArr; SPI_nrf_write_bits &rArr; SPI_nrf_read_reg &rArr; digital_writepin
+__rt_entry_main &rArr; main &rArr; nrf_setup &rArr; SPI_nrf_write_bit &rArr; SPI_nrf_read_reg &rArr; digital_writepin
 <P>
 <H3>
 Functions with no stack information
@@ -197,8 +197,8 @@ Global Symbols
 <P><STRONG><a name="[7f]"></a>__rt_entry_postsh_1</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, __rtentry2.o(.ARM.Collect$$rtentry$$00000009))
 
 <P><STRONG><a name="[45]"></a>__rt_entry_main</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, __rtentry2.o(.ARM.Collect$$rtentry$$0000000D))
-<BR><BR>[Stack]<UL><LI>Max Depth = 48 + Unknown Stack Size
-<LI>Call Chain = __rt_entry_main &rArr; main &rArr; SPI_nrf_write_bits &rArr; SPI_nrf_read_reg &rArr; digital_writepin
+<BR><BR>[Stack]<UL><LI>Max Depth = 72 + Unknown Stack Size
+<LI>Call Chain = __rt_entry_main &rArr; main &rArr; nrf_setup &rArr; SPI_nrf_write_bit &rArr; SPI_nrf_read_reg &rArr; digital_writepin
 </UL>
 <BR>[Calls]<UL><LI><a href="#[46]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 <LI><a href="#[47]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;exit
@@ -480,18 +480,16 @@ Global Symbols
 <BR>[Calls]<UL><LI><a href="#[52]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SPI_nrf_rx
 <LI><a href="#[50]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;digital_writepin
 </UL>
-<BR>[Called By]<UL><LI><a href="#[54]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SPI_nrf_write_bits
-<LI><a href="#[53]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SPI_nrf_write_bit
+<BR>[Called By]<UL><LI><a href="#[53]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SPI_nrf_write_bit
 <LI><a href="#[46]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 </UL>
 
 <P><STRONG><a name="[52]"></a>SPI_nrf_rx</STRONG> (Thumb, 42 bytes, Stack size 0 bytes, spi_nrf_driver0.o(i.SPI_nrf_rx))
-<BR><BR>[Called By]<UL><LI><a href="#[54]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SPI_nrf_write_bits
-<LI><a href="#[53]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SPI_nrf_write_bit
+<BR><BR>[Called By]<UL><LI><a href="#[53]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SPI_nrf_write_bit
 <LI><a href="#[51]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SPI_nrf_read_reg
 </UL>
 
-<P><STRONG><a name="[5b]"></a>SPI_nrf_setup</STRONG> (Thumb, 44 bytes, Stack size 0 bytes, spi_nrf_driver0.o(i.SPI_nrf_setup))
+<P><STRONG><a name="[5a]"></a>SPI_nrf_setup</STRONG> (Thumb, 44 bytes, Stack size 0 bytes, spi_nrf_driver0.o(i.SPI_nrf_setup))
 <BR><BR>[Called By]<UL><LI><a href="#[46]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 </UL>
 
@@ -502,23 +500,13 @@ Global Symbols
 <LI><a href="#[50]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;digital_writepin
 <LI><a href="#[51]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SPI_nrf_read_reg
 </UL>
-<BR>[Called By]<UL><LI><a href="#[46]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
-</UL>
-
-<P><STRONG><a name="[54]"></a>SPI_nrf_write_bits</STRONG> (Thumb, 80 bytes, Stack size 24 bytes, spi_nrf_driver0.o(i.SPI_nrf_write_bits))
-<BR><BR>[Stack]<UL><LI>Max Depth = 48<LI>Call Chain = SPI_nrf_write_bits &rArr; SPI_nrf_read_reg &rArr; digital_writepin
-</UL>
-<BR>[Calls]<UL><LI><a href="#[52]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SPI_nrf_rx
-<LI><a href="#[50]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;digital_writepin
-<LI><a href="#[51]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SPI_nrf_read_reg
-</UL>
-<BR>[Called By]<UL><LI><a href="#[46]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
+<BR>[Called By]<UL><LI><a href="#[5c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;nrf_setup
 </UL>
 
 <P><STRONG><a name="[39]"></a>SystemInit</STRONG> (Thumb, 78 bytes, Stack size 8 bytes, system_stm32f10x.o(i.SystemInit))
 <BR><BR>[Stack]<UL><LI>Max Depth = 28<LI>Call Chain = SystemInit &rArr; SetSysClock &rArr; SetSysClockTo72
 </UL>
-<BR>[Calls]<UL><LI><a href="#[55]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SetSysClock
+<BR>[Calls]<UL><LI><a href="#[54]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SetSysClock
 </UL>
 <BR>[Address Reference Count : 1]<UL><LI> startup_stm32f10x_md.o(.text)
 </UL>
@@ -526,59 +514,69 @@ Global Symbols
 <BR><BR>[Called By]<UL><LI><a href="#[46]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 </UL>
 
-<P><STRONG><a name="[59]"></a>clock_setup</STRONG> (Thumb, 60 bytes, Stack size 0 bytes, tim_driver0.o(i.clock_setup))
+<P><STRONG><a name="[58]"></a>clock_setup</STRONG> (Thumb, 60 bytes, Stack size 0 bytes, tim_driver0.o(i.clock_setup))
 <BR><BR>[Called By]<UL><LI><a href="#[46]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 </UL>
 
-<P><STRONG><a name="[57]"></a>delay_ms</STRONG> (Thumb, 24 bytes, Stack size 8 bytes, tim_driver0.o(i.delay_ms))
+<P><STRONG><a name="[56]"></a>delay_ms</STRONG> (Thumb, 24 bytes, Stack size 8 bytes, tim_driver0.o(i.delay_ms))
 <BR><BR>[Stack]<UL><LI>Max Depth = 8<LI>Call Chain = delay_ms
 </UL>
-<BR>[Calls]<UL><LI><a href="#[58]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;delay_us
+<BR>[Calls]<UL><LI><a href="#[57]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;delay_us
 </UL>
 <BR>[Called By]<UL><LI><a href="#[46]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 </UL>
 
 <P><STRONG><a name="[5e]"></a>delay_tim_init</STRONG> (Thumb, 36 bytes, Stack size 0 bytes, tim_driver0.o(i.delay_tim_init))
-<BR><BR>[Called By]<UL><LI><a href="#[5a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;tim_setup
+<BR><BR>[Called By]<UL><LI><a href="#[59]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;tim_setup
 </UL>
 
-<P><STRONG><a name="[58]"></a>delay_us</STRONG> (Thumb, 42 bytes, Stack size 0 bytes, tim_driver0.o(i.delay_us))
-<BR><BR>[Called By]<UL><LI><a href="#[57]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;delay_ms
+<P><STRONG><a name="[57]"></a>delay_us</STRONG> (Thumb, 42 bytes, Stack size 0 bytes, tim_driver0.o(i.delay_us))
+<BR><BR>[Called By]<UL><LI><a href="#[56]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;delay_ms
 </UL>
 
 <P><STRONG><a name="[50]"></a>digital_writepin</STRONG> (Thumb, 30 bytes, Stack size 8 bytes, gpio_driver2.o(i.digital_writepin))
 <BR><BR>[Stack]<UL><LI>Max Depth = 8<LI>Call Chain = digital_writepin
 </UL>
-<BR>[Called By]<UL><LI><a href="#[54]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SPI_nrf_write_bits
-<LI><a href="#[53]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SPI_nrf_write_bit
+<BR>[Called By]<UL><LI><a href="#[53]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SPI_nrf_write_bit
+<LI><a href="#[5c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;nrf_setup
 <LI><a href="#[51]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SPI_nrf_read_reg
 <LI><a href="#[4e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SPI_nrf_GPIO_setup
 </UL>
 
-<P><STRONG><a name="[46]"></a>main</STRONG> (Thumb, 72 bytes, Stack size 0 bytes, testing.o(i.main))
-<BR><BR>[Stack]<UL><LI>Max Depth = 48<LI>Call Chain = main &rArr; SPI_nrf_write_bits &rArr; SPI_nrf_read_reg &rArr; digital_writepin
+<P><STRONG><a name="[46]"></a>main</STRONG> (Thumb, 62 bytes, Stack size 16 bytes, testing.o(i.main))
+<BR><BR>[Stack]<UL><LI>Max Depth = 72<LI>Call Chain = main &rArr; nrf_setup &rArr; SPI_nrf_write_bit &rArr; SPI_nrf_read_reg &rArr; digital_writepin
 </UL>
-<BR>[Calls]<UL><LI><a href="#[5a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;tim_setup
-<LI><a href="#[57]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;delay_ms
-<LI><a href="#[59]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;clock_setup
-<LI><a href="#[54]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SPI_nrf_write_bits
-<LI><a href="#[53]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SPI_nrf_write_bit
-<LI><a href="#[5b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SPI_nrf_setup
+<BR>[Calls]<UL><LI><a href="#[59]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;tim_setup
+<LI><a href="#[5c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;nrf_setup
+<LI><a href="#[56]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;delay_ms
+<LI><a href="#[58]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;clock_setup
+<LI><a href="#[5a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SPI_nrf_setup
 <LI><a href="#[51]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SPI_nrf_read_reg
 <LI><a href="#[4e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SPI_nrf_GPIO_setup
-<LI><a href="#[5c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;usart1_setup
+<LI><a href="#[5b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;usart1_setup
 <LI><a href="#[5d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;UART_TX
 </UL>
 <BR>[Called By]<UL><LI><a href="#[45]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__rt_entry_main
 </UL>
 
+<P><STRONG><a name="[5c]"></a>nrf_setup</STRONG> (Thumb, 54 bytes, Stack size 8 bytes, nrfl01_0.o(i.nrf_setup))
+<BR><BR>[Stack]<UL><LI>Max Depth = 56<LI>Call Chain = nrf_setup &rArr; SPI_nrf_write_bit &rArr; SPI_nrf_read_reg &rArr; digital_writepin
+</UL>
+<BR>[Calls]<UL><LI><a href="#[53]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SPI_nrf_write_bit
+<LI><a href="#[4f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;pin_mode
+<LI><a href="#[50]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;digital_writepin
+</UL>
+<BR>[Called By]<UL><LI><a href="#[46]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
+</UL>
+
 <P><STRONG><a name="[4f]"></a>pin_mode</STRONG> (Thumb, 92 bytes, Stack size 20 bytes, gpio_driver2.o(i.pin_mode))
 <BR><BR>[Stack]<UL><LI>Max Depth = 20<LI>Call Chain = pin_mode
 </UL>
-<BR>[Called By]<UL><LI><a href="#[4e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SPI_nrf_GPIO_setup
+<BR>[Called By]<UL><LI><a href="#[5c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;nrf_setup
+<LI><a href="#[4e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SPI_nrf_GPIO_setup
 </UL>
 
-<P><STRONG><a name="[5a]"></a>tim_setup</STRONG> (Thumb, 8 bytes, Stack size 4 bytes, tim_driver0.o(i.tim_setup))
+<P><STRONG><a name="[59]"></a>tim_setup</STRONG> (Thumb, 8 bytes, Stack size 4 bytes, tim_driver0.o(i.tim_setup))
 <BR><BR>[Stack]<UL><LI>Max Depth = 4<LI>Call Chain = tim_setup
 </UL>
 <BR>[Calls]<UL><LI><a href="#[5e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;delay_tim_init
@@ -586,25 +584,25 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[46]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 </UL>
 
-<P><STRONG><a name="[5c]"></a>usart1_setup</STRONG> (Thumb, 102 bytes, Stack size 0 bytes, testing.o(i.usart1_setup))
+<P><STRONG><a name="[5b]"></a>usart1_setup</STRONG> (Thumb, 102 bytes, Stack size 0 bytes, testing.o(i.usart1_setup))
 <BR><BR>[Called By]<UL><LI><a href="#[46]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 </UL>
 <P>
 <H3>
 Local Symbols
 </H3>
-<P><STRONG><a name="[55]"></a>SetSysClock</STRONG> (Thumb, 8 bytes, Stack size 8 bytes, system_stm32f10x.o(i.SetSysClock))
+<P><STRONG><a name="[54]"></a>SetSysClock</STRONG> (Thumb, 8 bytes, Stack size 8 bytes, system_stm32f10x.o(i.SetSysClock))
 <BR><BR>[Stack]<UL><LI>Max Depth = 20<LI>Call Chain = SetSysClock &rArr; SetSysClockTo72
 </UL>
-<BR>[Calls]<UL><LI><a href="#[56]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SetSysClockTo72
+<BR>[Calls]<UL><LI><a href="#[55]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SetSysClockTo72
 </UL>
 <BR>[Called By]<UL><LI><a href="#[39]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SystemInit
 </UL>
 
-<P><STRONG><a name="[56]"></a>SetSysClockTo72</STRONG> (Thumb, 214 bytes, Stack size 12 bytes, system_stm32f10x.o(i.SetSysClockTo72))
+<P><STRONG><a name="[55]"></a>SetSysClockTo72</STRONG> (Thumb, 214 bytes, Stack size 12 bytes, system_stm32f10x.o(i.SetSysClockTo72))
 <BR><BR>[Stack]<UL><LI>Max Depth = 12<LI>Call Chain = SetSysClockTo72
 </UL>
-<BR>[Called By]<UL><LI><a href="#[55]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SetSysClock
+<BR>[Called By]<UL><LI><a href="#[54]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SetSysClock
 </UL>
 <P>
 <H3>

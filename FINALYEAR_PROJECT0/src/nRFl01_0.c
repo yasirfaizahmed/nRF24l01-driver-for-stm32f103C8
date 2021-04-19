@@ -2,10 +2,10 @@
 #include <stm32f10x.h>
 #include "../inc/GPIO_DRIVER2.h"
 #include "../inc/TIM_DRIVER0.h"
+#include "../inc/SPI_nrf_DRIVER0.h"
 
 
 /*
-
 void nRF_setup(){
 	// SETUP REG (0x20) (0x0A)
 	//command |= W_REGISTER | CONFIG;	//Or-ing the command with offset
@@ -33,12 +33,19 @@ void nRF_setup(){
 	SPI_write_uint8_t(STATUS, data);
 	data = CLEAR;	
 	delay_us(1000);
+}
+*/
+
+void nrf_setup(){
+	pin_mode(IOPA, GPIOA, 3, op_50MHz, op_gppp);	//CE pin setup
+	digital_writepin(GPIOA, 3, LOW);	//A HIGH to LOW transition is what causes the tranmission to start from nRF
+	
+	SPI_nrf_write_bit(CONFIG, PWR_UP);	//turns-on the nRF
+	SPI_nrf_write_bit(CONFIG, PRIM_RX);	//as PTX now
+	//SPI_nrf_write_bit(CONFIG, CRCO);	//2byte CRC scheme
+	SPI_nrf_write_bit(CONFIG, EN_CRC);
 	
 	
 }
-
-
-*/
-
 
 

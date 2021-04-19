@@ -170,7 +170,7 @@
 
 
 /********************* function prototyping **************/
-void nRF_setup(void);	//it sets the nRF in working condition
+void nrf_setup(void);	//it sets the nRF in working condition
 
 	
 #endif
