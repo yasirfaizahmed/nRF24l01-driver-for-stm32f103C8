@@ -33,8 +33,9 @@ Section Cross References
     nrfl01_0.o(i.nrf_init) refers to tim_driver0.o(i.delay_ms) for delay_ms
     nrfl01_0.o(i.nrf_init) refers to spi_nrf_driver0.o(i.SPI_nrf_write_bits) for SPI_nrf_write_bits
     nrfl01_0.o(i.nrf_ptx_init) refers to spi_nrf_driver0.o(i.SPI_nrf_write_bits) for SPI_nrf_write_bits
-    nrfl01_0.o(i.nrf_ptx_init) refers to spi_nrf_driver0.o(i.SPI_nrf_rx_tx) for SPI_nrf_rx_tx
     nrfl01_0.o(i.nrf_ptx_init) refers to spi_nrf_driver0.o(i.SPI_nrf_write_bit) for SPI_nrf_write_bit
+    nrfl01_0.o(i.nrf_ptx_init) refers to tim_driver0.o(i.delay_ms) for delay_ms
+    nrfl01_0.o(i.nrf_ptx_init) refers to gpio_driver2.o(i.digital_writepin) for digital_writepin
     tim_driver0.o(i.analog_write) refers to gpio_driver2.o(i.pin_mode) for pin_mode
     tim_driver0.o(i.analog_write) refers to fflt_clz.o(x$fpl$ffltu) for __aeabi_ui2f
     tim_driver0.o(i.analog_write) refers to fmul.o(x$fpl$fmul) for __aeabi_fmul
@@ -617,9 +618,9 @@ Image Symbol Table
     i.main                                   0x0800062e   Section        0  testing.o(i.main)
     i.nrf_init                               0x0800066c   Section        0  nrfl01_0.o(i.nrf_init)
     i.nrf_ptx_init                           0x080006e4   Section        0  nrfl01_0.o(i.nrf_ptx_init)
-    i.pin_mode                               0x0800070c   Section        0  gpio_driver2.o(i.pin_mode)
-    i.tim_setup                              0x0800076c   Section        0  tim_driver0.o(i.tim_setup)
-    i.usart1_setup                           0x08000774   Section        0  testing.o(i.usart1_setup)
+    i.pin_mode                               0x0800071c   Section        0  gpio_driver2.o(i.pin_mode)
+    i.tim_setup                              0x0800077c   Section        0  tim_driver0.o(i.tim_setup)
+    i.usart1_setup                           0x08000784   Section        0  testing.o(i.usart1_setup)
     .bss                                     0x20000000   Section       96  libspace.o(.bss)
     HEAP                                     0x20000060   Section      512  startup_stm32f10x_md.o(HEAP)
     Heap_Mem                                 0x20000060   Data         512  startup_stm32f10x_md.o(HEAP)
@@ -795,12 +796,12 @@ Image Symbol Table
     digital_writepin                         0x08000611   Thumb Code    30  gpio_driver2.o(i.digital_writepin)
     main                                     0x0800062f   Thumb Code    60  testing.o(i.main)
     nrf_init                                 0x0800066d   Thumb Code   116  nrfl01_0.o(i.nrf_init)
-    nrf_ptx_init                             0x080006e5   Thumb Code    40  nrfl01_0.o(i.nrf_ptx_init)
-    pin_mode                                 0x0800070d   Thumb Code    92  gpio_driver2.o(i.pin_mode)
-    tim_setup                                0x0800076d   Thumb Code     8  tim_driver0.o(i.tim_setup)
-    usart1_setup                             0x08000775   Thumb Code   102  testing.o(i.usart1_setup)
-    Region$$Table$$Base                      0x080007e8   Number         0  anon$$obj.o(Region$$Table)
-    Region$$Table$$Limit                     0x080007f8   Number         0  anon$$obj.o(Region$$Table)
+    nrf_ptx_init                             0x080006e5   Thumb Code    50  nrfl01_0.o(i.nrf_ptx_init)
+    pin_mode                                 0x0800071d   Thumb Code    92  gpio_driver2.o(i.pin_mode)
+    tim_setup                                0x0800077d   Thumb Code     8  tim_driver0.o(i.tim_setup)
+    usart1_setup                             0x08000785   Thumb Code   102  testing.o(i.usart1_setup)
+    Region$$Table$$Base                      0x080007f8   Number         0  anon$$obj.o(Region$$Table)
+    Region$$Table$$Limit                     0x08000808   Number         0  anon$$obj.o(Region$$Table)
     __libspace_start                         0x20000000   Data          96  libspace.o(.bss)
     __temporary_stack_top$libspace           0x20000060   Data           0  libspace.o(.bss)
 
@@ -812,9 +813,9 @@ Memory Map of the image
 
   Image Entry point : 0x0800016d
 
-  Load Region LR_1 (Base: 0x08000000, Size: 0x000007f8, Max: 0xffffffff, ABSOLUTE)
+  Load Region LR_1 (Base: 0x08000000, Size: 0x00000808, Max: 0xffffffff, ABSOLUTE)
 
-    Execution Region ER_RO (Exec base: 0x08000000, Load base: 0x08000000, Size: 0x000007f8, Max: 0xffffffff, ABSOLUTE)
+    Execution Region ER_RO (Exec base: 0x08000000, Load base: 0x08000000, Size: 0x00000808, Max: 0xffffffff, ABSOLUTE)
 
     Exec Addr    Load Addr    Size         Type   Attr      Idx    E Section Name        Object
 
@@ -892,19 +893,19 @@ Memory Map of the image
     0x0800062e   0x0800062e   0x0000003c   Code   RO            5    i.main              testing.o
     0x0800066a   0x0800066a   0x00000002   PAD
     0x0800066c   0x0800066c   0x00000078   Code   RO          218    i.nrf_init          nrfl01_0.o
-    0x080006e4   0x080006e4   0x00000028   Code   RO          219    i.nrf_ptx_init      nrfl01_0.o
-    0x0800070c   0x0800070c   0x00000060   Code   RO          104    i.pin_mode          gpio_driver2.o
-    0x0800076c   0x0800076c   0x00000008   Code   RO          256    i.tim_setup         tim_driver0.o
-    0x08000774   0x08000774   0x00000074   Code   RO            7    i.usart1_setup      testing.o
-    0x080007e8   0x080007e8   0x00000010   Data   RO          701    Region$$Table       anon$$obj.o
+    0x080006e4   0x080006e4   0x00000038   Code   RO          219    i.nrf_ptx_init      nrfl01_0.o
+    0x0800071c   0x0800071c   0x00000060   Code   RO          104    i.pin_mode          gpio_driver2.o
+    0x0800077c   0x0800077c   0x00000008   Code   RO          256    i.tim_setup         tim_driver0.o
+    0x08000784   0x08000784   0x00000074   Code   RO            7    i.usart1_setup      testing.o
+    0x080007f8   0x080007f8   0x00000010   Data   RO          701    Region$$Table       anon$$obj.o
 
 
-    Execution Region ER_RW (Exec base: 0x20000000, Load base: 0x080007f8, Size: 0x00000000, Max: 0xffffffff, ABSOLUTE)
+    Execution Region ER_RW (Exec base: 0x20000000, Load base: 0x08000808, Size: 0x00000000, Max: 0xffffffff, ABSOLUTE)
 
     **** No section assigned to this execution region ****
 
 
-    Execution Region ER_ZI (Exec base: 0x20000000, Load base: 0x080007f8, Size: 0x00000660, Max: 0xffffffff, ABSOLUTE)
+    Execution Region ER_ZI (Exec base: 0x20000000, Load base: 0x08000808, Size: 0x00000660, Max: 0xffffffff, ABSOLUTE)
 
     Exec Addr    Load Addr    Size         Type   Attr      Idx    E Section Name        Object
 
@@ -921,7 +922,7 @@ Image component sizes
       Code (inc. data)   RO Data    RW Data    ZI Data      Debug   Object Name
 
        126          4          0          0          0       2390   gpio_driver2.o
-       160          4          0          0          0        934   nrfl01_0.o
+       176         10          0          0          0        938   nrfl01_0.o
        404         34          0          0          0       3553   spi_nrf_driver0.o
         64         26        236          0       1536        828   startup_stm32f10x_md.o
        328         28          0          0          0       2161   system_stm32f10x.o
@@ -929,7 +930,7 @@ Image component sizes
        188         18          0          0          0       2289   tim_driver0.o
 
     ----------------------------------------------------------------------
-      1536        140        252          0       1536     220059   Object Totals
+      1552        146        252          0       1536     220063   Object Totals
          0          0         16          0          0          0   (incl. Generated)
          2          0          0          0          0          0   (incl. Padding)
 
@@ -977,15 +978,15 @@ Image component sizes
 
       Code (inc. data)   RO Data    RW Data    ZI Data      Debug   
 
-      1788        156        252          0       1632     219479   Grand Totals
-      1788        156        252          0       1632     219479   ELF Image Totals
-      1788        156        252          0          0          0   ROM Totals
+      1804        162        252          0       1632     219483   Grand Totals
+      1804        162        252          0       1632     219483   ELF Image Totals
+      1804        162        252          0          0          0   ROM Totals
 
 ==============================================================================
 
-    Total RO  Size (Code + RO Data)                 2040 (   1.99kB)
+    Total RO  Size (Code + RO Data)                 2056 (   2.01kB)
     Total RW  Size (RW Data + ZI Data)              1632 (   1.59kB)
-    Total ROM Size (Code + RO Data + RW Data)       2040 (   1.99kB)
+    Total ROM Size (Code + RO Data + RW Data)       2056 (   2.01kB)
 
 ==============================================================================
 

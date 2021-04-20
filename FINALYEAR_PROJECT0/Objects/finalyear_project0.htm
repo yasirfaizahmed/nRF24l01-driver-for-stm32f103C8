@@ -3,7 +3,7 @@
 <title>Static Call Graph - [.\Objects\finalyear_project0.axf]</title></head>
 <body><HR>
 <H1>Static Call Graph for image .\Objects\finalyear_project0.axf</H1><HR>
-<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5060750: Last Updated: Tue Apr 20 21:42:22 2021
+<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5060750: Last Updated: Wed Apr 21 00:41:33 2021
 <BR><P>
 <H3>Maximum Stack Usage =         72 bytes + Unknown(Functions without stacksize, Cycles, Untraceable Function Pointers)</H3><H3>
 Call chain for Maximum Stack Depth:</H3>
@@ -488,7 +488,6 @@ Global Symbols
 <P><STRONG><a name="[52]"></a>SPI_nrf_rx_tx</STRONG> (Thumb, 42 bytes, Stack size 0 bytes, spi_nrf_driver0.o(i.SPI_nrf_rx_tx))
 <BR><BR>[Called By]<UL><LI><a href="#[54]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SPI_nrf_write_bits
 <LI><a href="#[53]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SPI_nrf_write_bit
-<LI><a href="#[5e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;nrf_ptx_init
 <LI><a href="#[51]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SPI_nrf_read_reg
 </UL>
 
@@ -538,7 +537,8 @@ Global Symbols
 </UL>
 <BR>[Calls]<UL><LI><a href="#[58]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;delay_us
 </UL>
-<BR>[Called By]<UL><LI><a href="#[5d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;nrf_init
+<BR>[Called By]<UL><LI><a href="#[5e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;nrf_ptx_init
+<LI><a href="#[5d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;nrf_init
 </UL>
 
 <P><STRONG><a name="[60]"></a>delay_tim_init</STRONG> (Thumb, 36 bytes, Stack size 0 bytes, tim_driver0.o(i.delay_tim_init))
@@ -554,6 +554,7 @@ Global Symbols
 </UL>
 <BR>[Called By]<UL><LI><a href="#[54]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SPI_nrf_write_bits
 <LI><a href="#[53]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SPI_nrf_write_bit
+<LI><a href="#[5e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;nrf_ptx_init
 <LI><a href="#[5d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;nrf_init
 <LI><a href="#[51]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SPI_nrf_read_reg
 <LI><a href="#[4e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SPI_nrf_GPIO_setup
@@ -587,12 +588,13 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[46]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 </UL>
 
-<P><STRONG><a name="[5e]"></a>nrf_ptx_init</STRONG> (Thumb, 40 bytes, Stack size 8 bytes, nrfl01_0.o(i.nrf_ptx_init))
+<P><STRONG><a name="[5e]"></a>nrf_ptx_init</STRONG> (Thumb, 50 bytes, Stack size 8 bytes, nrfl01_0.o(i.nrf_ptx_init))
 <BR><BR>[Stack]<UL><LI>Max Depth = 56<LI>Call Chain = nrf_ptx_init &rArr; SPI_nrf_write_bits &rArr; SPI_nrf_read_reg &rArr; digital_writepin
 </UL>
-<BR>[Calls]<UL><LI><a href="#[54]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SPI_nrf_write_bits
+<BR>[Calls]<UL><LI><a href="#[57]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;delay_ms
+<LI><a href="#[54]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SPI_nrf_write_bits
 <LI><a href="#[53]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SPI_nrf_write_bit
-<LI><a href="#[52]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SPI_nrf_rx_tx
+<LI><a href="#[50]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;digital_writepin
 </UL>
 <BR>[Called By]<UL><LI><a href="#[46]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 </UL>

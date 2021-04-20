@@ -42,7 +42,7 @@ uint8_t SPI_nrf_read_reg(uint8_t addr){
 	digital_writepin(GPIOA, 4, LOW);	//bring the CS lOW
 
 	SPI_nrf_rx_tx(R_REGISTER | addr);	//sending R_REGISTER command
-	reg_contents = SPI_nrf_rx_tx(R_REGISTER | addr);	//sending it again and in return taking nRF register data from MISO 
+	reg_contents = SPI_nrf_rx_tx(DUMMY_BYTE);	//sending DUMMY_BYTE and in return taking nRF register data from MISO 
 
 	digital_writepin(GPIOA, 4, HIGH);	//bring the CS HIGH
 	return reg_contents;

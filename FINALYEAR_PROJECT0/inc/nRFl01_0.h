@@ -188,8 +188,9 @@
 
 /********************* function prototyping **************/
 void nrf_init(void);	//it sets the nRF in working condition
-bool nrf_set_TX_ADDR(uint64_t tx_addr, int addr_width);	//sets the TX_ADDR
-bool nrf_ptx_init(void);
+bool nrf_set_TX_ADDR(uint64_t tx_addr, int addr_width);	//sets the TX_ADDR	(need to work on it)
+void nrf_ptx_init(void);	//initializes the PTX
+
 
 #endif
 

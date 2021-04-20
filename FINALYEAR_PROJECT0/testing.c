@@ -24,7 +24,7 @@ int main(){
 	
 	nrf_init();
 	nrf_ptx_init();
-	for(int i=0;i<0x1D;i++) UART_TX(1, SPI_nrf_read_reg(i));
+	for(int i=0;i<=0x1D;i++) UART_TX(1, SPI_nrf_read_reg(i));
 
 
 
