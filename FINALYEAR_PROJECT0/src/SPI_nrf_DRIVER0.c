@@ -61,7 +61,7 @@ uint8_t SPI_nrf_read_status(void){
 bool SPI_nrf_write_bit(uint8_t addr, uint8_t bit, uint8_t mask){//to write into the passed address register, returns 1 if successfully written else returns 0
 	uint8_t reg_content, new_content;	//reg_contents are the present data in reg we are about to write
 	reg_content = SPI_nrf_read_reg(addr);	//taking the reg contents before over-writing
-	new_content = (mask & reg_content) | bit;
+	new_content = (mask & reg_content) | bit;	//erasing the aboutToBeModified bit from the presnt reg_content and Oring it with new one
 	digital_writepin(GPIOA, 4, LOW);
 	
 	SPI_nrf_rx_tx(W_REGISTER | addr);	//sending W_REGISTER command

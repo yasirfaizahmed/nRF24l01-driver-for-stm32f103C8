@@ -97,14 +97,14 @@
 #define RETR_ARC_1        (uint8_t) 0x02
 #define RETR_ARC_2      	(uint8_t) 0x04
 #define RETR_ARC_3      	(uint8_t) 0x08
-#define RETR_ARC_DIS      (uint8_t) 0x00
-#define RETR_ARC_MASK			(uint8_t) 0xF0
+#define RETR_ARC_DIS      (uint8_t) 0x00//
+#define RETR_ARC_MASK			(uint8_t) 0xF0//
 #define RETR_ARD_0      	(uint8_t) 0x10
 #define RETR_ARD_1      	(uint8_t) 0x20
 #define RETR_ARD_2      	(uint8_t) 0x40
 #define RETR_ARD_3      	(uint8_t) 0x80
-#define RETR_ARD_DIS			(uint8_t) 0x00
-#define RETR_ARD_MASK			(uint8_t) 0x0F
+#define RETR_ARD_DIS			(uint8_t) 0x00//
+#define RETR_ARD_MASK			(uint8_t) 0x0F//
 
 /******* RF_CH ******/
 #define RF_CH_0           (uint8_t) 0x01
@@ -118,19 +118,23 @@
 /****** RF_SETUP ****/
 #define RF_PWR_0          (uint8_t) 0x02
 #define RF_PWR_1          (uint8_t) 0x04
-#define RF_DR_HIGH        (uint8_t) 0x08
-#define RF_DR_LOW         (uint8_t) 0x20
+#define RF_PWR_MIN				(uint8_t) 0x00//
+#define RF_PWR_MASK				(uint8_t) 0xF9//
+#define RF_DR_250Kbps			(uint8_t) 0x20
+#define RF_DR_MASK 				(uint8_t) 0xD7//
 #define CONT_WAVE         (uint8_t) 0x80
 
 /***** STATUS ******/
 #define TX_FULL           (uint8_t) 0
 #define RX_P_NO           (uint8_t) 1
 #define MAX_RT            (uint8_t) 0x10
-#define MAX_RT_MASK				(uint8_t) 0xEF
+#define MAX_RT_MASK				(uint8_t) 0xEF//
 #define TX_DS             (uint8_t) 0x20
-#define TX_DS_MASK				(uint8_t) 0xDF
+#define TX_DS_MASK				(uint8_t) 0xDF//
 #define RX_DR             (uint8_t) 0x40
-#define RX_DR_MASK				(uint8_t) 0xBF
+#define RX_DR_MASK				(uint8_t) 0xBF//
+#define STATUS_FLAG_CLEAR (uint8_t) 0x00//
+#define STATUS_FLAGS_MASK (uint8_t) 0x8F//
 
 /**** OBSERVE *****/
 #define PLOS_CNT          (uint8_t) 4
@@ -153,11 +157,13 @@
 #define DPL_P3            (uint8_t) 0x08
 #define DPL_P4            (uint8_t) 0x10
 #define DPL_P5            (uint8_t) 0x20
+#define DPL_MASK					(uint8_t) 0xC0//
 
 /***** FEATURE *****/
 #define EN_DYN_ACK        (uint8_t) 0x01
 #define EN_ACK_PAY        (uint8_t) 0x02
 #define EN_DPL            (uint8_t) 0x04
+#define EN_DPL_MASK				(uint8_t) 0xFB//
 
 
 

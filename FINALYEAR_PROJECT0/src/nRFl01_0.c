@@ -37,19 +37,25 @@ void nRF_setup(){
 
 void nrf_init(){
 	pin_mode(IOPA, GPIOA, 3, op_50MHz, op_gppp);	//CE pin setup
-	digital_writepin(GPIOA, 3, LOW);	//A HIGH to LOW transition is what causes the tranmission to start from nRF
+	digital_writepin(GPIOA, 3, LOW);	//A HIGH to LOW transition is what causes the tranmission to start from nTF PTX
 	
 	SPI_nrf_write_bit(CONFIG, PWR_DN, PWR_MASK);
-	SPI_nrf_write_bit(CONFIG, PWR_UP, PWR_MASK);	//turns-on the nRF
-	//delay_ms(20);	//takes 1.5ms to get stable after PWR_UP = 1
+	delay_ms(15);	//to get the nRF in a stable state
+	//SPI_nrf_write_bit(CONFIG, PWR_UP, PWR_MASK);	//turns-on the nRF
 	//SPI_nrf_write_bit(CONFIG, CRCO);	//2byte CRC scheme
 	SPI_nrf_write_bit(CONFIG, EN_CRC, EN_CRC_MASK);	//enabeling auto ACK
 	//SPI_nrf_write_bits(SETUP_AW, AW_3B);	//setting Address width to 3Bytes
+	
+	SPI_nrf_write_bit(RF_SETUP, RF_DR_250Kbps, RF_DR_MASK);	//setting up the lowest data speeds
+	SPI_nrf_write_bits(RF_SETUP, (RF_PWR_0|RF_PWR_1), RF_PWR_MASK);	//setting the highest power 
+	
 	SPI_nrf_write_bits(SETUP_RETR, (RETR_ARD_0|RETR_ARD_1|RETR_ARD_2|RETR_ARD_3), RETR_ARD_MASK);	//waiting 4000uS for onother Auto Retransmission
 	SPI_nrf_write_bits(SETUP_RETR, (RETR_ARC_0|RETR_ARC_1|RETR_ARC_2), RETR_ARC_MASK);	//7 re_transmit on fail of AA
-	SPI_nrf_write_bit(STATUS, RX_DR, RX_DR_MASK);	//clearing flags in STATUS reg
-	SPI_nrf_write_bit(STATUS, TX_DS, TX_DS_MASK);
-	SPI_nrf_write_bit(STATUS, MAX_RT, MAX_RT_MASK);
+	
+	SPI_nrf_write_bit(FEATURE, EN_DPL, EN_DPL_MASK);	//enabling dynamic payload
+	SPI_nrf_write_bits(DYNPD, DPL_P0, DPL_MASK);	//enabelin in DPL reg also
+	
+	
 }
 
 /*
@@ -78,9 +84,15 @@ bool nrf_set_TX_ADDR(uint64_t tx_addr, int addr_width){	//sets the TX_ADDR, retu
 
 
 bool nrf_ptx_init(void){
-	//SPI_nrf_write_bit(CONFIG, PRIM_TX);	//as PTX now
-	//SPI_nrf_rx_tx(FLUSH_TX);	//cleaning the TX FIFO making it ready to receive new fress payload
-	//SPI_nrf_rx_tx(FLUSH_RX);
+	SPI_nrf_write_bits(STATUS, STATUS_FLAG_CLEAR, STATUS_FLAGS_MASK);	//clearing flags in STATUS reg
+
+	//SPI_nrf_rx_tx(FLUSH_RX);	//flushing RX first then TX FIFO
+	//SPI_nrf_rx_tx(FLUSH_TX);	//cleaning the TX FIFO making it ready to receive fresh payload
+	
+	SPI_nrf_write_bit(CONFIG, PRIM_TX, PRIM_MASK);	//as PTX now
+	SPI_nrf_write_bit(CONFIG, PWR_UP, PWR_MASK);	//turns-on the nRF
+	
+	
 }
 
 
