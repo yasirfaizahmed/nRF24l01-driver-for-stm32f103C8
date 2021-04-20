@@ -58,10 +58,10 @@ uint8_t SPI_nrf_read_status(void){
 }
 
 
-bool SPI_nrf_write_bit(uint8_t addr, uint8_t bit){//to write into the passed address register, returns 1 if successfully written else returns 0
+bool SPI_nrf_write_bit(uint8_t addr, uint8_t bit, uint8_t mask){//to write into the passed address register, returns 1 if successfully written else returns 0
 	uint8_t reg_content, new_content;	//reg_contents are the present data in reg we are about to write
 	reg_content = SPI_nrf_read_reg(addr);	//taking the reg contents before over-writing
-	new_content = reg_content  | bit;	//or-ring it with bit
+	new_content = (mask & reg_content) | bit;
 	digital_writepin(GPIOA, 4, LOW);
 	
 	SPI_nrf_rx_tx(W_REGISTER | addr);	//sending W_REGISTER command
@@ -75,10 +75,10 @@ bool SPI_nrf_write_bit(uint8_t addr, uint8_t bit){//to write into the passed add
 }
 
 
-bool SPI_nrf_write_bits(uint8_t addr, uint8_t bits){	//does the same thing as above, but instead writes multiple bits at once in the reg
+bool SPI_nrf_write_bits(uint8_t addr, uint8_t bits, uint8_t mask){	//does the same thing as above, but instead writes multiple bits at once in the reg
 	uint8_t reg_content, new_content;
 	reg_content = SPI_nrf_read_reg(addr);
-	new_content = reg_content | bits;
+	new_content = (mask & reg_content) | bits;
 	digital_writepin(GPIOA, 4, LOW);
 	
 	SPI_nrf_rx_tx(W_REGISTER|addr);

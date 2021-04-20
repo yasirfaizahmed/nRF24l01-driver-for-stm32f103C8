@@ -22,12 +22,11 @@ int main(){
 	
 	//testing linrary functions here starts
 	
-	nrf_setup();
-	nrf_set_TX_ADDR(0x1234567890, 5);
-	while(1){
-		UART_TX(1, SPI_nrf_read_reg(TX_ADDR));
-		delay_ms(2000);
-	}
+	nrf_init();
+	nrf_ptx_init();
+	for(int i=0;i<0x1D;i++) UART_TX(1, SPI_nrf_read_reg(i));
+
+
 
 }
 

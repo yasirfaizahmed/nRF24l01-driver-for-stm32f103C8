@@ -62,9 +62,14 @@
 #define MASK_TX_DS        (uint8_t) 0x05
 #define MASK_MAX_RT       (uint8_t) 0x04
 #define EN_CRC            (uint8_t) 0x08
+#define EN_CRC_MASK				(uint8_t) 0xF7
 #define CRCO              (uint8_t) 0x04
 #define PWR_UP            (uint8_t) 0x02
-#define PRIM_RX           (uint8_t) 0x00
+#define PWR_DN						(uint8_t) 0x00//
+#define PWR_MASK					(uint8_t) 0xFD//
+#define PRIM_RX           (uint8_t) 0x01
+#define PRIM_TX						(uint8_t) 0x00//
+#define PRIM_MASK					(uint8_t) 0xFE//
 
 /******** EN_AA *******/
 #define ENAA_P5           (uint8_t) 0x05
@@ -88,16 +93,18 @@
 #define AW_5B             (uint8_t) 0x03
 
 /**** SETUP_RETR ****/
-#define RETR_ARC_DIS      (uint8_t) 0x00
 #define RETR_ARC_0        (uint8_t) 0x01
 #define RETR_ARC_1        (uint8_t) 0x02
 #define RETR_ARC_2      	(uint8_t) 0x04
 #define RETR_ARC_3      	(uint8_t) 0x08
-#define RETR_ARD_DIS			(uint8_t) 0x00
+#define RETR_ARC_DIS      (uint8_t) 0x00
+#define RETR_ARC_MASK			(uint8_t) 0xF0
 #define RETR_ARD_0      	(uint8_t) 0x10
 #define RETR_ARD_1      	(uint8_t) 0x20
 #define RETR_ARD_2      	(uint8_t) 0x40
 #define RETR_ARD_3      	(uint8_t) 0x80
+#define RETR_ARD_DIS			(uint8_t) 0x00
+#define RETR_ARD_MASK			(uint8_t) 0x0F
 
 /******* RF_CH ******/
 #define RF_CH_0           (uint8_t) 0x01
@@ -119,8 +126,11 @@
 #define TX_FULL           (uint8_t) 0
 #define RX_P_NO           (uint8_t) 1
 #define MAX_RT            (uint8_t) 0x10
+#define MAX_RT_MASK				(uint8_t) 0xEF
 #define TX_DS             (uint8_t) 0x20
+#define TX_DS_MASK				(uint8_t) 0xDF
 #define RX_DR             (uint8_t) 0x40
+#define RX_DR_MASK				(uint8_t) 0xBF
 
 /**** OBSERVE *****/
 #define PLOS_CNT          (uint8_t) 4
@@ -160,6 +170,7 @@
 #define PIPE_4	0x04
 #define PIPE_5	0x05
 
+
 /****** Offset addresses *****/
 #define RX_ADDR_OFFSET  0x0A
 #define RX_PW_OFFSET    0x11
@@ -170,8 +181,9 @@
 
 
 /********************* function prototyping **************/
-void nrf_setup(void);	//it sets the nRF in working condition
+void nrf_init(void);	//it sets the nRF in working condition
 bool nrf_set_TX_ADDR(uint64_t tx_addr, int addr_width);	//sets the TX_ADDR
-	
+bool nrf_ptx_init(void);
+
 #endif
 
