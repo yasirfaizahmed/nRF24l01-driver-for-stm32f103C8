@@ -18,10 +18,6 @@ Section Cross References
     testing.o(i.main) refers to gpio_driver2.o(i.pin_mode) for pin_mode
     testing.o(i.main) refers to gpio_driver2.o(i.digital_writepin) for digital_writepin
     testing.o(i.main) refers to nrfl01_0.o(i.nrf_tx) for nrf_tx
-    testing.o(i.main) refers to spi_nrf_driver0.o(i.SPI_nrf_read_status) for SPI_nrf_read_status
-    testing.o(i.main) refers to spi_nrf_driver0.o(i.SPI_nrf_write_bit) for SPI_nrf_write_bit
-    testing.o(i.main) refers to tim_driver0.o(i.delay_ms) for delay_ms
-    testing.o(i.main) refers to spi_nrf_driver0.o(i.SPI_nrf_rx_tx) for SPI_nrf_rx_tx
     testing.o(i.main) refers to testing.o(.data) for trigger
     testing.o(i.printMsg) refers to vsprintf.o(.text) for vsprintf
     testing.o(i.printMsg) refers to strlen.o(.text) for strlen
@@ -50,6 +46,9 @@ Section Cross References
     nrfl01_0.o(i.nrf_tx) refers to nrfl01_0.o(i.nrf_ptx_init) for nrf_ptx_init
     nrfl01_0.o(i.nrf_tx) refers to gpio_driver2.o(i.digital_writepin) for digital_writepin
     nrfl01_0.o(i.nrf_tx) refers to spi_nrf_driver0.o(i.SPI_nrf_rx_tx) for SPI_nrf_rx_tx
+    nrfl01_0.o(i.nrf_tx) refers to spi_nrf_driver0.o(i.SPI_nrf_read_status) for SPI_nrf_read_status
+    nrfl01_0.o(i.nrf_tx) refers to spi_nrf_driver0.o(i.SPI_nrf_write_bit) for SPI_nrf_write_bit
+    nrfl01_0.o(i.nrf_tx) refers to tim_driver0.o(i.delay_ms) for delay_ms
     tim_driver0.o(i.analog_write) refers to gpio_driver2.o(i.pin_mode) for pin_mode
     tim_driver0.o(i.analog_write) refers to fflt_clz.o(x$fpl$ffltu) for __aeabi_ui2f
     tim_driver0.o(i.analog_write) refers to fmul.o(x$fpl$fmul) for __aeabi_fmul
@@ -634,9 +633,9 @@ Image Symbol Table
     i.delay_us                               0x0800065c   Section        0  tim_driver0.o(i.delay_us)
     i.digital_writepin                       0x0800068c   Section        0  gpio_driver2.o(i.digital_writepin)
     i.main                                   0x080006ac   Section        0  testing.o(i.main)
-    i.nrf_init                               0x08000824   Section        0  nrfl01_0.o(i.nrf_init)
-    i.nrf_ptx_init                           0x0800089c   Section        0  nrfl01_0.o(i.nrf_ptx_init)
-    i.nrf_tx                                 0x080008d4   Section        0  nrfl01_0.o(i.nrf_tx)
+    i.nrf_init                               0x08000784   Section        0  nrfl01_0.o(i.nrf_init)
+    i.nrf_ptx_init                           0x080007fc   Section        0  nrfl01_0.o(i.nrf_ptx_init)
+    i.nrf_tx                                 0x08000834   Section        0  nrfl01_0.o(i.nrf_tx)
     i.pin_mode                               0x0800091c   Section        0  gpio_driver2.o(i.pin_mode)
     i.tim_setup                              0x0800097c   Section        0  tim_driver0.o(i.tim_setup)
     i.usart1_setup                           0x08000984   Section        0  testing.o(i.usart1_setup)
@@ -816,10 +815,10 @@ Image Symbol Table
     delay_tim_init                           0x08000631   Thumb Code    36  tim_driver0.o(i.delay_tim_init)
     delay_us                                 0x0800065d   Thumb Code    42  tim_driver0.o(i.delay_us)
     digital_writepin                         0x0800068d   Thumb Code    30  gpio_driver2.o(i.digital_writepin)
-    main                                     0x080006ad   Thumb Code   348  testing.o(i.main)
-    nrf_init                                 0x08000825   Thumb Code   116  nrfl01_0.o(i.nrf_init)
-    nrf_ptx_init                             0x0800089d   Thumb Code    50  nrfl01_0.o(i.nrf_ptx_init)
-    nrf_tx                                   0x080008d5   Thumb Code    66  nrfl01_0.o(i.nrf_tx)
+    main                                     0x080006ad   Thumb Code   190  testing.o(i.main)
+    nrf_init                                 0x08000785   Thumb Code   116  nrfl01_0.o(i.nrf_init)
+    nrf_ptx_init                             0x080007fd   Thumb Code    50  nrfl01_0.o(i.nrf_ptx_init)
+    nrf_tx                                   0x08000835   Thumb Code   222  nrfl01_0.o(i.nrf_tx)
     pin_mode                                 0x0800091d   Thumb Code    92  gpio_driver2.o(i.pin_mode)
     tim_setup                                0x0800097d   Thumb Code     8  tim_driver0.o(i.tim_setup)
     usart1_setup                             0x08000985   Thumb Code   102  testing.o(i.usart1_setup)
@@ -923,10 +922,10 @@ Memory Map of the image
     0x0800065c   0x0800065c   0x00000030   Code   RO          274    i.delay_us          tim_driver0.o
     0x0800068c   0x0800068c   0x0000001e   Code   RO          112    i.digital_writepin  gpio_driver2.o
     0x080006aa   0x080006aa   0x00000002   PAD
-    0x080006ac   0x080006ac   0x00000178   Code   RO            6    i.main              testing.o
-    0x08000824   0x08000824   0x00000078   Code   RO          231    i.nrf_init          nrfl01_0.o
-    0x0800089c   0x0800089c   0x00000038   Code   RO          232    i.nrf_ptx_init      nrfl01_0.o
-    0x080008d4   0x080008d4   0x00000048   Code   RO          233    i.nrf_tx            nrfl01_0.o
+    0x080006ac   0x080006ac   0x000000d8   Code   RO            6    i.main              testing.o
+    0x08000784   0x08000784   0x00000078   Code   RO          231    i.nrf_init          nrfl01_0.o
+    0x080007fc   0x080007fc   0x00000038   Code   RO          232    i.nrf_ptx_init      nrfl01_0.o
+    0x08000834   0x08000834   0x000000e8   Code   RO          233    i.nrf_tx            nrfl01_0.o
     0x0800091c   0x0800091c   0x00000060   Code   RO          113    i.pin_mode          gpio_driver2.o
     0x0800097c   0x0800097c   0x00000008   Code   RO          275    i.tim_setup         tim_driver0.o
     0x08000984   0x08000984   0x00000074   Code   RO            8    i.usart1_setup      testing.o
@@ -957,15 +956,15 @@ Image component sizes
       Code (inc. data)   RO Data    RW Data    ZI Data      Debug   Object Name
 
        126          4          0          0          0       2390   gpio_driver2.o
-       248         16          0          0          0       2027   nrfl01_0.o
+       408         20          0          0          0       2127   nrfl01_0.o
        432         38          0          0          0       4063   spi_nrf_driver0.o
         64         26        236          0       1536        828   startup_stm32f10x_md.o
        328         28          0          0          0       2161   system_stm32f10x.o
-       648         72          0         39          0     235753   testing.o
+       488         70          0         39          0     235669   testing.o
        188         18          0          0          0       2289   tim_driver0.o
 
     ----------------------------------------------------------------------
-      2036        202        268         40       1536     249511   Object Totals
+      2036        204        268         40       1536     249527   Object Totals
          0          0         32          0          0          0   (incl. Generated)
          2          0          0          1          0          0   (incl. Padding)
 
@@ -1014,9 +1013,9 @@ Image component sizes
 
       Code (inc. data)   RO Data    RW Data    ZI Data      Debug   
 
-      2316        218        268         40       1632     248843   Grand Totals
-      2316        218        268         40       1632     248843   ELF Image Totals
-      2316        218        268         40          0          0   ROM Totals
+      2316        220        268         40       1632     248859   Grand Totals
+      2316        220        268         40       1632     248859   ELF Image Totals
+      2316        220        268         40          0          0   ROM Totals
 
 ==============================================================================
 

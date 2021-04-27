@@ -111,6 +111,39 @@ void nrf_tx(uint8_t payload[]){
 	}
 	digital_writepin(GPIOA, 4, HIGH);
 	
+	if( (SPI_nrf_read_status()) & (TX_DS) ){	//transmitted and recieved the ACK also
+		//trigger = 0;
+		//msg_status = 0;
+		SPI_nrf_write_bit(STATUS, TX_DS, TX_DS_MASK);	//resettign the flag
+		digital_writepin(GPIOC, 13, HIGH);	//indication
+		delay_ms(100);
+		digital_writepin(GPIOC, 13, LOW);
+	}
+				
+	if( (SPI_nrf_read_status()) & (MAX_RT) ){	//MAX_RT flag reached
+		SPI_nrf_write_bit(STATUS, MAX_RT, MAX_RT_MASK);	//resettign the flag
+		digital_writepin(GPIOC, 13, HIGH);	//indication
+		delay_ms(500);
+		digital_writepin(GPIOC, 13, LOW);
+		delay_ms(500);
+	}
+				
+	else if( (SPI_nrf_read_status()) & (MAX_RT) ){	//TX_FULL flag reached
+		//msg_status = 0;
+		//trigger = 0;
+		SPI_nrf_rx_tx(FLUSH_TX);
+		digital_writepin(GPIOC, 13, HIGH);	//indication
+		delay_ms(1000);
+		digital_writepin(GPIOC, 13, LOW);
+		delay_ms(1000);
+	}
+					
+				
+				
+				
+				
+			
+	
 	
 }
 
