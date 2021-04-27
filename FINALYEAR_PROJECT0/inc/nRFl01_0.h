@@ -44,7 +44,7 @@
 #define R_REGISTER          (uint8_t) 0x00
 #define W_REGISTER          (uint8_t) 0x20
 #define R_RX_PAYLOAD        (uint8_t) 0x61
-#define W_TX_REGISTER       (uint8_t) 0xA0
+#define W_TX_PAYLOAD        (uint8_t) 0xA0
 #define FLUSH_TX            (uint8_t) 0xE1
 #define FLUSH_RX            (uint8_t) 0xE2
 #define REUSE_TX_PL         (uint8_t) 0xE3
@@ -190,6 +190,8 @@
 void nrf_init(void);	//it sets the nRF in working condition
 bool nrf_set_TX_ADDR(uint64_t tx_addr, int addr_width);	//sets the TX_ADDR	(need to work on it)
 void nrf_ptx_init(void);	//initializes the PTX
+void nrf_tx(uint8_t payload[]);	//transmit function
+
 
 
 #endif

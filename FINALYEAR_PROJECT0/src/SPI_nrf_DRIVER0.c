@@ -26,7 +26,7 @@ void SPI_nrf_GPIO_setup(){
 
 
 
-uint8_t SPI_nrf_rx_tx(uint8_t value){
+uint8_t SPI_nrf_rx_tx(uint8_t value){	//basic funcion to transmit commands and get STATUS contents in return
 	uint8_t contents;
 	SPI1->DR = value;
 	while( (SPI1->SR) & (SPI_SR_BSY) );
@@ -37,7 +37,7 @@ uint8_t SPI_nrf_rx_tx(uint8_t value){
 }
 
 
-uint8_t SPI_nrf_read_reg(uint8_t addr){
+uint8_t SPI_nrf_read_reg(uint8_t addr){	//reads any register given address
 	uint8_t reg_contents;
 	digital_writepin(GPIOA, 4, LOW);	//bring the CS lOW
 
@@ -49,7 +49,7 @@ uint8_t SPI_nrf_read_reg(uint8_t addr){
 }
 
 
-uint8_t SPI_nrf_read_status(void){
+uint8_t SPI_nrf_read_status(void){	//a handy function to get only STATUS contents
 	uint8_t status_contents;
 	digital_writepin(GPIOA, 4, LOW);
 	

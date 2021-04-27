@@ -83,6 +83,7 @@ bool nrf_set_TX_ADDR(uint64_t tx_addr, int addr_width){	//sets the TX_ADDR, retu
 */
 
 
+
 void nrf_ptx_init(void){
 	SPI_nrf_write_bits(STATUS, STATUS_FLAG_CLEAR, STATUS_FLAGS_MASK);	//clearing flags in STATUS reg
 
@@ -94,8 +95,23 @@ void nrf_ptx_init(void){
 	delay_ms(15);	//some delay till stability is achieved
 	
 	digital_writepin(GPIOA, 3, HIGH);	//setting CE pin HIGH
+	  
 }
 
+void nrf_tx(uint8_t payload[]){
 
+	int i = 0;
+	if( SPI_nrf_read_reg(CONFIG) & (PRIM_RX) ) nrf_ptx_init();	//if in PRX mode, goto nrf_ptx_init
+	
+	digital_writepin(GPIOA, 4, LOW);
+	SPI_nrf_rx_tx(W_TX_PAYLOAD);	
+	while(payload[i]){
+		SPI_nrf_rx_tx(payload[i]);
+		i++;
+	}
+	digital_writepin(GPIOA, 4, HIGH);
+	
+	
+}
 
 
