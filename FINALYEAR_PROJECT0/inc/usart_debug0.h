@@ -13,6 +13,8 @@
 static void printMsg(char *msg, ...);
 void usart1_setup(void);
 void UART_TX(unsigned short uart, char ptr);
+void UART_SEND(unsigned short uart, char str[]);
+
 
 void usart1_setup(){
 	//Enabeling HSI, Not really necessary.
@@ -69,6 +71,16 @@ void UART_TX(unsigned short uart,char ptr)
 			{};
 			USART3->DR = ptr;
 		}
+}
+
+void UART_SEND(unsigned short uart, char str[])
+{
+	int i = 0;
+	while(str[i] != '\0')
+	{
+		UART_TX(uart,str[i]);
+		i++;
+	}
 }
 
 

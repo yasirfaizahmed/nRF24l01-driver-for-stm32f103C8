@@ -1,5 +1,5 @@
 --cpu Cortex-M3
-".\objects\testing.o"
+".\objects\primary_reciever.o"
 ".\objects\gpio_driver2.o"
 ".\objects\spi_nrf_driver0.o"
 ".\objects\nrfl01_0.o"

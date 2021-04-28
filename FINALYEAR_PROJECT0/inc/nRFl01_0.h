@@ -190,9 +190,10 @@
 void nrf_init(void);	//it sets the nRF in working condition
 bool nrf_set_TX_ADDR(uint64_t tx_addr, int addr_width);	//sets the TX_ADDR	(need to work on it)
 void nrf_ptx_init(void);	//initializes the PTX
-void nrf_tx(uint8_t payload[]);	//transmit function
-
-
+uint8_t nrf_tx(uint8_t payload[]);	//transmit function
+void nrf_prx_init(void);	//initializes the PRX
+void nrf_rx(char payload[]);	//recieve the payload byte by byte 
+uint8_t nrf_check_msg(void);	//returns 1 if data is ready in RX FIFO else returns 0
 
 #endif
 

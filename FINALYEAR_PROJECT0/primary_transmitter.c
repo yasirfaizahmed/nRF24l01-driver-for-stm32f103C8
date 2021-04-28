@@ -30,10 +30,9 @@ int main(){
 	
 	for(int i=0;i<=0x1D;i++) UART_TX(1, SPI_nrf_read_reg(i));	//just to get all the reg values once
 	
-	/*
-	pin_mode(IOPC, GPIOC, 13, op_50MHz, op_gppp);	//for debugging
-	digital_writepin(GPIOC, 13, LOW);
 	
+	
+	/*
 	pin_mode(IOPA, GPIOA, 0, op_50MHz, ip_pupd);	//interrupt IEQ pin
 	__disable_irq();
 	AFIO->EXTICR[0] |= 0x00;	//PA0 as interrupt input
@@ -50,7 +49,7 @@ int main(){
 		
 		
 
-			nrf_tx(payload);	//transmit char by char
+			nrf_tx(payload);	//transmitt
 			
 			
 			

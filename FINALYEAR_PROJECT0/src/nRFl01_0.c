@@ -94,22 +94,25 @@ void nrf_ptx_init(void){
 	SPI_nrf_write_bit(CONFIG, PWR_UP, PWR_MASK);	//turns-on the nRF
 	delay_ms(15);	//some delay till stability is achieved
 	
-	digital_writepin(GPIOA, 3, HIGH);	//setting CE pin HIGH
+	digital_writepin(GPIOA, 3, HIGH);	//setting CE pin HIGH (ready to transmit)
 	  
 }
 
-void nrf_tx(uint8_t payload[]){
+uint8_t nrf_tx(uint8_t payload[]){	//transmitts the uint8_t array byte by byte, if sucsessfull returns1, else returns 0
+	
+	pin_mode(IOPC, GPIOC, 13, op_50MHz, op_gppp);	//for debugging
+	digital_writepin(GPIOC, 13, LOW);
 
 	int i = 0;
 	if( SPI_nrf_read_reg(CONFIG) & (PRIM_RX) ) nrf_ptx_init();	//if in PRX mode, goto nrf_ptx_init
 	
-	digital_writepin(GPIOA, 4, LOW);
-	SPI_nrf_rx_tx(W_TX_PAYLOAD);	
-	while(payload[i]){
+	digital_writepin(GPIOA, 4, LOW);	//making CS LOW 
+	SPI_nrf_rx_tx(W_TX_PAYLOAD);		//sending the W_TX_PAYLOAD command
+	while(payload[i]){	//sending byte by byte 
 		SPI_nrf_rx_tx(payload[i]);
 		i++;
 	}
-	digital_writepin(GPIOA, 4, HIGH);
+	digital_writepin(GPIOA, 4, HIGH);	//making CS HIGH
 	
 	if( (SPI_nrf_read_status()) & (TX_DS) ){	//transmitted and recieved the ACK also
 		//trigger = 0;
@@ -118,33 +121,64 @@ void nrf_tx(uint8_t payload[]){
 		digital_writepin(GPIOC, 13, HIGH);	//indication
 		delay_ms(100);
 		digital_writepin(GPIOC, 13, LOW);
+		return 1;
 	}
 				
 	if( (SPI_nrf_read_status()) & (MAX_RT) ){	//MAX_RT flag reached
-		SPI_nrf_write_bit(STATUS, MAX_RT, MAX_RT_MASK);	//resettign the flag
+		SPI_nrf_write_bit(STATUS, MAX_RT, MAX_RT_MASK);	//clearing the flag by writing 1 into it
 		digital_writepin(GPIOC, 13, HIGH);	//indication
 		delay_ms(500);
 		digital_writepin(GPIOC, 13, LOW);
 		delay_ms(500);
+		return 0;
 	}
 				
 	else if( (SPI_nrf_read_status()) & (MAX_RT) ){	//TX_FULL flag reached
 		//msg_status = 0;
 		//trigger = 0;
-		SPI_nrf_rx_tx(FLUSH_TX);
+		SPI_nrf_cmd(FLUSH_TX);	//flushing the FIFO
 		digital_writepin(GPIOC, 13, HIGH);	//indication
 		delay_ms(1000);
 		digital_writepin(GPIOC, 13, LOW);
 		delay_ms(1000);
+		return 0;
 	}
 					
-				
-				
-				
-				
-			
 	
 	
 }
 
+void nrf_prx_init(void){	//initializes the PRX
+	SPI_nrf_write_bits(STATUS, STATUS_FLAG_CLEAR, STATUS_FLAGS_MASK);	//clearing flags in STATUS reg
+	
+	SPI_nrf_cmd(FLUSH_RX);	//flushing RX first then TX FIFO
+	SPI_nrf_cmd(FLUSH_TX);	//cleaning the TX FIFO making it ready to receive fresh payload
+	
+	SPI_nrf_write_bit(CONFIG, PRIM_RX, PRIM_MASK);	//as PRX now
+	SPI_nrf_write_bit(CONFIG, PWR_UP, PWR_MASK);	//turns-on the nRF
+	delay_ms(15);	//some delay till stability is achieved
+	
+	digital_writepin(GPIOA, 3, HIGH);	//setting CE pin HIGH (ready to recieve)
+	
+}
 
+void nrf_rx(char payload[]){	//recieve the payload byte by byte 
+	int payload_width = 0;
+	
+	SPI_nrf_cmd(R_RX_PL_WID);	//send the command to get the payload width
+	digital_writepin(GPIOA, 4, LOW);	//CS LOW
+	SPI_nrf_rx_tx(R_RX_PAYLOAD);	//read command
+	for(int i=0;i<payload_width;i++){
+		payload[i] = SPI_nrf_rx_tx(R_RX_PAYLOAD);	//sendign dummpybyte 
+	}
+	digital_writepin(GPIOA, 4, HIGH);	//CS HIGH
+	SPI_nrf_write_bit(STATUS, RX_DR, RX_DR_MASK);	//clearing the RX_DR falg
+	SPI_nrf_cmd(FLUSH_RX);	//clear RX FIFO
+	
+}
+
+uint8_t nrf_check_msg(void){	//returns 1 if data is ready in RX FIFO else returns 0
+	uint8_t status = SPI_nrf_read_reg(STATUS);
+	if( (SPI_nrf_read_status()) & (RX_DR) ) return 1;	//Data ready RX FIFO
+	else return 0;
+}

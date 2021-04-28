@@ -383,9 +383,9 @@
           <GroupName>Source Group 1</GroupName>
           <Files>
             <File>
-              <FileName>testing.c</FileName>
+              <FileName>primary_reciever.c</FileName>
               <FileType>1</FileType>
-              <FilePath>.\testing.c</FilePath>
+              <FilePath>.\primary_reciever.c</FilePath>
             </File>
             <File>
               <FileName>GPIO_DRIVER2.c</FileName>

@@ -57,6 +57,16 @@ uint8_t SPI_nrf_read_status(void){	//a handy function to get only STATUS content
 	return status_contents;
 }
 
+uint8_t SPI_nrf_cmd(uint8_t cmd){	//function to recieve the payload only
+	uint8_t payload;
+	digital_writepin(GPIOA, 4, LOW);	//CS LOW
+	SPI_nrf_rx_tx(cmd);	//send the commad
+	payload = SPI_nrf_rx_tx(cmd);	//sending dummy byte in return for the payload
+	digital_writepin(GPIOA, 4, HIGH);	//CS HIGH
+	return payload;
+	
+}
+
 
 bool SPI_nrf_write_bit(uint8_t addr, uint8_t bit, uint8_t mask){//to write into the passed address register, returns 1 if successfully written else returns 0
 	uint8_t reg_content, new_content;	//reg_contents are the present data in reg we are about to write
@@ -91,4 +101,9 @@ bool SPI_nrf_write_bits(uint8_t addr, uint8_t bits, uint8_t mask){	//does the sa
 	else return 0;
 	
 }
+
+
+
+
+
 
