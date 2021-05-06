@@ -13,7 +13,7 @@
 static void printMsg(char *msg, ...);
 void usart1_setup(void);
 void UART_TX(unsigned short uart, char ptr);
-void UART_SEND(unsigned short uart, char str[]);
+void UART_SEND(unsigned short uart, char str[], uint8_t payload_width);
 
 
 void usart1_setup(){
@@ -73,10 +73,10 @@ void UART_TX(unsigned short uart,char ptr)
 		}
 }
 
-void UART_SEND(unsigned short uart, char str[])
+void UART_SEND(unsigned short uart, char str[], uint8_t payload_width)
 {
 	int i = 0;
-	while(str[i] != '\0')
+	while(i<payload_width)
 	{
 		UART_TX(uart,str[i]);
 		i++;

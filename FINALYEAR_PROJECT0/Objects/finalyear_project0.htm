@@ -3,7 +3,7 @@
 <title>Static Call Graph - [.\Objects\finalyear_project0.axf]</title></head>
 <body><HR>
 <H1>Static Call Graph for image .\Objects\finalyear_project0.axf</H1><HR>
-<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5060750: Last Updated: Wed Apr 28 02:19:54 2021
+<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5060750: Last Updated: Thu May 06 15:46:49 2021
 <BR><P>
 <H3>Maximum Stack Usage =         64 bytes + Unknown(Functions without stacksize, Cycles, Untraceable Function Pointers)</H3><H3>
 Call chain for Maximum Stack Depth:</H3>
@@ -480,7 +480,8 @@ Global Symbols
 <BR>[Calls]<UL><LI><a href="#[52]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SPI_nrf_rx_tx
 <LI><a href="#[50]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;digital_writepin
 </UL>
-<BR>[Called By]<UL><LI><a href="#[64]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;nrf_rx
+<BR>[Called By]<UL><LI><a href="#[46]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
+<LI><a href="#[64]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;nrf_rx
 <LI><a href="#[62]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;nrf_prx_init
 </UL>
 
@@ -490,10 +491,9 @@ Global Symbols
 <BR>[Calls]<UL><LI><a href="#[52]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SPI_nrf_rx_tx
 <LI><a href="#[50]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;digital_writepin
 </UL>
-<BR>[Called By]<UL><LI><a href="#[56]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SPI_nrf_write_bits
+<BR>[Called By]<UL><LI><a href="#[63]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;nrf_check_msg
+<LI><a href="#[56]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SPI_nrf_write_bits
 <LI><a href="#[55]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SPI_nrf_write_bit
-<LI><a href="#[63]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;nrf_check_msg
-<LI><a href="#[46]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 </UL>
 
 <P><STRONG><a name="[54]"></a>SPI_nrf_read_status</STRONG> (Thumb, 24 bytes, Stack size 8 bytes, spi_nrf_driver0.o(i.SPI_nrf_read_status))
@@ -506,12 +506,12 @@ Global Symbols
 </UL>
 
 <P><STRONG><a name="[52]"></a>SPI_nrf_rx_tx</STRONG> (Thumb, 42 bytes, Stack size 0 bytes, spi_nrf_driver0.o(i.SPI_nrf_rx_tx))
-<BR><BR>[Called By]<UL><LI><a href="#[56]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SPI_nrf_write_bits
+<BR><BR>[Called By]<UL><LI><a href="#[64]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;nrf_rx
+<LI><a href="#[56]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SPI_nrf_write_bits
 <LI><a href="#[55]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SPI_nrf_write_bit
 <LI><a href="#[54]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SPI_nrf_read_status
-<LI><a href="#[51]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SPI_nrf_cmd
-<LI><a href="#[64]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;nrf_rx
 <LI><a href="#[53]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SPI_nrf_read_reg
+<LI><a href="#[51]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SPI_nrf_cmd
 </UL>
 
 <P><STRONG><a name="[5f]"></a>SPI_nrf_setup</STRONG> (Thumb, 44 bytes, Stack size 0 bytes, spi_nrf_driver0.o(i.SPI_nrf_setup))
@@ -522,8 +522,8 @@ Global Symbols
 <BR><BR>[Stack]<UL><LI>Max Depth = 48<LI>Call Chain = SPI_nrf_write_bit &rArr; SPI_nrf_read_reg &rArr; digital_writepin
 </UL>
 <BR>[Calls]<UL><LI><a href="#[52]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SPI_nrf_rx_tx
-<LI><a href="#[50]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;digital_writepin
 <LI><a href="#[53]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SPI_nrf_read_reg
+<LI><a href="#[50]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;digital_writepin
 </UL>
 <BR>[Called By]<UL><LI><a href="#[64]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;nrf_rx
 <LI><a href="#[62]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;nrf_prx_init
@@ -534,8 +534,8 @@ Global Symbols
 <BR><BR>[Stack]<UL><LI>Max Depth = 48<LI>Call Chain = SPI_nrf_write_bits &rArr; SPI_nrf_read_reg &rArr; digital_writepin
 </UL>
 <BR>[Calls]<UL><LI><a href="#[52]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SPI_nrf_rx_tx
-<LI><a href="#[50]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;digital_writepin
 <LI><a href="#[53]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SPI_nrf_read_reg
+<LI><a href="#[50]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;digital_writepin
 </UL>
 <BR>[Called By]<UL><LI><a href="#[62]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;nrf_prx_init
 <LI><a href="#[61]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;nrf_init
@@ -548,8 +548,8 @@ Global Symbols
 </UL>
 <BR>[Address Reference Count : 1]<UL><LI> startup_stm32f10x_md.o(.text)
 </UL>
-<P><STRONG><a name="[59]"></a>UART_SEND</STRONG> (Thumb, 28 bytes, Stack size 12 bytes, primary_reciever.o(i.UART_SEND))
-<BR><BR>[Stack]<UL><LI>Max Depth = 12<LI>Call Chain = UART_SEND
+<P><STRONG><a name="[59]"></a>UART_SEND</STRONG> (Thumb, 28 bytes, Stack size 16 bytes, primary_reciever.o(i.UART_SEND))
+<BR><BR>[Stack]<UL><LI>Max Depth = 16<LI>Call Chain = UART_SEND
 </UL>
 <BR>[Calls]<UL><LI><a href="#[5a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;UART_TX
 </UL>
@@ -557,8 +557,7 @@ Global Symbols
 </UL>
 
 <P><STRONG><a name="[5a]"></a>UART_TX</STRONG> (Thumb, 76 bytes, Stack size 0 bytes, primary_reciever.o(i.UART_TX))
-<BR><BR>[Called By]<UL><LI><a href="#[46]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
-<LI><a href="#[59]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;UART_SEND
+<BR><BR>[Called By]<UL><LI><a href="#[59]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;UART_SEND
 </UL>
 
 <P><STRONG><a name="[5d]"></a>clock_setup</STRONG> (Thumb, 60 bytes, Stack size 0 bytes, tim_driver0.o(i.clock_setup))
@@ -585,32 +584,31 @@ Global Symbols
 <P><STRONG><a name="[50]"></a>digital_writepin</STRONG> (Thumb, 30 bytes, Stack size 8 bytes, gpio_driver2.o(i.digital_writepin))
 <BR><BR>[Stack]<UL><LI>Max Depth = 8<LI>Call Chain = digital_writepin
 </UL>
-<BR>[Called By]<UL><LI><a href="#[56]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SPI_nrf_write_bits
-<LI><a href="#[55]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SPI_nrf_write_bit
-<LI><a href="#[54]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SPI_nrf_read_status
-<LI><a href="#[51]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SPI_nrf_cmd
-<LI><a href="#[64]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;nrf_rx
+<BR>[Called By]<UL><LI><a href="#[64]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;nrf_rx
 <LI><a href="#[62]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;nrf_prx_init
 <LI><a href="#[61]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;nrf_init
+<LI><a href="#[56]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SPI_nrf_write_bits
+<LI><a href="#[55]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SPI_nrf_write_bit
+<LI><a href="#[54]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SPI_nrf_read_status
 <LI><a href="#[53]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SPI_nrf_read_reg
+<LI><a href="#[51]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SPI_nrf_cmd
 <LI><a href="#[4e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SPI_nrf_GPIO_setup
 </UL>
 
-<P><STRONG><a name="[46]"></a>main</STRONG> (Thumb, 78 bytes, Stack size 0 bytes, primary_reciever.o(i.main))
+<P><STRONG><a name="[46]"></a>main</STRONG> (Thumb, 64 bytes, Stack size 0 bytes, primary_reciever.o(i.main))
 <BR><BR>[Stack]<UL><LI>Max Depth = 64<LI>Call Chain = main &rArr; nrf_rx &rArr; SPI_nrf_write_bit &rArr; SPI_nrf_read_reg &rArr; digital_writepin
 </UL>
-<BR>[Calls]<UL><LI><a href="#[5e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;tim_setup
+<BR>[Calls]<UL><LI><a href="#[60]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;usart1_setup
+<LI><a href="#[59]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;UART_SEND
+<LI><a href="#[5e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;tim_setup
+<LI><a href="#[5d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;clock_setup
 <LI><a href="#[64]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;nrf_rx
 <LI><a href="#[62]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;nrf_prx_init
 <LI><a href="#[61]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;nrf_init
 <LI><a href="#[63]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;nrf_check_msg
-<LI><a href="#[5d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;clock_setup
 <LI><a href="#[5f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SPI_nrf_setup
-<LI><a href="#[53]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SPI_nrf_read_reg
+<LI><a href="#[51]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SPI_nrf_cmd
 <LI><a href="#[4e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SPI_nrf_GPIO_setup
-<LI><a href="#[60]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;usart1_setup
-<LI><a href="#[5a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;UART_TX
-<LI><a href="#[59]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;UART_SEND
 </UL>
 <BR>[Called By]<UL><LI><a href="#[45]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__rt_entry_main
 </UL>
@@ -648,7 +646,7 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[46]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 </UL>
 
-<P><STRONG><a name="[64]"></a>nrf_rx</STRONG> (Thumb, 74 bytes, Stack size 16 bytes, nrfl01_0.o(i.nrf_rx))
+<P><STRONG><a name="[64]"></a>nrf_rx</STRONG> (Thumb, 78 bytes, Stack size 16 bytes, nrfl01_0.o(i.nrf_rx))
 <BR><BR>[Stack]<UL><LI>Max Depth = 64<LI>Call Chain = nrf_rx &rArr; SPI_nrf_write_bit &rArr; SPI_nrf_read_reg &rArr; digital_writepin
 </UL>
 <BR>[Calls]<UL><LI><a href="#[55]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SPI_nrf_write_bit

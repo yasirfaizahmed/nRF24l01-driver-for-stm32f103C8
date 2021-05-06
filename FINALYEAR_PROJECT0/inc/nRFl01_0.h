@@ -133,7 +133,7 @@
 #define TX_DS_MASK				(uint8_t) 0xDF//
 #define RX_DR             (uint8_t) 0x40
 #define RX_DR_MASK				(uint8_t) 0xBF//
-#define STATUS_FLAG_CLEAR (uint8_t) 0x00//
+#define STATUS_FLAG_CLEAR (uint8_t) 0x70//
 #define STATUS_FLAGS_MASK (uint8_t) 0x8F//
 
 /**** OBSERVE *****/

@@ -87,8 +87,8 @@ bool nrf_set_TX_ADDR(uint64_t tx_addr, int addr_width){	//sets the TX_ADDR, retu
 void nrf_ptx_init(void){
 	SPI_nrf_write_bits(STATUS, STATUS_FLAG_CLEAR, STATUS_FLAGS_MASK);	//clearing flags in STATUS reg
 
-	//SPI_nrf_rx_tx(FLUSH_RX);	//flushing RX first then TX FIFO
-	//SPI_nrf_rx_tx(FLUSH_TX);	//cleaning the TX FIFO making it ready to receive fresh payload
+	SPI_nrf_cmd(FLUSH_RX);	//flushing RX first then TX FIFO
+	SPI_nrf_cmd(FLUSH_TX);	//cleaning the TX FIFO making it ready to receive fresh payload
 	
 	SPI_nrf_write_bit(CONFIG, PRIM_TX, PRIM_MASK);	//as PTX now
 	SPI_nrf_write_bit(CONFIG, PWR_UP, PWR_MASK);	//turns-on the nRF
@@ -105,10 +105,14 @@ uint8_t nrf_tx(uint8_t payload[]){	//transmitts the uint8_t array byte by byte, 
 
 	int i = 0;
 	if( SPI_nrf_read_reg(CONFIG) & (PRIM_RX) ) nrf_ptx_init();	//if in PRX mode, goto nrf_ptx_init
+	if( SPI_nrf_read_reg(DYNPD) & (DPL_P0) ){	//if dynamic payload is turned off 
+		SPI_nrf_write_bit(FEATURE, EN_DPL, EN_DPL_MASK);	//enabling dynamic payload
+		SPI_nrf_write_bits(DYNPD, DPL_P0, DPL_MASK);	//enabelin in DPL reg also
+	}
 	
 	digital_writepin(GPIOA, 4, LOW);	//making CS LOW 
 	SPI_nrf_rx_tx(W_TX_PAYLOAD);		//sending the W_TX_PAYLOAD command
-	while(payload[i]){	//sending byte by byte 
+	while(payload[i] != '\0'){	//sending byte by byte 
 		SPI_nrf_rx_tx(payload[i]);
 		i++;
 	}
@@ -160,15 +164,15 @@ void nrf_prx_init(void){	//initializes the PRX
 	
 	digital_writepin(GPIOA, 3, HIGH);	//setting CE pin HIGH (ready to recieve)
 	
-}
+} 
 
 void nrf_rx(char payload[]){	//recieve the payload byte by byte 
-	int payload_width = 0;
+	uint8_t payload_width = 0;
 	
-	SPI_nrf_cmd(R_RX_PL_WID);	//send the command to get the payload width
+	payload_width = SPI_nrf_cmd(R_RX_PL_WID);	//send the command to get the payload width
 	digital_writepin(GPIOA, 4, LOW);	//CS LOW
-	SPI_nrf_rx_tx(R_RX_PAYLOAD);	//read command
-	for(int i=0;i<payload_width;i++){
+	SPI_nrf_rx_tx(R_RX_PAYLOAD);	//recieve command
+	for(uint8_t i=0;i<payload_width;i++){
 		payload[i] = SPI_nrf_rx_tx(R_RX_PAYLOAD);	//sendign dummpybyte 
 	}
 	digital_writepin(GPIOA, 4, HIGH);	//CS HIGH

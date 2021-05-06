@@ -9,26 +9,23 @@
 
 
 
-uint8_t payload[32] = "asdf";
-state STATE = HIGH;
+uint8_t payload[32] = "lmfao";	//our payload
 int main(){
-	clock_setup();
+	clock_setup();	//setting up the clock for the used peripherals
 	
-	SPI_nrf_GPIO_setup();
+	SPI_nrf_GPIO_setup(); //setting up the GPIO pins required for SPI1
 	
-	tim_setup();
+	tim_setup();	//setting up the timers mainly for delays
 	
-	SPI_nrf_setup();
+	SPI_nrf_setup();	//setting up the SPI to communicate to nRF
 	
-	usart1_setup();
+	usart1_setup();	//setting up the uart for debugging and for receiving the payload
 	
-	//testing linrary functions here starts
+	nrf_init();	//finally setting up the nRF 
 	
-	nrf_init();
+	nrf_ptx_init();	//and now the initilize the primary reciever
 	
-	nrf_ptx_init();
-	
-	for(int i=0;i<=0x1D;i++) UART_TX(1, SPI_nrf_read_reg(i));	//just to get all the reg values once
+	//for(int i=0;i<=0x1D;i++) UART_TX(1, SPI_nrf_read_reg(i));	//just to get all the reg values once
 	
 	
 	
@@ -49,15 +46,13 @@ int main(){
 		
 		
 
-			nrf_tx(payload);	//transmitt
-			
-			
-			
-			
+		nrf_tx(payload);	//transmitting the payload
 		
+		//for(int i=0;i<=0x1D;i++) UART_TX(1, SPI_nrf_read_reg(i));	//just to get all the reg values once
+			
+		delay_ms(1000);
 		
-		
-		
+			
 		
 		
 		
@@ -66,6 +61,7 @@ int main(){
 
 
 }
+
 /*
 void EXTI0_IRQHandler()
 {

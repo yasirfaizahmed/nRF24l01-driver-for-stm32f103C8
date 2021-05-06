@@ -383,11 +383,6 @@
           <GroupName>Source Group 1</GroupName>
           <Files>
             <File>
-              <FileName>primary_reciever.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\primary_reciever.c</FilePath>
-            </File>
-            <File>
               <FileName>GPIO_DRIVER2.c</FileName>
               <FileType>1</FileType>
               <FilePath>.\src\GPIO_DRIVER2.c</FilePath>
@@ -431,6 +426,11 @@
               <FileName>usart_debug0.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\inc\usart_debug0.h</FilePath>
+            </File>
+            <File>
+              <FileName>primary_reciever.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\primary_reciever.c</FilePath>
             </File>
           </Files>
         </Group>
