@@ -131,9 +131,9 @@ uint8_t nrf_tx(uint8_t payload[]){	//transmitts the uint8_t array byte by byte, 
 	if( (SPI_nrf_read_status()) & (MAX_RT) ){	//MAX_RT flag reached
 		SPI_nrf_write_bit(STATUS, MAX_RT, MAX_RT_MASK);	//clearing the flag by writing 1 into it
 		digital_writepin(GPIOC, 13, HIGH);	//indication
-		delay_ms(500);
+		delay_ms(1000);
 		digital_writepin(GPIOC, 13, LOW);
-		delay_ms(500);
+		delay_ms(5000);
 		return 0;
 	}
 				
@@ -142,9 +142,9 @@ uint8_t nrf_tx(uint8_t payload[]){	//transmitts the uint8_t array byte by byte, 
 		//trigger = 0;
 		SPI_nrf_cmd(FLUSH_TX);	//flushing the FIFO
 		digital_writepin(GPIOC, 13, HIGH);	//indication
-		delay_ms(1000);
+		delay_ms(5000);
 		digital_writepin(GPIOC, 13, LOW);
-		delay_ms(1000);
+		delay_ms(5000);
 		return 0;
 	}
 					

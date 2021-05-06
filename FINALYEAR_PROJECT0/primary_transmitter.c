@@ -9,7 +9,8 @@
 
 
 
-uint8_t payload[32] = "lmfao";	//our payload
+uint8_t payload[32] = "lmfao";
+state STATE = HIGH;
 int main(){
 	clock_setup();	//setting up the clock for the used peripherals
 	
@@ -23,7 +24,7 @@ int main(){
 	
 	nrf_init();	//finally setting up the nRF 
 	
-	nrf_ptx_init();	//and now the initilize the primary reciever
+	nrf_prx_init();	//and now the initilize the primary reciever
 	
 	//for(int i=0;i<=0x1D;i++) UART_TX(1, SPI_nrf_read_reg(i));	//just to get all the reg values once
 	
@@ -46,13 +47,17 @@ int main(){
 		
 		
 
-		nrf_tx(payload);	//transmitting the payload
+		nrf_tx(payload);	//transmitt
 		
-		//for(int i=0;i<=0x1D;i++) UART_TX(1, SPI_nrf_read_reg(i));	//just to get all the reg values once
-			
+		
 		delay_ms(1000);
-		
 			
+			
+			
+		
+		
+		
+		
 		
 		
 		
@@ -61,7 +66,6 @@ int main(){
 
 
 }
-
 /*
 void EXTI0_IRQHandler()
 {

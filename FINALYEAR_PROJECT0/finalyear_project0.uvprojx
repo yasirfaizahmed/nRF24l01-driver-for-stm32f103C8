@@ -428,9 +428,9 @@
               <FilePath>.\inc\usart_debug0.h</FilePath>
             </File>
             <File>
-              <FileName>primary_reciever.c</FileName>
+              <FileName>primary_transmitter.c</FileName>
               <FileType>1</FileType>
-              <FilePath>.\primary_reciever.c</FilePath>
+              <FilePath>.\primary_transmitter.c</FilePath>
             </File>
           </Files>
         </Group>
