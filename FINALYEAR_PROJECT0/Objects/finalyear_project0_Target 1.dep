@@ -1,86 +1,0 @@
-Dependencies for Project 'finalyear_project0', Target 'Target 1': (DO NOT MODIFY !)
-CompilerVersion: 5060750::V5.06 update 6 (build 750)::ARMCC
-F (.\src\GPIO_DRIVER2.c)(0x607CD67E)(--c99 --gnu -c --cpu Cortex-M3 -D__EVAL -g -O0 --apcs=interwork --split_sections-I.\RTE\Device\STM32F103C8-I.\RTE\_Target_1-IC:\Users\YASIR\AppData\Local\Arm\Packs\ARM\CMSIS\5.7.0\CMSIS\Core\Include-IC:\Users\YASIR\AppData\Local\Arm\Packs\Keil\STM32F1xx_DFP\2.3.0\Device\Include-D__UVISION_VERSION="529" -D_RTE_ -DSTM32F10X_MD-o .\objects\gpio_driver2.o --omf_browse .\objects\gpio_driver2.crf --depend .\objects\gpio_driver2.d)
-I (src\../inc/GPIO_DRIVER2.h)(0x607C2A6C)
-I (C:\Users\YASIR\AppData\Local\Arm\Packs\Keil\STM32F1xx_DFP\2.3.0\Device\Include\stm32f10x.h)(0x58255B94)
-I (.\RTE\_Target_1\RTE_Components.h)(0x607C2A6C)
-I (C:\Users\YASIR\AppData\Local\Arm\Packs\ARM\CMSIS\5.7.0\CMSIS\Core\Include\core_cm3.h)(0x5E8EF44A)
-I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x5D9AF540)
-I (C:\Users\YASIR\AppData\Local\Arm\Packs\ARM\CMSIS\5.7.0\CMSIS\Core\Include\cmsis_version.h)(0x5E8EF44A)
-I (C:\Users\YASIR\AppData\Local\Arm\Packs\ARM\CMSIS\5.7.0\CMSIS\Core\Include\cmsis_compiler.h)(0x5E8329EA)
-I (C:\Users\YASIR\AppData\Local\Arm\Packs\ARM\CMSIS\5.7.0\CMSIS\Core\Include\cmsis_armcc.h)(0x5E8EF44A)
-I (C:\Users\YASIR\AppData\Local\Arm\Packs\Keil\STM32F1xx_DFP\2.3.0\Device\Include\system_stm32f10x.h)(0x58255B94)
-F (.\inc\GPIO_DRIVER2.h)(0x607C2A6C)()
-F (.\src\SPI_nrf_DRIVER0.c)(0x60886BC9)(--c99 --gnu -c --cpu Cortex-M3 -D__EVAL -g -O0 --apcs=interwork --split_sections-I.\RTE\Device\STM32F103C8-I.\RTE\_Target_1-IC:\Users\YASIR\AppData\Local\Arm\Packs\ARM\CMSIS\5.7.0\CMSIS\Core\Include-IC:\Users\YASIR\AppData\Local\Arm\Packs\Keil\STM32F1xx_DFP\2.3.0\Device\Include-D__UVISION_VERSION="529" -D_RTE_ -DSTM32F10X_MD-o .\objects\spi_nrf_driver0.o --omf_browse .\objects\spi_nrf_driver0.crf --depend .\objects\spi_nrf_driver0.d)
-I (src\../inc/SPI_nrf_DRIVER0.h)(0x6088483A)
-I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x5D9AF540)
-I (C:\Keil_v5\ARM\ARMCC\include\stdbool.h)(0x5D9AF540)
-I (C:\Users\YASIR\AppData\Local\Arm\Packs\Keil\STM32F1xx_DFP\2.3.0\Device\Include\stm32f10x.h)(0x58255B94)
-I (.\RTE\_Target_1\RTE_Components.h)(0x607C2A6C)
-I (C:\Users\YASIR\AppData\Local\Arm\Packs\ARM\CMSIS\5.7.0\CMSIS\Core\Include\core_cm3.h)(0x5E8EF44A)
-I (C:\Users\YASIR\AppData\Local\Arm\Packs\ARM\CMSIS\5.7.0\CMSIS\Core\Include\cmsis_version.h)(0x5E8EF44A)
-I (C:\Users\YASIR\AppData\Local\Arm\Packs\ARM\CMSIS\5.7.0\CMSIS\Core\Include\cmsis_compiler.h)(0x5E8329EA)
-I (C:\Users\YASIR\AppData\Local\Arm\Packs\ARM\CMSIS\5.7.0\CMSIS\Core\Include\cmsis_armcc.h)(0x5E8EF44A)
-I (C:\Users\YASIR\AppData\Local\Arm\Packs\Keil\STM32F1xx_DFP\2.3.0\Device\Include\system_stm32f10x.h)(0x58255B94)
-I (src\../inc/GPIO_DRIVER2.h)(0x607C2A6C)
-I (src\../inc/nRFl01_0.h)(0x60893E3D)
-I (src\../inc/TIM_DRIVER0.h)(0x607C2A6C)
-F (.\inc\SPI_nrf_DRIVER0.h)(0x6088483A)()
-F (.\src\nRFl01_0.c)(0x6093C3F1)(--c99 --gnu -c --cpu Cortex-M3 -D__EVAL -g -O0 --apcs=interwork --split_sections-I.\RTE\Device\STM32F103C8-I.\RTE\_Target_1-IC:\Users\YASIR\AppData\Local\Arm\Packs\ARM\CMSIS\5.7.0\CMSIS\Core\Include-IC:\Users\YASIR\AppData\Local\Arm\Packs\Keil\STM32F1xx_DFP\2.3.0\Device\Include-D__UVISION_VERSION="529" -D_RTE_ -DSTM32F10X_MD-o .\objects\nrfl01_0.o --omf_browse .\objects\nrfl01_0.crf --depend .\objects\nrfl01_0.d)
-I (src\../inc/nRFl01_0.h)(0x60893E3D)
-I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x5D9AF540)
-I (C:\Keil_v5\ARM\ARMCC\include\stdbool.h)(0x5D9AF540)
-I (C:\Users\YASIR\AppData\Local\Arm\Packs\Keil\STM32F1xx_DFP\2.3.0\Device\Include\stm32f10x.h)(0x58255B94)
-I (.\RTE\_Target_1\RTE_Components.h)(0x607C2A6C)
-I (C:\Users\YASIR\AppData\Local\Arm\Packs\ARM\CMSIS\5.7.0\CMSIS\Core\Include\core_cm3.h)(0x5E8EF44A)
-I (C:\Users\YASIR\AppData\Local\Arm\Packs\ARM\CMSIS\5.7.0\CMSIS\Core\Include\cmsis_version.h)(0x5E8EF44A)
-I (C:\Users\YASIR\AppData\Local\Arm\Packs\ARM\CMSIS\5.7.0\CMSIS\Core\Include\cmsis_compiler.h)(0x5E8329EA)
-I (C:\Users\YASIR\AppData\Local\Arm\Packs\ARM\CMSIS\5.7.0\CMSIS\Core\Include\cmsis_armcc.h)(0x5E8EF44A)
-I (C:\Users\YASIR\AppData\Local\Arm\Packs\Keil\STM32F1xx_DFP\2.3.0\Device\Include\system_stm32f10x.h)(0x58255B94)
-I (src\../inc/GPIO_DRIVER2.h)(0x607C2A6C)
-I (src\../inc/TIM_DRIVER0.h)(0x607C2A6C)
-I (src\../inc/SPI_nrf_DRIVER0.h)(0x6088483A)
-F (.\inc\nRFl01_0.h)(0x60893E3D)()
-F (.\src\TIM_DRIVER0.c)(0x607CD722)(--c99 --gnu -c --cpu Cortex-M3 -D__EVAL -g -O0 --apcs=interwork --split_sections-I.\RTE\Device\STM32F103C8-I.\RTE\_Target_1-IC:\Users\YASIR\AppData\Local\Arm\Packs\ARM\CMSIS\5.7.0\CMSIS\Core\Include-IC:\Users\YASIR\AppData\Local\Arm\Packs\Keil\STM32F1xx_DFP\2.3.0\Device\Include-D__UVISION_VERSION="529" -D_RTE_ -DSTM32F10X_MD-o .\objects\tim_driver0.o --omf_browse .\objects\tim_driver0.crf --depend .\objects\tim_driver0.d)
-I (src\../inc/TIM_DRIVER0.h)(0x607C2A6C)
-I (C:\Users\YASIR\AppData\Local\Arm\Packs\Keil\STM32F1xx_DFP\2.3.0\Device\Include\stm32f10x.h)(0x58255B94)
-I (.\RTE\_Target_1\RTE_Components.h)(0x607C2A6C)
-I (C:\Users\YASIR\AppData\Local\Arm\Packs\ARM\CMSIS\5.7.0\CMSIS\Core\Include\core_cm3.h)(0x5E8EF44A)
-I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x5D9AF540)
-I (C:\Users\YASIR\AppData\Local\Arm\Packs\ARM\CMSIS\5.7.0\CMSIS\Core\Include\cmsis_version.h)(0x5E8EF44A)
-I (C:\Users\YASIR\AppData\Local\Arm\Packs\ARM\CMSIS\5.7.0\CMSIS\Core\Include\cmsis_compiler.h)(0x5E8329EA)
-I (C:\Users\YASIR\AppData\Local\Arm\Packs\ARM\CMSIS\5.7.0\CMSIS\Core\Include\cmsis_armcc.h)(0x5E8EF44A)
-I (C:\Users\YASIR\AppData\Local\Arm\Packs\Keil\STM32F1xx_DFP\2.3.0\Device\Include\system_stm32f10x.h)(0x58255B94)
-I (C:\Keil_v5\ARM\ARMCC\include\stdbool.h)(0x5D9AF540)
-I (src\../inc/GPIO_DRIVER2.h)(0x607C2A6C)
-F (.\inc\TIM_DRIVER0.h)(0x607C2A6C)()
-F (.\inc\usart_debug0.h)(0x6093BD98)()
-F (.\primary_transmitter.c)(0x6093C4AB)(--c99 --gnu -c --cpu Cortex-M3 -D__EVAL -g -O0 --apcs=interwork --split_sections-I.\RTE\Device\STM32F103C8-I.\RTE\_Target_1-IC:\Users\YASIR\AppData\Local\Arm\Packs\ARM\CMSIS\5.7.0\CMSIS\Core\Include-IC:\Users\YASIR\AppData\Local\Arm\Packs\Keil\STM32F1xx_DFP\2.3.0\Device\Include-D__UVISION_VERSION="529" -D_RTE_ -DSTM32F10X_MD-o .\objects\primary_transmitter.o --omf_browse .\objects\primary_transmitter.crf --depend .\objects\primary_transmitter.d)
-I (C:\Keil_v5\ARM\ARMCC\include\stdbool.h)(0x5D9AF540)
-I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x5D9AF540)
-I (C:\Users\YASIR\AppData\Local\Arm\Packs\Keil\STM32F1xx_DFP\2.3.0\Device\Include\stm32f10x.h)(0x58255B94)
-I (.\RTE\_Target_1\RTE_Components.h)(0x607C2A6C)
-I (C:\Users\YASIR\AppData\Local\Arm\Packs\ARM\CMSIS\5.7.0\CMSIS\Core\Include\core_cm3.h)(0x5E8EF44A)
-I (C:\Users\YASIR\AppData\Local\Arm\Packs\ARM\CMSIS\5.7.0\CMSIS\Core\Include\cmsis_version.h)(0x5E8EF44A)
-I (C:\Users\YASIR\AppData\Local\Arm\Packs\ARM\CMSIS\5.7.0\CMSIS\Core\Include\cmsis_compiler.h)(0x5E8329EA)
-I (C:\Users\YASIR\AppData\Local\Arm\Packs\ARM\CMSIS\5.7.0\CMSIS\Core\Include\cmsis_armcc.h)(0x5E8EF44A)
-I (C:\Users\YASIR\AppData\Local\Arm\Packs\Keil\STM32F1xx_DFP\2.3.0\Device\Include\system_stm32f10x.h)(0x58255B94)
-I (inc/nRFl01_0.h)(0x60893E3D)
-I (inc/GPIO_DRIVER2.h)(0x607C2A6C)
-I (inc/TIM_DRIVER0.h)(0x607C2A6C)
-I (inc/usart_debug0.h)(0x6093BD98)
-I (C:\Keil_v5\ARM\ARMCC\include\string.h)(0x5D9AF540)
-I (C:\Keil_v5\ARM\ARMCC\include\stdlib.h)(0x5D9AF542)
-I (C:\Keil_v5\ARM\ARMCC\include\stdarg.h)(0x5D9AF542)
-I (inc/SPI_nrf_DRIVER0.h)(0x6088483A)
-F (RTE\Device\STM32F103C8\RTE_Device.h)(0x607C2A6C)()
-F (RTE\Device\STM32F103C8\startup_stm32f10x_md.s)(0x6086CEE6)(--cpu Cortex-M3 --pd "__EVAL SETA 1" -g --apcs=interwork -I.\RTE\Device\STM32F103C8-I.\RTE\_Target_1-IC:\Users\YASIR\AppData\Local\Arm\Packs\ARM\CMSIS\5.7.0\CMSIS\Core\Include-IC:\Users\YASIR\AppData\Local\Arm\Packs\Keil\STM32F1xx_DFP\2.3.0\Device\Include--pd "__UVISION_VERSION SETA 529" --pd "_RTE_ SETA 1" --pd "STM32F10X_MD SETA 1"--list .\listings\startup_stm32f10x_md.lst --xref -o .\objects\startup_stm32f10x_md.o --depend .\objects\startup_stm32f10x_md.d)
-F (RTE\Device\STM32F103C8\system_stm32f10x.c)(0x607C2A6C)(--c99 --gnu -c --cpu Cortex-M3 -D__EVAL -g -O0 --apcs=interwork --split_sections-I.\RTE\Device\STM32F103C8-I.\RTE\_Target_1-IC:\Users\YASIR\AppData\Local\Arm\Packs\ARM\CMSIS\5.7.0\CMSIS\Core\Include-IC:\Users\YASIR\AppData\Local\Arm\Packs\Keil\STM32F1xx_DFP\2.3.0\Device\Include-D__UVISION_VERSION="529" -D_RTE_ -DSTM32F10X_MD-o .\objects\system_stm32f10x.o --omf_browse .\objects\system_stm32f10x.crf --depend .\objects\system_stm32f10x.d)
-I (C:\Users\YASIR\AppData\Local\Arm\Packs\Keil\STM32F1xx_DFP\2.3.0\Device\Include\stm32f10x.h)(0x58255B94)
-I (.\RTE\_Target_1\RTE_Components.h)(0x607C2A6C)
-I (C:\Users\YASIR\AppData\Local\Arm\Packs\ARM\CMSIS\5.7.0\CMSIS\Core\Include\core_cm3.h)(0x5E8EF44A)
-I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x5D9AF540)
-I (C:\Users\YASIR\AppData\Local\Arm\Packs\ARM\CMSIS\5.7.0\CMSIS\Core\Include\cmsis_version.h)(0x5E8EF44A)
-I (C:\Users\YASIR\AppData\Local\Arm\Packs\ARM\CMSIS\5.7.0\CMSIS\Core\Include\cmsis_compiler.h)(0x5E8329EA)
-I (C:\Users\YASIR\AppData\Local\Arm\Packs\ARM\CMSIS\5.7.0\CMSIS\Core\Include\cmsis_armcc.h)(0x5E8EF44A)
-I (C:\Users\YASIR\AppData\Local\Arm\Packs\Keil\STM32F1xx_DFP\2.3.0\Device\Include\system_stm32f10x.h)(0x58255B94)
